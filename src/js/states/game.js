@@ -13,8 +13,8 @@ Game.prototype = {
     this.game.plugins.add(new SwipeManager(this.game, {}, this.onSwipe));
   },
 
-  onSwipe: function() {
-    console.log('swipe detected!');
+  onSwipe: function(swipeDirection) {
+    console.log('swipe ' + swipeDirection + ' detected!');
   },
 
   update: function () {

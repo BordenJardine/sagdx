@@ -5,6 +5,7 @@ var SwipeManager = function(game, bounds, callback) {
   this.onCooldown = false;
   this.cooldown = 0;
   this.onSwipe = callback;
+  this.swipeDirection = SwipeManager.SWIPE_DIRECTIONS.LEFT;
 };
 
 SwipeManager.prototype = Object.create(Phaser.Plugin.prototype);
@@ -20,7 +21,9 @@ SwipeManager.prototype.update = function() {
 
   if (duration > 0 && !this.onCooldown) {
     if (distance > SwipeManager.SWIPE_DIST && duration < SwipeManager.SWIPE_TIME) {
-      this.onSwipe();
+      swipeDirection = end.x > start.x ? SwipeManager.SWIPE_DIRECTIONS.RIGHT :
+        SwipeManager.SWIPE_DIRECTIONS.LEFT;
+      this.onSwipe(swipeDirection);
       this.onCooldown = true;
     }
   }
@@ -38,5 +41,9 @@ SwipeManager.prototype.update = function() {
 SwipeManager.SWIPE_TIME = 250;
 SwipeManager.SWIPE_DIST = 100;
 SwipeManager.SWIPE_COOLDOWN = 25;
+SwipeManager.SWIPE_DIRECTIONS = {
+  LEFT: 0,
+  RIGHT: 1
+};
 
 module.exports = SwipeManager;
