@@ -5,6 +5,11 @@ module.exports = Menu;
 
 Menu.prototype = {
   create: function () {
+    var startText = "Press to start!";
+    var textProps = { font: '24pt Arial',
+                      fill: '#C24300',
+                      strokeThickness: 0 };
+
     var cinderLogoW = this.game.cache.getImage('cinderLogo').width;
     var cinderLogoH = this.game.cache.getImage('cinderLogo').height;
 
@@ -12,6 +17,7 @@ Menu.prototype = {
     var y = (this.game.height / 3) - (cinderLogoH / 2);
 
     this.game.add.sprite(x, y, 'cinderLogo');
+    this.game.add.text(x, y + cinderLogoH * 1.5, startText, textProps);
 
     this.input.onDown.add(this.onDown, this);
   },
