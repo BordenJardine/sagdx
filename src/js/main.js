@@ -1,11 +1,11 @@
 'use strict';
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'sagdx-game');
+var game = new Phaser.Game(414, 736, Phaser.AUTO, 'sagdx-game');
 
 window.Utils = require('./utils');
 window.playerState = {
-    currentLevel: 'Game'
-}
+  currentLevel: 'Game'
+};
 
 game.state.add('Boot', require('./states/boot'));
 game.state.add('Splash', require('./states/splash'));
