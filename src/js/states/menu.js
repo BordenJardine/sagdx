@@ -8,8 +8,8 @@ Menu.prototype = {
     var cinderLogoW = this.game.cache.getImage('cinderLogo').width;
     var cinderLogoH = this.game.cache.getImage('cinderLogo').height;
 
-    var x = (this.game.width / 2) - (cinderLogoH / 2);
-    var y = (this.game.height / 3) - (cinderLogoW / 2);
+    var x = (this.game.width / 2) - (cinderLogoW / 2);
+    var y = (this.game.height / 3) - (cinderLogoH / 2);
 
     this.game.add.sprite(x, y, 'cinderLogo');
 
