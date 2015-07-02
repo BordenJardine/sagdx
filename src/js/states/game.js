@@ -10,8 +10,6 @@ Game.prototype = {
     var x = (this.game.width / 2) - 100;
     var y = (this.game.height / 2);
 
-    // TODO: (Random?) Image and profile
-
     this.game.plugins.add(new SwipeManager(this.game, {}, this.onSwipe));
   },
 
