@@ -14,6 +14,7 @@ Preloader.prototype = {
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);
     this.load.image('testsprite', 'assets/test.png');
+    this.load.image('cinderLogo', 'assets/cinder-logo.png');
   },
 
   create: function () {

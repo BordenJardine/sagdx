@@ -1,18 +1,17 @@
 var Menu = function () {
-  this.text = null;
 };
 
 module.exports = Menu;
 
 Menu.prototype = {
-
   create: function () {
-    var x = this.game.width / 2;
-    var y = this.game.height / 2;
+    var cinderLogoW = this.game.cache.getImage('cinderLogo').width;
+    var cinderLogoH = this.game.cache.getImage('cinderLogo').height;
 
-    var style = { font: "45px Arial", fill: "#ffffff", align: "left" };
+    var x = (this.game.width / 2) - (cinderLogoH / 2);
+    var y = (this.game.height / 3) - (cinderLogoW / 2);
 
-    this.text = this.add.text(x - 150, y - 200, "Press to Start", style);
+    this.game.add.sprite(x, y, 'cinderLogo');
 
     this.input.onDown.add(this.onDown, this);
   },
