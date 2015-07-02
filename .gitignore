@@ -1,5 +1,6 @@
 .DS_Store
 *.db
+.tern-port
 node_modules/
 bower_components/
 
