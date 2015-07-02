@@ -1,20 +1,17 @@
-var Player = require('../entities/player');
 var SwipeManager = require('../utilities/SwipeManager.js');
 
 var Game = function () {
-  this.testentity = null;
 };
 
 module.exports = Game;
 
 Game.prototype = {
-
   create: function () {
     var x = (this.game.width / 2) - 100;
     var y = (this.game.height / 2);
 
-    this.testentity = new Player(this.game, x, y);
-    this.testentity.anchor.setTo(0.5, 0.5);
+    // TODO: (Random?) Image and profile
+
     this.SwipeManager = new SwipeManager(this.game, {}, this.onSwipe);
   },
 

@@ -5,6 +5,7 @@ var SwipeManager = function(game, bounds, callback) {
 };
 
 SwipeManager.prototype.update = function() {
+  // TODO: Ensure majority of swipe falls within this.bounds (?)
   var start = this.game.input.activePointer.positionDown;
   var end = this.game.input.activePointer.position;
 
