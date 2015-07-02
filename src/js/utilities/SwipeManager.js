@@ -1,8 +1,12 @@
 var SwipeManager = function(game, bounds, callback) {
+  Phaser.Plugin.call(this, game);
   this.game = game;
   this.bounds = bounds;
   this.onSwipe = callback;
 };
+
+SwipeManager.prototype = Object.create(Phaser.Plugin.prototype);
+SwipeManager.prototype.constructor = SwipeManager;
 
 SwipeManager.prototype.update = function() {
   // TODO: Ensure majority of swipe falls within this.bounds (?)
