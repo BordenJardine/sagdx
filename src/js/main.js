@@ -1,6 +1,6 @@
 'use strict';
 
-var game = new Phaser.Game(414, 736, Phaser.AUTO, 'sagdx-game');
+var game = new Phaser.Game(414, 606, Phaser.AUTO, 'sagdx-game');
 
 window.Utils = require('./utils');
 window.playerState = {
