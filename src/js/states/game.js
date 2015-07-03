@@ -3,6 +3,7 @@ var CinderProfile = require('../entities/CinderProfile.js');
 
 var Game = function () {
   currentCinderProfile = null;
+  lastSwipeDirection = SwipeManager.SWIPE_DIRECTIONS.RIGHT;
 };
 
 Game.prototype = {
@@ -12,22 +13,25 @@ Game.prototype = {
 
     this.game.plugins.add(new SwipeManager(this.game, {}, this.onSwipe, this));
 
-    currentCinderProfile = new CinderProfile(this.game);
+    currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
   },
 
   onSwipe: function(swipeDirection) {
-    var to = -1000;
-    if (swipeDirection == SwipeManager.SWIPE_DIRECTIONS.RIGHT)
-      to = 1000;
+    var to = -this.game.width;
+    lastSwipeDirection = swipeDirection;
+
+    if (swipeDirection == SwipeManager.SWIPE_DIRECTIONS.RIGHT) {
+      to = this.game.width;
+    }
 
     var tween = this.game.add.tween(currentCinderProfile);
-    tween.onComplete.add(this.onTweenComplete, this);
-    tween.to({ x: to }, 500, Phaser.Easing.Quadratic.InOut, true);
+    tween.onComplete.add(this.onTweenComplete, this, swipeDirection);
+    tween.to({ x: to }, 700, Phaser.Easing.Cubic.Out, true);
     tween.start();
   },
 
   onTweenComplete: function() {
-    currentCinderProfile = new CinderProfile(this.game);
+    currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
   },
 
   update: function () {
