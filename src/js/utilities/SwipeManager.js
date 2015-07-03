@@ -1,10 +1,10 @@
-var SwipeManager = function(game, bounds, callback) {
+var SwipeManager = function(game, bounds, callback, receiver) {
   Phaser.Plugin.call(this, game);
   this.game = game;
   this.bounds = bounds;
   this.onCooldown = false;
   this.cooldown = 0;
-  this.onSwipe = callback;
+  this.onSwipe = callback.bind(receiver);
   this.swipeDirection = SwipeManager.SWIPE_DIRECTIONS.LEFT;
 };
 

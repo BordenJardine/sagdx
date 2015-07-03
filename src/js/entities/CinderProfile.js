@@ -17,6 +17,8 @@ CinderProfile.prototype.generateProfile = function() {
   // Generate result of R/L swipes for this profile
 
   var width = this.game.width;
+  this.x = -width;
+
   var cinderFrameW = this.game.cache.getImage('cinderFrame').width;
   var cinderFrameH = this.game.cache.getImage('cinderFrame').height;
   var offset = (width - cinderFrameW) / 2;
@@ -31,6 +33,10 @@ CinderProfile.prototype.generateProfile = function() {
                                    });
   this.add(this.aboutText);
   this.add(this.name);
+
+  var tween = this.game.add.tween(this);
+  tween.to({ x: 0 }, 500, Phaser.Easing.Quadratic.InOut, true);
+  tween.start();
 };
 
 module.exports = CinderProfile;
