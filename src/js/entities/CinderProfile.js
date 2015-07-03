@@ -17,14 +17,14 @@ CinderProfile.prototype.generateProfile = function(direction) {
   // Generate result of R/L swipes for this profile
 
   var width = this.game.width;
+  var cinderFrameW = this.game.cache.getImage('cinderFrame').width;
+  var cinderFrameH = this.game.cache.getImage('cinderFrame').height;
+  var offset = (width - cinderFrameW) / 2;
+
   if (direction === 1)
     this.x = -width;
   else
     this.x = width * 2;
-
-  var cinderFrameW = this.game.cache.getImage('cinderFrame').width;
-  var cinderFrameH = this.game.cache.getImage('cinderFrame').height;
-  var offset = (width - cinderFrameW) / 2;
 
   this.image = this.create(offset, offset, 'cinderFrame');
   this.name = new Phaser.Text(this.game, offset, cinderFrameH + offset, "Ron");

@@ -25,12 +25,14 @@ Game.prototype = {
     }
 
     var tween = this.game.add.tween(currentCinderProfile);
-    tween.onComplete.add(this.onTweenComplete, this, swipeDirection);
+    tween.onComplete.add(this.onTweenComplete, this);
     tween.to({ x: to }, 700, Phaser.Easing.Cubic.Out, true);
     tween.start();
   },
 
   onTweenComplete: function() {
+    // execute currentCinderProfile.selectionResult
+    // or generate new profile:
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
   },
 
