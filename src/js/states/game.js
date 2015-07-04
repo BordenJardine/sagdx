@@ -8,11 +8,7 @@ var Game = function () {
 
 Game.prototype = {
   create: function () {
-    var x = (this.game.width / 2) - 100;
-    var y = (this.game.height / 2);
-
     this.game.plugins.add(new SwipeManager(this.game, {}, this.onSwipe, this));
-
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
   },
 
