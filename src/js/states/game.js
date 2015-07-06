@@ -10,6 +10,12 @@ Game.prototype = {
   create: function () {
     this.game.plugins.add(new SwipeManager(this.game, {}, this.onSwipe, this));
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
+
+    this.header = this.add.sprite(0, 0, 'header');
+    //add Header
+    //add portrait
+    //add buttons
+    //make buttons clicky
   },
 
   onSwipe: function(swipeDirection) {
