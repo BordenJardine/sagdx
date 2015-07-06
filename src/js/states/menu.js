@@ -26,6 +26,12 @@ Menu.prototype = {
   },
 
   onDown: function () {
+    //if (!!this.game.device.desktop) {
+    if (!this.game.device.desktop) {
+      this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+      this.game.scale.startFullScreen(true);
+    }
+
     this.game.state.start(playerState.currentLevel);
   }
 };
