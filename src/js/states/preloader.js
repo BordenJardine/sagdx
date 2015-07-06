@@ -21,7 +21,8 @@ Preloader.prototype = {
     this.load.image('cinderFrame', 'assets/cinder-frame.png');
     this.load.image('ryan', 'assets/ryan.png');
     this.load.image('header', 'assets/header.png');
-    this.load.image('twoButtons', 'assets/twobuttons.png');
+    this.load.image('xButton', 'assets/x_button.png');
+    this.load.image('heartButton', 'assets/heart_button.png');
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);
