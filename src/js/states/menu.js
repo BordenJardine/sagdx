@@ -32,6 +32,6 @@ Menu.prototype = {
       this.game.scale.startFullScreen(true);
     }
 
-    this.game.state.start(playerState.currentLevel);
+    this.game.state.start('Game');
   }
 };

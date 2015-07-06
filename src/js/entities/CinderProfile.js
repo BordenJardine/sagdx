@@ -1,9 +1,7 @@
 var CinderProfile = function(game, direction) {
   Phaser.Group.call(this, game);
   this.game = game;
-  this.image = null;
-  this.name = null;
-  this.aboutText = null;
+  this.profile = null;
   this.selectionResult = null;
   this.generateProfile(direction);
 };
@@ -16,6 +14,12 @@ CinderProfile.prototype.generateProfile = function(direction) {
   // Generate or randomly pick already generated profile text
   // Generate result of R/L swipes for this profile
 
+  window.CurrentProfileIdx += 1;
+  if (window.CurrentProfileIdx === window.CinderProfiles.length)
+    window.CurrentProfileIdx = 0;
+
+  this.profile = window.CinderProfiles[window.CurrentProfileIdx];
+
   var width = this.game.width;
   var cinderFrameW = this.game.cache.getImage('cinderFrame').width;
   var cinderFrameH = this.game.cache.getImage('cinderFrame').height;
@@ -26,15 +30,8 @@ CinderProfile.prototype.generateProfile = function(direction) {
   else
     this.x = width * 2;
 
-  this.image = this.create(offset, offset, 'cinderFrame');
-  this.name = new Phaser.Text(this.game, offset, cinderFrameH + offset, "Ron");
-  this.aboutText = new Phaser.Text(this.game,
-                                   offset,
-                                   this.name.y + this.name.height,
-                                   "Hi, my name is Ron!", {
-                                     font: '12px Arial'
-                                   });
-  this.add(this.aboutText);
+  this.image = this.create(offset, offset, this.profile.image);
+  this.name = new Phaser.Text(this.game, offset, cinderFrameH + offset, this.profile.name);
   this.add(this.name);
 
   var tween = this.game.add.tween(this);
