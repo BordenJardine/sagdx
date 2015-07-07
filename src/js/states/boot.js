@@ -10,7 +10,7 @@ Boot.prototype = {
 
   create: function () {
     this.game.input.maxPointers = 1;
-    this.game.stage.backgroundColor = 0xf6f6f2;
+    this.game.stage.backgroundColor = 0xffffff;
 
     this.game.scale.pageAlignHorizontally = true;
     this.game.scale.pageAlignVertically = true;

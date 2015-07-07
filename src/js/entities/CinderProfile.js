@@ -24,19 +24,24 @@ CinderProfile.prototype.generateProfile = function(direction) {
   var cinderFrameW = this.game.cache.getImage('cinderFrame').width;
   var cinderFrameH = this.game.cache.getImage('cinderFrame').height;
   var headerH = this.game.cache.getImage('header').height;
-  var offset = (width - cinderFrameW) / 2;
+  var offsetX = (width - cinderFrameW) / 2;
+  var offsetY = offsetX / 2;
+  var textMargin = 25;
 
   if (direction === 1)
     this.x = -width;
   else
     this.x = width * 2;
 
-  this.image = this.create(offset, headerH + offset, this.profile.image);
-  this.name = new Phaser.Text(this.game, offset, headerH + cinderFrameH + offset, this.profile.name);
-  this.add(this.name);
+  this.image = this.create(offsetX, headerH + offsetY, this.profile.image);
+  this.frame = new Phaser.Sprite(this.game, 0, 0, 'cinderFrame');
+  this.name = new Phaser.Text(this.game, textMargin, cinderFrameH - textMargin * 2, this.profile.name);
+
+  this.image.addChild(this.frame);
+  this.image.addChild(this.name);
 
   var tween = this.game.add.tween(this);
-  tween.to({ x: 0 }, 500, Phaser.Easing.Cubic.Out, true);
+  tween.to({ x: 0}, 500, Phaser.Easing.Cubic.Out, true);
   tween.start();
 };
 
