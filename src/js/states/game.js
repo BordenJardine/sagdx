@@ -50,6 +50,7 @@ Game.prototype = {
     this.game.time.events.add(2500, this.onTimerComplete, this);
     this.timerAnimation.x = 16;
 
+    // todo - subtract score as timer decreases
     swipeScore = 20;
 
     var tween = this.game.add.tween(this.timerAnimation).to({ x: this.game.width - 32}, 2500);
