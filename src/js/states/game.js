@@ -4,6 +4,7 @@ var CinderProfile = require('../entities/CinderProfile.js');
 var Game = function () {
   currentCinderProfile = null;
   lastSwipeDirection = SwipeManager.SWIPE_DIRECTIONS.RIGHT;
+  swipeScore = 20;
 };
 
 Game.prototype = {
@@ -30,6 +31,12 @@ Game.prototype = {
       to = this.game.width;
     }
 
+    var scoreMultiplier = -1;
+    if (swipeDirection === currentCinderProfile.profile.correctDirection)
+      scoreMultiplier = 1;
+
+    window.Score += swipeScore * scoreMultiplier;
+
     var tween = this.game.add.tween(currentCinderProfile);
     tween.onComplete.add(this.onTweenComplete, this);
     tween.to({ x: to }, 700, Phaser.Easing.Cubic.Out, true);
@@ -54,10 +61,11 @@ Game.prototype = {
   },
 
   onTimerComplete: function() {
+    window.Score -= 10;
   },
 
   update: function () {
-  }
+  },
 };
 
 module.exports = Game;
