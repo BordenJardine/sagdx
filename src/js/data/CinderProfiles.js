@@ -9,6 +9,10 @@ CinderProfiles.PROFILES = [
   {
     name: 'Demo 2',
     image: 'demo2.png'
+  },
+  {
+    name: 'Cinderella',
+    image: 'cind.png'
   }
 ];
 
