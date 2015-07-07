@@ -75,10 +75,17 @@ Game.prototype = {
   },
 
   swipeTo: function(to, angle) {
+    var nopeW = this.game.cache.getImage('nope').width;
+    var frameW = this.game.cache.getImage('cinderFrame').width;
+    var nopeY = currentCinderProfile.y + frameW - nopeW;
+    var NOPE = this.game.add.sprite(nopeY, currentCinderProfile.x, 'nope');
+
     var tween = this.game.add.tween(currentCinderProfile);
+    var nopeTween = this.game.add.tween(currentCinderProfile);
     tween.onComplete.add(this.onTweenComplete, this);
     tween.to({ x: to, y: this.game.height / 3, angle: angle }, 700, Phaser.Easing.Cubic.Out, true);
     tween.start();
+    nopeTween.to({ x: to, y: this.game.height / 3, angle: angle }, 700, Phaser.Easing.Cubic.Out, true).start();
   },
 
   update: function () {
