@@ -23,6 +23,7 @@ Preloader.prototype = {
     this.load.image('header', 'assets/header.png');
     this.load.image('xButton', 'assets/x_button.png');
     this.load.image('heartButton', 'assets/heart_button.png');
+    this.game.load.spritesheet('timer-animation', 'assets/timer-animation.png', 32, 32);
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);

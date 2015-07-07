@@ -12,6 +12,10 @@ Game.prototype = {
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
 
     this.header = this.add.sprite(0, 0, 'header');
+    this.timerAnimation = this.game.add.sprite(-32, this.game.height - 32, 'timer-animation');
+    this.timerAnimation.animations.add('timer', [0, 1, 2, 3, 4, 5]);
+    this.timerAnimation.play('timer', 8, true);
+
     //add Header
     //add portrait
     //add buttons
@@ -37,16 +41,22 @@ Game.prototype = {
     // or generate new profile:
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
     this.game.time.events.add(2500, this.onTimerComplete, this);
+    this.timerAnimation.x = 16;
+
+    var tween = this.game.add.tween(this.timerAnimation).to({ x: this.game.width - 32}, 2500);
+    tween.onComplete.add(this.onTimerTweenComplete, this);
+    tween.start();
+  },
+
+  onTimerTweenComplete: function() {
+    // explosion animation, etc?
+    this.timerAnimation.x = -32;
   },
 
   onTimerComplete: function() {
   },
 
   update: function () {
-  },
-
-  render: function() {
-    this.game.debug.text("Time until event: " + this.game.time.events.duration, 32, 32);
   }
 };
 
