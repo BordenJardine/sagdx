@@ -89,7 +89,7 @@ Game.prototype = {
 
     var tween = this.game.add.tween(currentCinderProfile);
     tween.onComplete.add(this.onTweenComplete, this);
-    tween.to({ x: to, y: this.game.height / 3, angle: angle }, 1000, Phaser.Easing.Cubic.Out, true);
+    tween.to({ x: to, y: this.game.height / 3, angle: angle }, 1000, Phaser.Easing.Cubic.Out, false, 200);
     tween.start();
   },
 
