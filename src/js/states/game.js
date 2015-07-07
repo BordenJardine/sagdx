@@ -14,7 +14,7 @@ Game.prototype = {
 
     this.header = this.add.sprite(0, 0, 'header');
 
-    this.xButton = this.add.button(100, 475, 'xButton', this.nopeButtonCallback.bind(this));
+    this.xButton = this.add.button(120, 475, 'xButton', this.nopeButtonCallback.bind(this));
     this.heartButton = this.add.button(212, 475, 'heartButton', this.yepButtonCallback.bind(this));
     this.timerAnimation = this.game.add.sprite(-32, this.game.height - 32, 'timer-animation');
     this.timerAnimation.animations.add('timer', [0, 1, 2, 3, 4, 5]);
