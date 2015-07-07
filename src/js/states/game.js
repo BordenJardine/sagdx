@@ -8,17 +8,17 @@ var Game = function () {
 
 Game.prototype = {
   create: function () {
-    this.game.plugins.add(new SwipeManager(this.game, {}, this.onSwipe, this));
+    this.game.plugins.add(new SwipeManager(this.game, {}, this.swipe, this));
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
 
     this.header = this.add.sprite(0, 0, 'header');
-    //add Header
+
+    this.xButton = this.add.button(100, 475, 'xButton', this.nopeButtonCallback.bind(this));
+    this.heartButton = this.add.button(212, 475, 'heartButton', this.yepButtonCallback.bind(this));
     //add portrait
-    //add buttons
-    //make buttons clicky
   },
 
-  onSwipe: function(swipeDirection) {
+  swipe: function(swipeDirection) {
     var to = -this.game.width;
     lastSwipeDirection = swipeDirection;
 
@@ -26,10 +26,7 @@ Game.prototype = {
       to = this.game.width;
     }
 
-    var tween = this.game.add.tween(currentCinderProfile);
-    tween.onComplete.add(this.onTweenComplete, this);
-    tween.to({ x: to }, 700, Phaser.Easing.Cubic.Out, true);
-    tween.start();
+    this.swipeTo(to);
   },
 
   onTweenComplete: function() {
@@ -38,8 +35,25 @@ Game.prototype = {
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
   },
 
+  nopeButtonCallback: function() {
+    this.swipe(SwipeManager.SWIPE_DIRECTIONS.LEFT);
+  },
+
+  yepButtonCallback: function() {
+    this.swipe(SwipeManager.SWIPE_DIRECTIONS.RIGHT);
+  },
+
+  swipeTo: function(to) {
+    var tween = this.game.add.tween(currentCinderProfile);
+    tween.onComplete.add(this.onTweenComplete, this);
+    tween.to({ x: to }, 700, Phaser.Easing.Cubic.Out, true);
+    tween.start();
+  },
+
   update: function () {
   }
 };
+
+
 
 module.exports = Game;
