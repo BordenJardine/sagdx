@@ -36,9 +36,17 @@ Game.prototype = {
     // execute currentCinderProfile.selectionResult
     // or generate new profile:
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
+    this.game.time.events.add(2500, this.onTimerComplete, this);
+  },
+
+  onTimerComplete: function() {
   },
 
   update: function () {
+  },
+
+  render: function() {
+    this.game.debug.text("Time until event: " + this.game.time.events.duration, 32, 32);
   }
 };
 
