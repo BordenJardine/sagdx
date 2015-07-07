@@ -50,6 +50,8 @@ Game.prototype = {
     this.game.time.events.add(2500, this.onTimerComplete, this);
     this.timerAnimation.x = 16;
 
+    swipeScore = 20;
+
     var tween = this.game.add.tween(this.timerAnimation).to({ x: this.game.width - 32}, 2500);
     tween.onComplete.add(this.onTimerTweenComplete, this);
     tween.start();
@@ -62,6 +64,7 @@ Game.prototype = {
 
   onTimerComplete: function() {
     window.Score -= 10;
+    swipeScore = 0;
   },
 
   update: function () {
