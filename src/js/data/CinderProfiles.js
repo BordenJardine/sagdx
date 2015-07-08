@@ -17,6 +17,14 @@ CinderProfiles.PROFILES = [
     revealText: 'TeH B1g R3V34l!!!1'
   },
   {
+    name: 'Girl Next Door',
+    image: 'frog_profile.png',
+    correctDirection: 0,
+    revealImage: 'frog_reveal.png',
+    revealImage2: 'frog_reveal2.png',
+    revealText: 'GET OUT'
+  },
+  {
     name: 'Cinderella',
     image: 'cind.png',
     correctDirection: 1,
