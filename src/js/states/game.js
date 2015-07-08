@@ -64,8 +64,8 @@ Game.prototype = {
     this.game.add.existing(reveal);
     reveal.events.onInputDown.add(function() {
       reveal.kill();
-      if (typeof currentCinderProfile.profile.minigame !== "undefinied") {
-        // start minigame state from string
+      if (typeof currentCinderProfile.profile.minigame !== "undefined") {
+        this.game.state.start(currentCinderProfile.profile.minigame);
       } else {
         this.nextProfile();
       }
