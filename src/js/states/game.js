@@ -115,7 +115,8 @@ Game.prototype = {
     currentCinderProfile.addChild(stamp);
 
     var tween = this.game.add.tween(currentCinderProfile);
-    tween.onComplete.add(this.onSwipeComplete, this);
+    //tween.onComplete.add(this.onSwipeComplete, this);
+    setTimeout(this.onSwipeComplete.bind(this), 700);
     tween.to({ x: to, y: this.game.height / 3, angle: angle }, 1000, Phaser.Easing.Cubic.Out, false, 200);
     tween.start();
   }
