@@ -64,13 +64,15 @@ Game.prototype = {
     this.game.add.existing(reveal);
     reveal.events.onInputDown.add(function() {
       reveal.kill();
-      this.nextProfile();
+      if (typeof currentCinderProfile.profile.minigame !== "undefinied") {
+        // start minigame state from string
+      } else {
+        this.nextProfile();
+      }
     }, this);
   },
 
   nextProfile: function() {
-    // execute currentCinderProfile.selectionResult
-    // or generate new profile:
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
     this.timerAnimation.x = -6;
 
@@ -116,9 +118,6 @@ Game.prototype = {
     tween.onComplete.add(this.onSwipeComplete, this);
     tween.to({ x: to, y: this.game.height / 3, angle: angle }, 1000, Phaser.Easing.Cubic.Out, false, 200);
     tween.start();
-  },
-
-  update: function () {
   }
 };
 
