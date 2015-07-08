@@ -14,11 +14,13 @@ Game.prototype = {
 
     this.header = this.add.sprite(0, 0, 'header');
 
-    this.xButton = this.add.button(120, 495, 'xButton', this.nopeButtonCallback.bind(this));
-    this.heartButton = this.add.button(212, 495, 'heartButton', this.yepButtonCallback.bind(this));
-    this.timerAnimation = this.game.add.sprite(-32, this.game.height - 32, 'timer-animation');
-    this.timerAnimation.animations.add('timer', [0, 1, 2, 3, 4, 5]);
-    this.timerAnimation.play('timer', 8, true);
+    this.xButton = this.add.button(120, 485, 'xButton', this.nopeButtonCallback.bind(this));
+    this.heartButton = this.add.button(212, 485, 'heartButton', this.yepButtonCallback.bind(this));
+    this.timerAnimation = this.game.add.sprite(-6, this.game.height - 8, 'timer-animation');
+
+    var tween = this.game.add.tween(this.timerAnimation).to({ x: this.game.width}, 2500);
+    tween.onComplete.add(this.onTimerTweenComplete, this);
+    tween.start();
   },
 
   swipe: function(swipeDirection) {
@@ -46,19 +48,17 @@ Game.prototype = {
     // or generate new profile:
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
     this.game.time.events.add(2500, this.onTimerComplete, this);
-    this.timerAnimation.x = 16;
+    this.timerAnimation.x = -6;
 
     // todo - subtract score as timer decreases
     swipeScore = 20;
 
-    var tween = this.game.add.tween(this.timerAnimation).to({ x: this.game.width - 32}, 2500);
+    var tween = this.game.add.tween(this.timerAnimation).to({ x: this.game.width}, 2500);
     tween.onComplete.add(this.onTimerTweenComplete, this);
     tween.start();
   },
 
   onTimerTweenComplete: function() {
-    // explosion animation, etc?
-    this.timerAnimation.x = -32;
   },
 
   onTimerComplete: function() {
