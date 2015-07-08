@@ -41,6 +41,7 @@ Preloader.prototype = {
       var profile = window.CinderProfiles[i];
       this.load.image(profile.image, assetRoot + profile.image);
       this.load.image(profile.revealImage, assetRoot + profile.revealImage);
+      if(!!profile.revealImage2) this.load.image(profile.revealImage2, assetRoot + profile.revealImage2);
     }
   },
 
