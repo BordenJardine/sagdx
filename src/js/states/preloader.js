@@ -21,10 +21,10 @@ Preloader.prototype = {
     this.load.image('cinderFrame', 'assets/cinder-frame.png');
     this.load.image('nope', 'assets/NOPE.png');
     this.load.image('like', 'assets/like.png');
-    this.load.image('ryan', 'assets/ryan.png');
     this.load.image('header', 'assets/header.png');
     this.load.image('xButton', 'assets/x_button.png');
     this.load.image('heartButton', 'assets/heart_button.png');
+    this.load.image('revealTextArea', 'assets/reveal_text_area.jpg');
     this.game.load.spritesheet('timer-animation', 'assets/timer-animation.png', 32, 32);
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
@@ -37,7 +37,9 @@ Preloader.prototype = {
     this.load.image('cinderFrame', assetRoot + 'cinder-frame.png');
 
     for (var i = 0; i < window.CinderProfiles.length; i++) {
-      this.load.image(window.CinderProfiles[i].image, assetRoot + window.CinderProfiles[i].image);
+      var profile = window.CinderProfiles[i];
+      this.load.image(profile.image, assetRoot + profile.image);
+      this.load.image(profile.revealImage, assetRoot + profile.revealImage);
     }
   },
 

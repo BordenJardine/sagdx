@@ -1,5 +1,6 @@
 var SwipeManager = require('../utilities/SwipeManager.js');
 var CinderProfile = require('../entities/CinderProfile.js');
+var ProfileReveal = require('../entities/ProfileReveal.js');
 
 var Game = function () {
   currentCinderProfile = null;
@@ -41,7 +42,20 @@ Game.prototype = {
     this.swipeTo(to, angle);
   },
 
-  onTweenComplete: function() {
+  onSwipeComplete: function() {
+    this.handleReveal()
+  },
+
+  handleReveal: function() {
+    var reveal = new ProfileReveal(this.game, 0, this.header.height, currentCinderProfile.profile);
+    this.game.add.existing(reveal);
+    reveal.events.onInputDown.add(function() {
+      reveal.kill();
+      this.nextProfile();
+    }, this);
+  },
+
+  nextProfile: function() {
     // execute currentCinderProfile.selectionResult
     // or generate new profile:
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
@@ -88,7 +102,7 @@ Game.prototype = {
     currentCinderProfile.addChild(stamp);
 
     var tween = this.game.add.tween(currentCinderProfile);
-    tween.onComplete.add(this.onTweenComplete, this);
+    tween.onComplete.add(this.onSwipeComplete, this);
     tween.to({ x: to, y: this.game.height / 3, angle: angle }, 1000, Phaser.Easing.Cubic.Out, false, 200);
     tween.start();
   },

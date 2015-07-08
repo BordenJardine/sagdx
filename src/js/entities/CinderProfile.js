@@ -41,7 +41,7 @@ CinderProfile.prototype.generateProfile = function(direction) {
   this.image.addChild(this.name);
 
   var tween = this.game.add.tween(this);
-  tween.to({ x: 0}, 500, Phaser.Easing.Cubic.Out, true);
+  tween.to({ x: 0 }, 500, Phaser.Easing.Cubic.Out, true);
   tween.start();
 };
 
