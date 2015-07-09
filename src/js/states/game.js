@@ -68,7 +68,11 @@ Game.prototype = {
 
     this.game.add.existing(this.currentReveal);
 
-    this.currentReveal.events.onInputDown.add(this.endReveal.bind(this), this);
+    //This timeout forces them to look at the reveal image for at least a bit
+    this.game.time.events.add(300, function() {
+      this.currentReveal.events.onInputDown.add(this.endReveal.bind(this), this);
+    }, this);
+
     this.revealTimeout = this.game.time.events.add(3000, this.endReveal, this);
   },
 

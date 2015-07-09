@@ -14,7 +14,7 @@ var ProfileReveal = function(game, x, y, profile) {
   this.inputEnabled = true;
 
   if(!!profile.revealImage2) {
-    setTimeout(loadSecondImage.bind(this), 1000);
+    setTimeout(loadSecondImage.bind(this), 700);
   }
 
   this.addChild(textArea);
