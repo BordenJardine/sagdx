@@ -72,7 +72,11 @@ Game.prototype = {
     if(this.revealTimeout) clearTimeout(this.revealTimeout);
 
     this.currentReveal.kill();
-    this.nextProfile();
+
+    if (typeof currentCinderProfile.profile.minigame !== "undefined")
+      this.game.state.start(currentCinderProfile.profile.minigame);
+    else
+      this.nextProfile();
   },
 
   nextProfile: function() {
