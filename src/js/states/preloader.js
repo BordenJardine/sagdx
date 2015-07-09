@@ -26,6 +26,8 @@ Preloader.prototype = {
     this.load.image('heartButton', 'assets/heart_button.png');
     this.load.image('revealTextArea', 'assets/reveal_text_area.jpg');
     this.load.image('timer-animation', 'assets/timer-animation.png');
+    this.load.image('foot', 'assets/foot.png');
+    this.load.image('slipper', 'assets/slipper.png');
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);
