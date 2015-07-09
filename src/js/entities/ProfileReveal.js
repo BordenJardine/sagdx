@@ -11,7 +11,6 @@ var ProfileReveal = function(game, x, y, profile) {
   text.x = (textArea.width / 2) - (text.width / 2);
   text.y = textArea.y + (textArea.height / 2) - (text.height / 2);
 
-
   this.inputEnabled = true;
 
   if(!!profile.revealImage2) {

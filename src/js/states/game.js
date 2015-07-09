@@ -56,7 +56,7 @@ Game.prototype = {
   },
 
   onSwipeComplete: function() {
-    this.handleReveal()
+    this.handleReveal();
   },
 
   handleReveal: function() {
@@ -65,11 +65,11 @@ Game.prototype = {
     this.game.add.existing(this.currentReveal);
 
     this.currentReveal.events.onInputDown.add(this.endReveal.bind(this), this);
-    this.revealTimeout = setTimeout(this.endReveal.bind(this), 3000);
+    this.revealTimeout = this.game.time.events.add(3000, this.endReveal, this);
   },
 
   endReveal: function() {
-    if(this.revealTimeout) clearTimeout(this.revealTimeout);
+    if (this.revealTimeout) this.game.time.events.remove(this.revealTimeout);
 
     this.currentReveal.kill();
 
