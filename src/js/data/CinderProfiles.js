@@ -15,7 +15,6 @@ CinderProfiles.PROFILES = [
     correctDirection: 0,
     revealImage: 'reveal.png',
     revealText: 'TeH B1g R3V34l!!!1'
-
   },
   {
     name: 'Girl Next Door',
@@ -30,7 +29,8 @@ CinderProfiles.PROFILES = [
     image: 'cind.png',
     correctDirection: 1,
     revealImage: 'reveal.png',
-    revealText: 'TeH B1g R3V34l!!!1'
+    revealText: 'TeH B1g R3V34l!!!1',
+    minigame: 'CinderellaGame'
   }
 ];
 

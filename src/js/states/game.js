@@ -69,17 +69,13 @@ Game.prototype = {
   },
 
   endReveal: function() {
-    if(this.revealTimeout) {
-      clearTimeout(this.revealTimeout);
-    }
+    if(this.revealTimeout) clearTimeout(this.revealTimeout);
 
     this.currentReveal.kill();
     this.nextProfile();
   },
 
   nextProfile: function() {
-    // execute currentCinderProfile.selectionResult
-    // or generate new profile:
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
     this.timerAnimation.x = -6;
 
@@ -127,9 +123,6 @@ Game.prototype = {
     setTimeout(this.onSwipeComplete.bind(this), 700);
     tween.to({ x: to, y: this.game.height / 3, angle: angle }, 1000, Phaser.Easing.Cubic.Out, false, 200);
     tween.start();
-  },
-
-  update: function () {
   }
 };
 
