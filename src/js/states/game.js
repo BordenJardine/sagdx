@@ -74,7 +74,7 @@ Game.prototype = {
     this.currentReveal.kill();
 
     if (typeof currentCinderProfile.profile.minigame !== "undefined" &&
-        lastSwipeDirection === currentCinderProfile.profile.correctDirection)
+        lastSwipeDirection === currentCinderProfile.profile.minigameDirection)
       this.game.state.start(currentCinderProfile.profile.minigame);
     else
       this.nextProfile();
