@@ -60,12 +60,21 @@ Game.prototype = {
   },
 
   handleReveal: function() {
-    var reveal = new ProfileReveal(this.game, 0, this.header.height, currentCinderProfile.profile);
-    this.game.add.existing(reveal);
-    reveal.events.onInputDown.add(function() {
-      reveal.kill();
-      this.nextProfile();
-    }, this);
+    this.currentReveal = new ProfileReveal(this.game, 0, this.header.height, currentCinderProfile.profile);
+
+    this.game.add.existing(this.currentReveal);
+
+    this.currentReveal.events.onInputDown.add(this.endReveal.bind(this), this);
+    this.revealTimeout = setTimeout(this.endReveal.bind(this), 3000);
+  },
+
+  endReveal: function() {
+    if(this.revealTimeout) {
+      clearTimeout(this.revealTimeout);
+    }
+
+    this.currentReveal.kill();
+    this.nextProfile();
   },
 
   nextProfile: function() {
@@ -114,6 +123,7 @@ Game.prototype = {
 
     var tween = this.game.add.tween(currentCinderProfile);
     //tween.onComplete.add(this.onSwipeComplete, this);
+    //using setTimeout to show reveal before tween completes (hack?)
     setTimeout(this.onSwipeComplete.bind(this), 700);
     tween.to({ x: to, y: this.game.height / 3, angle: angle }, 1000, Phaser.Easing.Cubic.Out, false, 200);
     tween.start();
