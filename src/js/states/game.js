@@ -25,9 +25,13 @@ Game.prototype = {
     this.timerTween = this.game.add.tween(this.timerAnimation).to({ x: this.game.width}, 2500);
     this.timerTween.onComplete.add(this.onTimerTweenComplete, this);
     this.timerTween.start();
+    this.swipeEnabled = true;
   },
 
   swipe: function(swipeDirection) {
+    if (!this.swipeEnabled) return;
+    this.swipeEnabled = false;
+
     var to = -this.game.width * 3;
     var angle = -90;
 
@@ -78,9 +82,12 @@ Game.prototype = {
       this.game.state.start(currentCinderProfile.profile.minigame);
     else
       this.nextProfile();
+
+    this.swipeEnabled = true;
   },
 
   nextProfile: function() {
+
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
     this.timerAnimation.x = -6;
 
@@ -123,9 +130,8 @@ Game.prototype = {
     currentCinderProfile.addChild(stamp);
 
     var tween = this.game.add.tween(currentCinderProfile);
-    //tween.onComplete.add(this.onSwipeComplete, this);
     //using setTimeout to show reveal before tween completes (hack?)
-    setTimeout(this.onSwipeComplete.bind(this), 700);
+    this.game.time.events.add(700, this.onSwipeComplete.bind(this), this);
     tween.to({ x: to, y: this.game.height / 3, angle: angle }, 1000, Phaser.Easing.Cubic.Out, false, 200);
     tween.start();
   }
