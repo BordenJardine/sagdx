@@ -30,7 +30,8 @@ CinderProfiles.PROFILES = [
     correctDirection: 1,
     revealImage: 'reveal.png',
     revealText: 'TeH B1g R3V34l!!!1',
-    minigame: 'CinderellaGame'
+    minigame: 'CinderellaGame',
+    minigameDirection: 0
   }
 ];
 
