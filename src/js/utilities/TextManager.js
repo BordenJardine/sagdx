@@ -21,14 +21,13 @@ TextManager.prototype.addFloatingText = function(text, dir, reason, x, y) {
   textObj.x -= (textObj.width / 2) + 16;
 
   if (typeof reason !== "undefined") {
-    textReason = this.game.add.text(startX, startY - 16, reason, { font: '16px Arial' });
-    textReason.x -= (textReason.width / 2) + 16;
+    textReason = this.game.add.text(0, -16, reason, { font: '16px Arial' });
+    textObj.addChild(textReason);
   }
 
   var tween = this.game.add.tween(textObj.scale)
         .to({ y: 1.2, x: 1.2 }, 200, Phaser.Easing.Linear.None, false, 200);
   tween.onComplete.add(function() {
-    if (textReason !== null) textObj.addChild(textReason);
     var tween2 = this.game.add.tween(textObj)
           .to({ y: target , alpha: 0 }, 1000, Phaser.Easing.Linear.None, false, 700);
     tween2.onComplete.add(function() {
