@@ -49,7 +49,8 @@ Game.prototype = {
 
     if (swipeScore > 0) {
       var modifier = scoreMultiplier > 0 ? "+" : "";
-      this.TextManager.addFloatingText(modifier + (swipeScore * scoreMultiplier));
+      var reason = scoreMultiplier > 0 ? "good match!" : "bad match!";
+      this.TextManager.addFloatingText(modifier + (swipeScore * scoreMultiplier), "up", reason);
     }
 
     this.swipeTo(to, angle);
@@ -95,9 +96,9 @@ Game.prototype = {
 
   onTimerTweenComplete: function() {
     if (!this.timerDestroyed) {
-        window.Score -= 10;
-        this.TextManager.addFloatingText("-10", "down");
-        swipeScore = 0;
+      window.Score -= 10;
+      this.TextManager.addFloatingText("-10", "down", "out of time!");
+      swipeScore = 0;
     }
   },
 
