@@ -38,15 +38,20 @@ CinderellaGame.prototype = {
     if (!this.ready)
       return;
 
+    var text = null
     if (this.slipper.y > 280 && this.slipper.y < 300) {
-      alert('WIN!');
       window.SpeedMultiplier += 0.5;
       window.Score += 100;
+      this.TextManager.statusText("WIN!");
     } else {
-      alert('LOSE!');
       window.Score -= 100;
+      this.TextManager.statusText("LOSE!");
     }
 
+    this.game.time.events.add(4000, this.end, this);
+  },
+
+  end: function() {
     this.game.state.start('Game');
   }
 };

@@ -35,7 +35,7 @@ TextManager.prototype.addFloatingText = function(text, dir, reason, x, y) {
   tween.start();
 };
 
-TextManager.prototype.InstructionsText = function(text) {
+TextManager.prototype.statusText = function(text) {
   var x = this.game.width / 2;
   var y = this.game.height / 2;
 
