@@ -16,6 +16,8 @@ Game.prototype = {
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
 
     this.header = this.add.sprite(0, 0, 'header');
+    this.bad = this.game.add.audio('bad');
+    this.good = this.game.add.audio('good');
 
     this.xButton = this.add.button(120, 485, 'xButton', this.nopeButtonCallback.bind(this));
     this.heartButton = this.add.button(212, 485, 'heartButton', this.yepButtonCallback.bind(this));
@@ -52,6 +54,9 @@ Game.prototype = {
     window.Score += swipeScore * scoreMultiplier;
 
     if (swipeScore > 0) {
+      if (scoreMultiplier > 0) this.good.play();
+      else this.bad.play();
+
       var modifier = scoreMultiplier > 0 ? "+" : "";
       var reason = scoreMultiplier > 0 ? "good match!" : "bad match!";
       this.TextManager.addFloatingText(modifier + (swipeScore * scoreMultiplier), "up", reason);
