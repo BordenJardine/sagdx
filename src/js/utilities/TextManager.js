@@ -4,9 +4,6 @@ var TextManager = function(game) {
   this.floatingTexts = [];
 };
 
-TextManager.prototype.addBonusText = function(text, x, y) {
-};
-
 TextManager.prototype.addFloatingText = function(text, dir, reason, x, y) {
   var startX = x || this.game.width / 2;
   var startY = y || this.game.height / 2;
@@ -37,5 +34,14 @@ TextManager.prototype.addFloatingText = function(text, dir, reason, x, y) {
   }, this);
   tween.start();
 };
+
+TextManager.prototype.InstructionsText = function(text) {
+  var x = this.game.width / 2;
+  var y = this.game.height / 2;
+
+  var textObj = this.game.add.text(x, y, text, { font: '40px Arial' });
+  textObj.x -= (textObj.width / 2) + 16;
+  textObj.y -= (textObj.height / 2);
+}
 
 module.exports = TextManager;
