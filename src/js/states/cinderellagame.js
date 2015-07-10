@@ -38,7 +38,7 @@ CinderellaGame.prototype = {
     if (!this.ready)
       return;
 
-    var text = null
+    var text = null;
     if (this.slipper.y > 280 && this.slipper.y < 300) {
       window.SpeedMultiplier += 0.5;
       window.Score += 100;
