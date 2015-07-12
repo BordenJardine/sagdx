@@ -29,8 +29,6 @@ Preloader.prototype = {
     this.load.image('foot', 'assets/foot.png');
     this.load.image('slipper', 'assets/slipper.png');
 
-    this.game.load.audio('swipeR', 'assets/sounds/swiper.wav');
-    this.game.load.audio('swipeL', 'assets/sounds/swipel.wav');
     this.game.load.audio('good', 'assets/sounds/good.wav');
     this.game.load.audio('bad', 'assets/sounds/bad.wav');
 

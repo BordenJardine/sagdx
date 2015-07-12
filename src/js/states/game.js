@@ -2,6 +2,7 @@ var SwipeManager = require('../utilities/SwipeManager.js');
 var CinderProfile = require('../entities/CinderProfile.js');
 var ProfileReveal = require('../entities/ProfileReveal.js');
 var TextManager = require('../utilities/TextManager.js');
+var Timer = require('../entities/Timer.js');
 
 var Game = function () {
   currentCinderProfile = null;
@@ -13,6 +14,7 @@ Game.prototype = {
   create: function () {
     this.game.plugins.add(new SwipeManager(this.game, {}, this.swipe, this));
     this.TextManager = new TextManager(this.game);
+    this.Timer = new Timer(this.game, this.onTimerTweenComplete, this);
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
 
     this.header = this.add.sprite(0, 0, 'header');
@@ -21,13 +23,14 @@ Game.prototype = {
 
     this.xButton = this.add.button(120, 485, 'xButton', this.nopeButtonCallback.bind(this));
     this.heartButton = this.add.button(212, 485, 'heartButton', this.yepButtonCallback.bind(this));
-    this.timerAnimation = this.game.add.sprite(-6, this.game.height - 8, 'timer-animation');
 
-    this.timeDestroyed = false;
-    this.timerTween = this.game.add.tween(this.timerAnimation).to({ x: this.game.width}, 2500);
-    this.timerTween.onComplete.add(this.onTimerTweenComplete, this);
-    this.timerTween.start();
+    this.baseSwipeScore = 20;
+    this.swipeScore = this.baseSwipeScore;
+    this.updateTime = 0;
+
     this.swipeEnabled = true;
+
+    this.Timer.start();
   },
 
   swipe: function(swipeDirection) {
@@ -37,8 +40,7 @@ Game.prototype = {
     var to = -this.game.width * 3;
     var angle = -90;
 
-    this.timerDestroyed = true;
-    this.game.tweens.remove(this.timerTween);
+    this.Timer.end();
 
     lastSwipeDirection = swipeDirection;
 
@@ -47,11 +49,14 @@ Game.prototype = {
       angle = angle * -1;
     }
 
-    var scoreMultiplier = -1;
-    if (swipeDirection === currentCinderProfile.profile.correctDirection)
-      scoreMultiplier = 1;
+    var scoreMultiplier = 1;
+    if (swipeDirection !== currentCinderProfile.profile.correctDirection) {
+      scoreMultiplier = -1;
+      this.swipeScore = this.baseSwipeScore;
+    }
 
-    window.Score += swipeScore * scoreMultiplier;
+    var scoreChange = this.swipeScore * scoreMultiplier;
+    window.Score += scoreChange;
 
     if (swipeScore > 0) {
       if (scoreMultiplier > 0) this.good.play();
@@ -59,7 +64,7 @@ Game.prototype = {
 
       var modifier = scoreMultiplier > 0 ? "+" : "";
       var reason = scoreMultiplier > 0 ? "good match!" : "bad match!";
-      this.TextManager.addFloatingText(modifier + (swipeScore * scoreMultiplier), "up", reason);
+      this.TextManager.addFloatingText(modifier + scoreChange, "up", reason);
     }
 
     this.swipeTo(to, angle);
@@ -97,23 +102,24 @@ Game.prototype = {
   },
 
   nextProfile: function() {
-
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
-    this.timerAnimation.x = -6;
 
-    // todo - subtract score as timer decreases
-    swipeScore = 20;
+    this.swipeScore = this.baseSwipeScore;
 
-    this.timerDestroyed = false;
-    this.timerTween = this.game.add.tween(this.timerAnimation).to({ x: this.game.width}, 2500);
-    this.timerTween.onComplete.add(this.onTimerTweenComplete, this);
-    this.timerTween.start();
+    this.Timer.start();
+  },
+
+  update: function () {
+    this.updateTime += 1;
+    if (this.swipeScore > 1 && this.updateTime % 10 === 0) {
+      this.swipeScore -= 1;
+    }
   },
 
   onTimerTweenComplete: function() {
-    if (!this.timerDestroyed) {
-      window.Score -= 10;
-      this.TextManager.addFloatingText("-10", "down", "out of time!");
+    if (!this.Timer.timerDestroyed) {
+      window.Score -= (this.baseSwipeScore / 2);
+      this.TextManager.addFloatingText("-" + (this.baseSwipeScore / 2), "down", "out of time!");
       swipeScore = 0;
     }
   },

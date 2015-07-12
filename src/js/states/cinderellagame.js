@@ -29,9 +29,9 @@ CinderellaGame.prototype = {
     this.slipper.y += this.movement;
 
     if (this.slipper.y > this.game.height - this.slipper.height)
-      this.movement = -2;
+      this.movement *= -1;
     if (this.slipper.y < this.slipper.height)
-      this.movement = 2;
+      this.movement *= -1;
   },
 
   onDown: function () {
