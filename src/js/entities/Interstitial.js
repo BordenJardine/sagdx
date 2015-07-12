@@ -31,7 +31,7 @@ Interstitial.prototype.constructor = Interstitial;
 Interstitial.prototype.update = function() {
   this.updateTime += 1;
 
-  if (this.updateTime % 5 === 0) {
+  if (this.updateTime % 3 === 0) {
     // no XOR in JS...
     this.currentFill = !this.currentFill ? 0xFFFFFF : 0;
     var textFill = !this.currentFill ? '#FFFFFF' : '#000000';

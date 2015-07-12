@@ -15,7 +15,7 @@ CinderellaGame.prototype = {
 
     this.input.onDown.add(this.onDown, this);
     this.game.add.sprite(0, 120, 'foot');
-    this.slipper = this.game.add.sprite(this.game.width - slipperW, slipperH, 'slipper');
+    this.slipper = this.game.add.sprite(this.game.width - slipperW + 20, slipperH, 'slipper');
     this.movement = 2 * window.SpeedMultiplier;
     this.ready = false;
 
@@ -63,7 +63,10 @@ CinderellaGame.prototype = {
     if (!this.ready)
       return;
 
-    if (this.slipper.y > 280 && this.slipper.y < 300) {
+    this.Timer.end();
+
+    this.slipper.x -= 20;
+    if (this.slipper.y > 280 && this.slipper.y < 310) {
       this.win();
     } else {
       this.lose();
