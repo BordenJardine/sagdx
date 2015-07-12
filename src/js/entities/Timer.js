@@ -1,8 +1,8 @@
-var Timer = function(game, endCallback, ctx) {
+var Timer = function(game, baseTime, endCallback, ctx) {
   Phaser.Sprite.call(this, game, -6, game.height - 8, 'timer-animation');
   this.game = game;
 
-  this.timerTime = 2500 - (window.SpeedMultiplier * 10);
+  this.timerTime = baseTime - (window.SpeedMultiplier * 10);
   this.timeDestroyed = false;
   this.timerTween = null;
 

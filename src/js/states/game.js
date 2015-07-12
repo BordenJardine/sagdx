@@ -14,7 +14,7 @@ Game.prototype = {
   create: function () {
     this.game.plugins.add(new SwipeManager(this.game, {}, this.swipe, this));
     this.TextManager = new TextManager(this.game);
-    this.Timer = new Timer(this.game, this.onTimerTweenComplete, this);
+    this.Timer = new Timer(this.game, 2500, this.onTimerTweenComplete, this);
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
 
     this.header = this.add.sprite(0, 0, 'header');
@@ -24,7 +24,7 @@ Game.prototype = {
     this.xButton = this.add.button(120, 485, 'xButton', this.nopeButtonCallback.bind(this));
     this.heartButton = this.add.button(212, 485, 'heartButton', this.yepButtonCallback.bind(this));
 
-    this.baseSwipeScore = 20;
+    this.baseSwipeScore = 25;
     this.swipeScore = this.baseSwipeScore;
     this.updateTime = 0;
 
