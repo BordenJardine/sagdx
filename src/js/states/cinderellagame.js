@@ -16,9 +16,6 @@ CinderellaGame.prototype = {
     this.input.onDown.add(this.onDown, this);
     this.game.add.sprite(0, 120, 'foot');
     this.slipper = this.game.add.sprite(this.game.width - slipperW + 20, slipperH, 'slipper');
-    this.foot = this.game.add.sprite(100, 200, 'foot-anim');
-    this.foot.animations.add('base');
-    this.foot.animations.play('base', 10, true);
     this.movement = 2 * window.SpeedMultiplier;
     this.ready = false;
 

@@ -28,7 +28,6 @@ Preloader.prototype = {
     this.load.image('timer-animation', 'assets/timer-animation.png');
     this.load.image('foot', 'assets/foot.png');
     this.load.image('slipper', 'assets/slipper.png');
-    this.load.spritesheet('foot-anim', 'assets/foot-anim.png', 131, 290);
 
     this.game.load.audio('good', 'assets/sounds/good.wav');
     this.game.load.audio('bad', 'assets/sounds/bad.wav');
