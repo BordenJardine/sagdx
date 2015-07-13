@@ -66,7 +66,7 @@ CinderellaGame.prototype = {
     this.Timer.end();
 
     this.slipper.x -= 20;
-    if (this.slipper.y > 280 && this.slipper.y < 310) {
+    if (this.slipper.y > 260 && this.slipper.y < 310) {
       this.win();
     } else {
       this.lose();
