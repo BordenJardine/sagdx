@@ -117,10 +117,11 @@ Game.prototype = {
   },
 
   onTimerTweenComplete: function() {
+    this.bad.play();
     if (!this.Timer.timerDestroyed) {
       window.Score -= (this.baseSwipeScore / 2);
       this.TextManager.addFloatingText("-" + (this.baseSwipeScore / 2), "down", "out of time!");
-      swipeScore = 0;
+      this.swipeScore = 0;
     }
   },
 
