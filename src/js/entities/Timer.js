@@ -17,6 +17,7 @@ Timer.prototype = Object.create(Phaser.Sprite.prototype);
 Timer.prototype.constructor = Timer;
 
 Timer.prototype.start = function() {
+  this.timerDestroyed = false;
   this.timerTween.start();
 }
 
