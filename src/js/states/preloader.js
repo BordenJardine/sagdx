@@ -29,6 +29,12 @@ Preloader.prototype = {
     this.load.image('foot', 'assets/foot.png');
     this.load.image('slipper', 'assets/slipper.png');
 
+    this.load.image('frogHaus', 'assets/froghaus.png');
+    this.load.image('frogPlayer', 'assets/frogplayer.png');
+    this.load.image('frogChaser', 'assets/frogchaser.png');
+    this.load.spritesheet('leftShoe', 'assets/left_shoe.png', 48, 110, 3);
+    this.load.spritesheet('rightShoe', 'assets/right_shoe.png', 48, 110, 3);
+
     this.game.load.audio('good', 'assets/sounds/good.wav');
     this.game.load.audio('bad', 'assets/sounds/bad.wav');
 

@@ -36,8 +36,8 @@ TextManager.prototype.addFloatingText = function(text, dir, reason, x, y) {
 };
 
 TextManager.prototype.statusText = function(text) {
-  var x = this.game.width / 2;
-  var y = this.game.height / 2;
+  var x = this.game.camera.x + this.game.width / 2;
+  var y =  this.game.camera.y + this.game.height / 2;
 
   var textObj = this.game.add.text(x, y, text, { font: '40px Arial' });
   textObj.x -= (textObj.width / 2) + 16;

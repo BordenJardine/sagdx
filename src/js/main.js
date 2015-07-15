@@ -12,5 +12,6 @@ game.state.add('Preloader', require('./states/preloader'));
 game.state.add('Menu', require('./states/menu'));
 game.state.add('Game', require('./states/game'));
 game.state.add('CinderellaGame', require('./states/cinderellagame'));
+game.state.add('FrogGame', require('./states/froggame'));
 
 game.state.start('Boot');

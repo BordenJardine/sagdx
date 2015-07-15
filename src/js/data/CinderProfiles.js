@@ -22,7 +22,9 @@ CinderProfiles.PROFILES = [
     correctDirection: 0,
     revealImage: 'frog_reveal.png',
     revealImage2: 'frog_reveal2.png',
-    revealText: 'GET OUT'
+    revealText: 'GET OUT',
+    minigame: 'FrogGame',
+    minigameDirection: 1
   },
   {
     name: 'Cinderella',
