@@ -22,6 +22,11 @@ FrogGame.prototype = {
 
     this.background = this.game.add.image(0, 0, 'frogHaus');
     this.player = this.game.add.sprite(this.game.width / 2 - playerW / 2, 290, 'frogPlayer');
+    this.player.animations.add('idle', [0]);
+    this.player.animations.add('left', [1]);
+    this.player.animations.add('right', [2]);
+    this.player.animations.play('idle', 0, true);
+
     this.frog = this.game.add.sprite(this.player.x - 350, PLAYER_Y, 'frogChaser');
     this.frog.animations.add('run');
     this.frog.animations.play('run', 10, true);
@@ -57,11 +62,15 @@ FrogGame.prototype = {
     this.rightShoe.inputEnabled = false;
 
     this.leftShoe.events.onInputDown.add(function() {
+      this.player.animations.play('left', 10, false);
+      this.player.events.onAnimationComplete.add(this.idlePlayer, this);
       this.movePlayer();
       this.activateShoe(this.rightShoe, this.leftShoe);
     }, this);
 
     this.rightShoe.events.onInputDown.add(function() {
+      this.player.animations.play('right', 10, false);
+      this.player.events.onAnimationComplete.add(this.idlePlayer, this);
       this.movePlayer();
       this.activateShoe(this.leftShoe, this.rightShoe);
     }, this);
@@ -75,6 +84,10 @@ FrogGame.prototype = {
 
     unactiveShoe.animations.play('idle', 50, true);
     unactiveShoe.inputEnabled = false;
+  },
+
+  idlePlayer: function() {
+    this.player.animations.play('idle', 5, true);
   },
 
   update: function() {
