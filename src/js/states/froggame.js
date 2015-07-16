@@ -22,12 +22,14 @@ FrogGame.prototype = {
 
     this.background = this.game.add.image(0, 0, 'frogHaus');
     this.player = this.game.add.sprite(this.game.width / 2 - playerW / 2, 290, 'frogPlayer');
-    this.frog = this.game.add.sprite(this.player.x - 250, PLAYER_Y, 'frogChaser');
+    this.frog = this.game.add.sprite(this.player.x - 350, PLAYER_Y, 'frogChaser');
+    this.frog.animations.add('run');
+    this.frog.animations.play('run', 10, true);
 
     this.setupShoes();
 
     this.frogSpeed = 2.5 * window.SpeedMultiplier;
-    this.playerSpeed = 20 * window.SpeedMultiplier;
+    this.playerSpeed = 25 * window.SpeedMultiplier;
 
     this.ready = false;
 
@@ -78,7 +80,7 @@ FrogGame.prototype = {
   update: function() {
     if (!this.ready) return;
 
-    if(this.frog.x + this.frog.width > this.player.x) this.lose();
+    if(this.frog.x + (this.frog.width * 0.666) > this.player.x) this.lose();
 
     if(this.player.x > WIN_X) this.win();
 

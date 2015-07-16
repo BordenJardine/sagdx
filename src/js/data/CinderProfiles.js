@@ -2,6 +2,7 @@ var CinderProfiles = function() {
 };
 
 CinderProfiles.PROFILES = [
+/*
   {
     name: 'Demo 1',
     image: 'demo.png',
@@ -16,6 +17,7 @@ CinderProfiles.PROFILES = [
     revealImage: 'reveal.png',
     revealText: 'TeH B1g R3V34l!!!1'
   },
+*/
   {
     name: 'Girl Next Door',
     image: 'frog_profile.png',
@@ -26,6 +28,7 @@ CinderProfiles.PROFILES = [
     minigame: 'FrogGame',
     minigameDirection: 1
   },
+/*
   {
     name: 'Cinderella',
     image: 'cind.png',
@@ -35,6 +38,7 @@ CinderProfiles.PROFILES = [
     minigame: 'CinderellaGame',
     minigameDirection: 1
   }
+*/
 ];
 
 module.exports = CinderProfiles;
