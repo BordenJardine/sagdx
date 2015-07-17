@@ -10,7 +10,15 @@ MermaidGame.prototype = {
     this.TextManager = new TextManager(this.game);
     this.Timer = null;
 
-    this.inter = new Interstitial(this.game, "PROTECT THE CLAM", 4000, function() {
+    this.lost = false;
+
+    // clam / player sprite
+    // random N of fish sprites
+
+    // set up controls for shutting clam (onDown)
+    // clam on down cooldown (1s?)
+
+    this.inter = new Interstitial(this.game, "PROTECT THE CLAM", 3500, function() {
       this.inter.destroy();
       this.ready = true;
       this.Timer = new Timer(this.game, 2500, this.onTimerComplete, this);
@@ -21,9 +29,17 @@ MermaidGame.prototype = {
   update: function () {
     if (!this.ready)
       return;
+
+    // random chance for one fish to charge
+    // increases as timer durection increases (need at least one to charge)
   },
 
   onTimerComplete: function () {
+    // if loss flag not set, win
+    if (!this.lost)
+      this.win();
+    else
+      this.lose();
   },
 
   lose: function () {
