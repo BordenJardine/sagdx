@@ -100,7 +100,6 @@ Game.prototype = {
     else
       this.nextProfile();
 
-    this.swipeEnabled = true;
   },
 
   nextProfile: function() {
@@ -108,6 +107,7 @@ Game.prototype = {
 
     this.swipeScore = this.baseSwipeScore;
 
+    this.swipeEnabled = true;
     this.Timer.start();
   },
 
