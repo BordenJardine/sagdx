@@ -7,6 +7,7 @@ var MermaidGame = function () {
 
 MermaidGame.prototype = {
   create: function () {
+    this.gameTime = 4000;
     this.TextManager = new TextManager(this.game);
     this.Timer = null;
 
@@ -14,12 +15,27 @@ MermaidGame.prototype = {
     this.clamReady = false;
     this.vuln = !this.clamReady;
     this.lost = false;
+    this.attacked = false;
 
     this.clam = this.game.add.sprite(this.game.width / 3, this.game.height / 3, 'clam');
     this.clam.animations.add('shut');
     this.clam.animations.add('open', [3, 2, 1, 0]);
 
-    // random N of fish sprites
+    this.attackers = [];
+    var fishCount = Math.floor((Math.random() * 4) + 1);
+    for (var i = 0; i < fishCount; i++) {
+      var fishTmp = this.game.add.sprite(1 + i * 100, 1 + i * 100, 'fish');
+      fishTmp.animations.add('swim');
+      fishTmp.animations.play('swim', 5, true);
+      fishTmp.attacker = (Math.floor((Math.random() * 10) + 1)) > 7;
+
+      if (this.attackers.length == 0 && i == fishCount - 1) fishTmp.attacker = true;
+
+      var countDown = this.gameTime - (Math.floor((Math.random() * (this.gameTime / 2)) + 1));
+      fishTmp.time = countDown;
+      fishTmp.attacked = false;
+      this.attackers.push(fishTmp);
+    }
 
     this.input.onDown.add(this.onDown, this);
     this.clamCooldown = 2000;
@@ -29,7 +45,7 @@ MermaidGame.prototype = {
       this.inter.destroy();
       this.ready = true;
       this.clamReady = true;
-      this.Timer = new Timer(this.game, 2500, this.onTimerComplete, this, true);
+      this.Timer = new Timer(this.game, this.gameTime, this.onTimerComplete, this, true);
       this.Timer.start();
     }, this);
   },
@@ -38,8 +54,16 @@ MermaidGame.prototype = {
     if (!this.ready)
       return;
 
-    // random chance for one fish to charge
-    // increases as timer durection increases (need at least one to charge)
+    for (var i = 0; i < this.attackers.length; i++) {
+      if (this.Timer.timer.timer.duration <= this.attackers[i].time &&
+          this.Timer.timer.timer.duration != 0 &&
+          !this.attackers[i].attacked) {
+        this.attackers[i].attacked = true;
+      }
+
+      if (this.attackers[i].attacked) {
+      }
+    }
   },
 
   onTimerComplete: function () {
