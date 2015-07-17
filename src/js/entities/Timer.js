@@ -27,7 +27,7 @@ Timer.prototype.constructor = Timer;
 Timer.prototype.start = function() {
   this.timerDestroyed = false;
   this.timerTween.start();
-  this.timer = this.game.time.events.add(this.timerTime);
+  this.timer = this.game.time.events.add(this.timerTime, function() {});
 };
 
 Timer.prototype.setup = function() {

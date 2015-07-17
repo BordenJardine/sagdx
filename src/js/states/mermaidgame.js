@@ -10,18 +10,26 @@ MermaidGame.prototype = {
     this.TextManager = new TextManager(this.game);
     this.Timer = null;
 
+    this.ready = false;
+    this.clamReady = false;
+    this.vuln = !this.clamReady;
     this.lost = false;
 
-    // clam / player sprite
+    this.clam = this.game.add.sprite(this.game.width / 3, this.game.height / 3, 'clam');
+    this.clam.animations.add('shut');
+    this.clam.animations.add('open', [3, 2, 1, 0]);
+
     // random N of fish sprites
 
-    // set up controls for shutting clam (onDown)
-    // clam on down cooldown (1s?)
+    this.input.onDown.add(this.onDown, this);
+    this.clamCooldown = 2000;
+    this.clamDown = 750;
 
     this.inter = new Interstitial(this.game, "PROTECT THE CLAM", 3500, function() {
       this.inter.destroy();
       this.ready = true;
-      this.Timer = new Timer(this.game, 2500, this.onTimerComplete, this);
+      this.clamReady = true;
+      this.Timer = new Timer(this.game, 2500, this.onTimerComplete, this, true);
       this.Timer.start();
     }, this);
   },
@@ -46,7 +54,7 @@ MermaidGame.prototype = {
     this.ready = false;
     window.Score -= 100;
     this.TextManager.statusText("LOSE!");
-    this.game.time.events.add(4000, this.end, this);
+    game.time.events.add(4000, this.end, this);
   },
 
   win: function () {
@@ -58,8 +66,18 @@ MermaidGame.prototype = {
   },
 
   onDown: function () {
-    if (!this.ready)
+    if (!this.ready || !this.clamReady)
       return;
+
+    this.clam.animations.play('shut', 20);
+    this.clamReady = false;
+    this.vuln = false;
+    this.game.time.events.add(this.clamCooldown, function() { this.clamReady = true; }.bind(this));
+    this.game.time.events.add(this.clamDown,
+                              function() {
+                                this.clam.animations.play('open', 20);
+                                this.vuln = true;
+                              }.bind(this));
   },
 
   end: function() {

@@ -34,6 +34,15 @@ CinderProfiles.PROFILES = [
     revealText: 'TeH B1g R3V34l!!!1',
     minigame: 'CinderellaGame',
     minigameDirection: 1
+  },
+  {
+    name: 'Mermaid',
+    image: 'mermaid.png',
+    correctDirection: 1,
+    revealImage: 'reveal.png',
+    revealText: 'OH OH HOW DOES THIS WORK?',
+    minigame: 'MermaidGame',
+    minigameDirection: 1
   }
 ];
 
