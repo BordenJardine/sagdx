@@ -36,6 +36,7 @@ Preloader.prototype = {
     this.load.spritesheet('rightShoe', 'assets/right_shoe.png', 48, 110, 3);
 
     this.load.spritesheet('clam', 'assets/clam.png', 202, 215, 4);
+    this.load.spritesheet('fish', 'assets/fish.png', 75, 50, 4);
 
     this.game.load.audio('good', 'assets/sounds/good.wav');
     this.game.load.audio('bad', 'assets/sounds/bad.wav');
