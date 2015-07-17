@@ -26,6 +26,7 @@ MermaidGame.prototype = {
     this.clam.animations.add('open', [3, 2, 1, 0]);
 
     this.attackers = [];
+
     var fishCount = Math.floor((Math.random() * 4) + 1);
     for (var i = 0; i < fishCount; i++) {
       var fishTmp = this.game.add.sprite(1 + i * 100, 1 + i * 100, 'fish');
@@ -33,12 +34,16 @@ MermaidGame.prototype = {
       fishTmp.animations.play('swim', 5, true);
       fishTmp.attacker = (Math.floor((Math.random() * 10) + 1)) > 7;
 
-      if (this.attackers.length == 0 && i == fishCount - 1) fishTmp.attacker = true;
+      if (this.attackers.length == 0 && i == fishCount - 1)
+        fishTmp.attacker = true;
 
-      var countDown = this.gameTime - (Math.floor((Math.random() * (this.gameTime / 2)) + 1));
-      fishTmp.time = countDown;
-      fishTmp.attacked = false;
-      this.attackers.push(fishTmp);
+      if (fishTmp.attacker) {
+        var countDown = this.gameTime -
+              (Math.floor((Math.random() * (this.gameTime / 2)) + 1));
+        fishTmp.time = countDown;
+        fishTmp.attacked = false;
+        this.attackers.push(fishTmp);
+      }
     }
 
     this.input.onDown.add(this.onDown, this);
