@@ -12,6 +12,8 @@ FrogGame.prototype = {
   create: function () {
     var self = this;
 
+    if (!this.game.device.desktop) this.input.onDown.add(this.goFullscreen, this);
+
     this.game.world.width = 1200;
     this.game.camera.setBoundsToWorld();
 
@@ -44,6 +46,12 @@ FrogGame.prototype = {
       this.inter.destroy();
       this.ready = true;
     }, this);
+  },
+
+  goFullscreen: function() {
+    if(this.game.scale.isFullScreen) return;
+    this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.game.scale.startFullScreen(true);
   },
 
   setupShoes: function() {

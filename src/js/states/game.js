@@ -19,6 +19,8 @@ Game.prototype = {
     this.Timer = new Timer(this.game, 2500, this.onTimerTweenComplete, this);
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
 
+    if (!this.game.device.desktop) this.input.onDown.add(this.goFullscreen, this);
+
     this.header = this.add.sprite(0, 0, 'header');
     this.bad = this.game.add.audio('bad');
     this.good = this.game.add.audio('good');
@@ -33,6 +35,12 @@ Game.prototype = {
     this.swipeEnabled = true;
 
     this.Timer.start();
+  },
+
+  goFullscreen: function() {
+    if(this.game.scale.isFullScreen) return;
+    this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.game.scale.startFullScreen(true);
   },
 
   swipe: function(swipeDirection) {
