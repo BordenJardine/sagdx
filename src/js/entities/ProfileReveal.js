@@ -22,7 +22,7 @@ var ProfileReveal = function(game, x, y, profile) {
 };
 
 var loadSecondImage = function() {
-  this.loadTexture(this.profile.revealImage2);
+  if(this.game) this.loadTexture(this.profile.revealImage2);
 };
 
 ProfileReveal.prototype = Object.create(Phaser.Sprite.prototype);

@@ -43,6 +43,7 @@ Timer.prototype.setup = function() {
 };
 
 Timer.prototype.end = function() {
+  if(!this.game) return;
   this.timerDestroyed = true;
   this.game.tweens.remove(this.timerTween);
   this.game.time.events.remove(this.timer);
