@@ -59,9 +59,32 @@ MermaidGame.prototype = {
           this.Timer.timer.timer.duration != 0 &&
           !this.attackers[i].attacked) {
         this.attackers[i].attacked = true;
+
+        var tween = this.game.add.tween(this.attackers[i])
+              .to({ x: this.clam.x + (this.clam.width / 2.5),
+                    y: this.clam.y + (this.clam.height / 2) },
+                  750,
+                  Phaser.Easing.Linear.None,
+                  false,
+                  100)
+              .start();
       }
 
       if (this.attackers[i].attacked) {
+        var boundsClam = Phaser.Rectangle.inflate(this.clam.getBounds(), -70, -80);
+        boundsClam.y += 20;
+        boundsClam.x -= 25;
+        var boundsAttacker = this.attackers[i].getBounds();
+
+        if (Phaser.Rectangle.intersects(boundsClam, boundsAttacker)) {
+          if (this.vuln) {
+            this.lost = true;
+          } else {
+            var tmp = this.attackers[i];
+            this.attackers.splice(i, 1);
+            tmp.destroy();
+          }
+        }
       }
     }
   },
@@ -78,7 +101,7 @@ MermaidGame.prototype = {
     this.ready = false;
     window.Score -= 100;
     this.TextManager.statusText("LOSE!");
-    game.time.events.add(4000, this.end, this);
+    this.game.time.events.add(4000, this.end, this);
   },
 
   win: function () {
