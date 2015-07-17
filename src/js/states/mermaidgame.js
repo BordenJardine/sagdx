@@ -29,7 +29,10 @@ MermaidGame.prototype = {
 
     var fishCount = Math.floor((Math.random() * 4) + 1);
     for (var i = 0; i < fishCount; i++) {
-      var fishTmp = this.game.add.sprite(1 + i * 100, 1 + i * 100, 'fish');
+      var baseX = (i == 0 || i == 2) ? 15 : this.game.width - 100;
+      var baseY = (i == 3 || i == 2) ? this.game.height - 50 : 23;
+
+      var fishTmp = this.game.add.sprite(baseX, baseY, 'fish');
       fishTmp.animations.add('swim');
       fishTmp.animations.play('swim', 5, true);
       fishTmp.attacker = (Math.floor((Math.random() * 10) + 1)) > 7;
