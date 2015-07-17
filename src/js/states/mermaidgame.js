@@ -10,6 +10,10 @@ MermaidGame.prototype = {
     this.gameTime = 4000;
     this.TextManager = new TextManager(this.game);
     this.Timer = null;
+    this.game.stage.backgroundColor = '#327ed0';
+
+    this.filter = new Phaser.Filter(this.game, null, waterShader);
+	this.filter.setResolution(this.game.stage.width, this.game.stage.height);
 
     this.ready = false;
     this.clamReady = false;
@@ -45,6 +49,11 @@ MermaidGame.prototype = {
       this.inter.destroy();
       this.ready = true;
       this.clamReady = true;
+      var filterSprite = this.game.add.sprite();
+	  filterSprite.width = this.game.stage.width;
+	  filterSprite.height = this.game.stage.height;
+      filterSprite.fixedToCamera = false;
+	  filterSprite.filters = [ this.filter ];
       this.Timer = new Timer(this.game, this.gameTime, this.onTimerComplete, this, true);
       this.Timer.start();
     }, this);
@@ -54,6 +63,7 @@ MermaidGame.prototype = {
     if (!this.ready)
       return;
 
+    this.filter.update(this.game.input.activePointer);
     for (var i = 0; i < this.attackers.length; i++) {
       if (this.Timer.timer.timer.duration <= this.attackers[i].time &&
           this.Timer.timer.timer.duration != 0 &&
@@ -90,7 +100,6 @@ MermaidGame.prototype = {
   },
 
   onTimerComplete: function () {
-    // if loss flag not set, win
     if (!this.lost)
       this.win();
     else
@@ -128,8 +137,38 @@ MermaidGame.prototype = {
   },
 
   end: function() {
+    this.game.stage.backgroundColor = '#ffffff';
     this.game.state.start('Game');
   }
 };
 
 module.exports = MermaidGame;
+
+var waterShader = [
+    "precision mediump float;",
+    "uniform float     time;",
+    "uniform vec2      resolution;",
+    "uniform vec2      mouse;",
+    "#define MAX_ITER 4",
+    "void main( void )",
+    "{",
+        "vec2 v_texCoord = gl_FragCoord.xy / resolution;",
+        "vec2 p =  v_texCoord * 8.0 - vec2(20.0);",
+        "vec2 i = p;",
+        "float c = 1.0;",
+        "float inten = .03;",
+        "for (int n = 0; n < MAX_ITER; n++)",
+        "{",
+            "float t = time * (1.0 - (3.0 / float(n+1)));",
+            "i = p + vec2(cos(t - i.x) + sin(t + i.y),",
+            "sin(t - i.y) + cos(t + i.x));",
+            "c += 1.0/length(vec2(p.x / (sin(i.x+t)/inten),",
+            "p.y / (cos(i.y+t)/inten)));",
+        "}",
+        "c /= float(MAX_ITER);",
+        "c = 1.5 - sqrt(c);",
+        "vec4 texColor = vec4(0.0, 0.01, 0.015, 0.2);",
+        "texColor.rgb *= (1.0 / (1.0 - (c + 0.05)));",
+        "gl_FragColor = texColor;",
+    "}"
+];
