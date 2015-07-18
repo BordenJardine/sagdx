@@ -23,7 +23,7 @@ FrogGame.prototype = {
     var playerW = this.game.cache.getImage('frogPlayer').width;
 
     this.background = this.game.add.image(0, 0, 'frogHaus');
-    this.player = this.game.add.sprite(this.game.width / 2 - playerW / 2, 290, 'frogPlayer');
+    this.player = this.game.add.sprite(this.game.width / 2, 290, 'frogPlayer');
     this.player.animations.add('idle', [0]);
     this.player.animations.add('left', [1]);
     this.player.animations.add('right', [2]);
