@@ -42,7 +42,7 @@ TextManager.prototype.statusText = function(text) {
   var bg = this.game.add.graphics(0, y - 36);
   bg.beginFill(0x000000, 1);
   bg.boundsPadding = 0;
-  bg.drawRect(0, 0, this.game.width, 64);
+  bg.drawRect(this.game.camera.x, 0, this.game.camera.x + this.game.width, 64);
 
   var textObj = this.game.add.text(x, y, text, { font: '40px Arial', fill: '#ffffff' });
   textObj.x -= (textObj.width / 2);
