@@ -34,8 +34,6 @@ MermaidGame.prototype = {
       var baseX = (i == 0 || i == 2) ? 64 : this.game.width - 100;
       var baseY = (i == 3 || i == 2) ? this.game.height - 64 - yOffset : 64 + yOffset;
 
-      console.log(yOffset);
-
       var fishTmp = this.game.add.sprite(baseX, baseY, 'fish');
       fishTmp.anchor.setTo(0.5, 1);
       fishTmp.animations.add('swim');
