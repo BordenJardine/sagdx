@@ -163,7 +163,7 @@ var waterShader = [
         "vec2 v_texCoord = gl_FragCoord.xy / resolution;",
         "vec2 p =  v_texCoord * 8.0 - vec2(20.0);",
         "vec2 i = p;",
-        "float c = 1.0;",
+        "float c = 0.8;",
         "float inten = .03;",
         "for (int n = 0; n < MAX_ITER; n++)",
         "{",
