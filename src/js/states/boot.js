@@ -12,8 +12,10 @@ Boot.prototype = {
     this.game.input.maxPointers = 1;
     this.game.stage.backgroundColor = 0xffffff;
 
-    this.game.scale.pageAlignHorizontally = true;
-    this.game.scale.pageAlignVertically = true;
+    if (!this.game.device.iPhone) {
+      this.game.scale.pageAlignHorizontally = true;
+      this.game.scale.pageAlignVertically = true;
+    }
 
     if (!this.game.device.desktop) {
       this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
