@@ -26,16 +26,25 @@ MermaidGame.prototype = {
     this.clam.animations.add('open', [3, 2, 1, 0]);
 
     this.attackers = [];
+    this.fish = [];
 
     var fishCount = Math.floor((Math.random() * 4) + 1);
     for (var i = 0; i < fishCount; i++) {
-      var baseX = (i == 0 || i == 2) ? 15 : this.game.width - 100;
-      var baseY = (i == 3 || i == 2) ? this.game.height - 50 : 23;
+      var yOffset = Math.floor((Math.random() * 150) + 50);
+      var baseX = (i == 0 || i == 2) ? 64 : this.game.width - 100;
+      var baseY = (i == 3 || i == 2) ? this.game.height - 64 - yOffset : 64 + yOffset;
+
+      console.log(yOffset);
 
       var fishTmp = this.game.add.sprite(baseX, baseY, 'fish');
+      fishTmp.anchor.setTo(0.5, 1);
       fishTmp.animations.add('swim');
       fishTmp.animations.play('swim', 5, true);
       fishTmp.attacker = (Math.floor((Math.random() * 10) + 1)) > 7;
+      fishTmp.facingLeft = (Math.floor((Math.random() * 2) + 1)) > 1;
+
+      if (!fishTmp.facingLeft)
+        fishTmp.scale.x = -1;
 
       if (this.attackers.length == 0 && i == fishCount - 1)
         fishTmp.attacker = true;
@@ -47,6 +56,8 @@ MermaidGame.prototype = {
         fishTmp.attacked = false;
         this.attackers.push(fishTmp);
       }
+
+      this.fish.push(fishTmp);
     }
 
     this.input.onDown.add(this.onDown, this);
@@ -78,6 +89,13 @@ MermaidGame.prototype = {
           !this.attackers[i].attacked) {
         this.attackers[i].attacked = true;
 
+        if (this.attackers[i].x < this.clam.x &&
+            this.attackers[i].facingLeft)
+          this.attackers[i].scale.x = -1;
+        else if (this.attackers[i].x > this.clam.x &&
+                 !this.attackers[i].facingLeft)
+          this.attackers[i].scale.x = 1;
+
         var tween = this.game.add.tween(this.attackers[i])
               .to({ x: this.clam.x + (this.clam.width / 2.5),
                     y: this.clam.y + (this.clam.height / 2) },
@@ -103,6 +121,21 @@ MermaidGame.prototype = {
             tmp.destroy();
           }
         }
+      }
+    }
+
+    for (var i = 0; i < this.fish.length; i++) {
+      if (!this.fish[i].attacked) {
+      if (this.fish[i].x > this.game.width ||
+          this.fish[i].x < 0) {
+        this.fish[i].facingLeft = !this.fish[i].facingLeft;
+        this.fish[i].scale.x *= -1;
+      }
+
+      var dir = 0.5;
+      if (this.fish[i].facingLeft)
+        dir *= -1;
+      this.fish[i].x += dir;
       }
     }
   },
