@@ -18,7 +18,7 @@ SnakeGame.prototype = {
 
     this.game.stage.backgroundColor = '#2b2544';
 
-    this.game.plugins.add(new SwipeManager(this.game, this.swipe, this));
+    this.game.plugins.add(new SwipeManager(this.game, this.swipe, this, true));
 
     this.TimeUp = new Timer(this.game, 10000, this.onTimeUp, this);
 
