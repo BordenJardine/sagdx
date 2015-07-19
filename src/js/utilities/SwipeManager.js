@@ -21,8 +21,19 @@ SwipeManager.prototype.update = function() {
 
   if (duration > 0 && !this.onCooldown) {
     if (distance > SwipeManager.SWIPE_DIST && duration < SwipeManager.SWIPE_TIME) {
-      swipeDirection = end.x > start.x ? SwipeManager.SWIPE_DIRECTIONS.RIGHT :
-        SwipeManager.SWIPE_DIRECTIONS.LEFT;
+      xDist = Math.abs(start.x - end.x);
+      yDist = Math.abs(start.y - end.y);
+
+      if(xDist > yDist) {
+        swipeDirection = end.x > start.x ?
+          SwipeManager.SWIPE_DIRECTIONS.RIGHT :
+          SwipeManager.SWIPE_DIRECTIONS.LEFT;
+      } else {
+        swipeDirection = end.y > start.y ?
+          SwipeManager.SWIPE_DIRECTIONS.DOWN :
+          SwipeManager.SWIPE_DIRECTIONS.UP;
+      }
+
       this.onSwipe(swipeDirection);
       this.onCooldown = true;
     }
@@ -43,7 +54,9 @@ SwipeManager.SWIPE_DIST = 100;
 SwipeManager.SWIPE_COOLDOWN = 25;
 SwipeManager.SWIPE_DIRECTIONS = {
   LEFT: 0,
-  RIGHT: 1
+  RIGHT: 1,
+  UP: 2,
+  DOWN: 3
 };
 
 module.exports = SwipeManager;

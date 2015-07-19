@@ -29,6 +29,15 @@ CinderProfiles.PROFILES = [
     revealText: 'OH OH HOW DOES THIS WORK?',
     minigame: 'MermaidGame',
     minigameDirection: 1
+  },
+  {
+    name: 'Gorgon Girl',
+    image: 'medusa_before.png',
+    correctDirection: 1,
+    revealImage: 'medusa_after.png',
+    revealText: "OH NO IT'S A GORGON",
+    minigame: 'SnakeGame',
+    minigameDirection: 1
   }
 ];
 

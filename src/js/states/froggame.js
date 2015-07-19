@@ -20,8 +20,6 @@ FrogGame.prototype = {
     this.TextManager = new TextManager(this.game);
     this.Timer = null;
 
-    var playerW = this.game.cache.getImage('frogPlayer').width;
-
     this.background = this.game.add.image(0, 0, 'frogHaus');
     this.player = this.game.add.sprite(this.game.width / 2, 290, 'frogPlayer');
     this.player.animations.add('idle', [0]);
@@ -121,7 +119,7 @@ FrogGame.prototype = {
     this.ready = false;
     window.Score -= 100;
     this.TextManager.statusText("LOSE!");
-    this.game.time.events.add(1000, this.end, this);
+    this.game.time.events.add(2000, this.end, this);
   },
 
   win: function () {
@@ -129,7 +127,7 @@ FrogGame.prototype = {
     window.SpeedMultiplier += 0.5;
     window.Score += 100;
     this.TextManager.statusText("WIN!");
-    this.game.time.events.add(1000, this.end, this);
+    this.game.time.events.add(2000, this.end, this);
   },
 
   end: function() {

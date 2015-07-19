@@ -14,5 +14,6 @@ game.state.add('Game', require('./states/game'));
 game.state.add('CinderellaGame', require('./states/cinderellagame'));
 game.state.add('FrogGame', require('./states/froggame'));
 game.state.add('MermaidGame', require('./states/mermaidgame'));
+game.state.add('SnakeGame', require('./states/snakegame'));
 
 game.state.start('Boot');
