@@ -14,8 +14,6 @@ DDRGame.prototype = {
 
     this.game.plugins.add(new SwipeManager(this.game, this.swipe, this, true));
 
-    this.bar = this.game.add.sprite(0, 10, 'ddrbar');
-
     this.inter = new Interstitial(this.game, "DANCE OFF", 4000, function() {
       this.inter.destroy();
       this.ready = true;

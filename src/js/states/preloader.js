@@ -28,13 +28,16 @@ Preloader.prototype = {
     this.load.image('timer-animation', 'assets/timer-animation.png');
     this.load.image('foot', 'assets/foot.png');
     this.load.image('slipper', 'assets/slipper.png');
-    this.load.image('ddrbar', 'assets/arrowbar.png');
 
-    this.load.image('frogHaus', 'assets/froghaus.png');
+    this.load.image('frogHaus', 'assets/froghaus_color.jpg');
     this.load.spritesheet('frogPlayer', 'assets/naked_runner.png', 160, 190, 3);
     this.load.spritesheet('frogChaser', 'assets/frogrun.png', 152, 189, 4);
     this.load.spritesheet('leftShoe', 'assets/left_shoe.png', 48, 110, 3);
     this.load.spritesheet('rightShoe', 'assets/right_shoe.png', 48, 110, 3);
+
+    this.load.image('snakeBite', 'assets/snake_bite.png');
+    this.load.spritesheet('snake', 'assets/snake_sprite.png', 173, 416, 2);
+    this.load.spritesheet('condom', 'assets/condom_sprite.png', 208, 499, 4);
 
     this.load.spritesheet('clam', 'assets/clam.png', 202, 215, 4);
     this.load.spritesheet('fish', 'assets/fish.png', 75, 50, 4);

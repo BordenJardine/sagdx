@@ -28,7 +28,7 @@ SwipeManager.prototype.update = function() {
         var yDist = start.y - end.y;
         if (Math.abs(yDist) > Math.abs(xDist))
           swipeDirection = end.y > start.y ? SwipeManager.SWIPE_DIRECTIONS.DOWN :
-          SwipeManager.SWIPE_DIRECTIONS.UP;
+            SwipeManager.SWIPE_DIRECTIONS.UP;
       }
 
       this.onSwipe(swipeDirection);
@@ -48,7 +48,7 @@ SwipeManager.prototype.update = function() {
 
 SwipeManager.SWIPE_TIME = 250;
 SwipeManager.SWIPE_DIST = 100;
-SwipeManager.SWIPE_COOLDOWN = 25;
+SwipeManager.SWIPE_COOLDOWN = 50;
 SwipeManager.SWIPE_DIRECTIONS = {
   LEFT: 0,
   RIGHT: 1,

@@ -38,6 +38,15 @@ CinderProfiles.PROFILES = [
     revealText: 'WANNA DANCE?',
     minigame: 'DDRGame',
     minigameDirection: 0
+  },
+  {
+    name: 'Gorgon Girl',
+    image: 'medusa_before.png',
+    correctDirection: 1,
+    revealImage: 'medusa_after.png',
+    revealText: "OH NO IT'S A GORGON",
+    minigame: 'SnakeGame',
+    minigameDirection: 1
   }
 ];
 
