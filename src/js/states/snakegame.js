@@ -4,7 +4,7 @@ var Timer = require('../entities/Timer.js');
 var SwipeManager = require('../utilities/SwipeManager.js');
 
 var SWIPES_PER_STAGE = 4;
-var BASE_STAGE_TIME = 1000;
+var BASE_STAGE_TIME = 1500;
 
 var SnakeGame = function () {
 };
@@ -22,7 +22,7 @@ SnakeGame.prototype = {
 
     this.TimeUp = new Timer(this.game, 10000, this.onTimeUp, this);
 
-    this.stageTime = BASE_STAGE_TIME / (window.SpeedMultiplier / 2);
+    this.stageTime = BASE_STAGE_TIME - (window.SpeedMultiplier * 100);
 
     this.condomTimer = null;
 
@@ -59,7 +59,6 @@ SnakeGame.prototype = {
 
   swipe: function(swipeDirection) {
     if(!this.ready) return;
-
 
     if (swipeDirection == SwipeManager.SWIPE_DIRECTIONS.DOWN) {
       this.onSwipeDown();

@@ -29,7 +29,7 @@ Preloader.prototype = {
     this.load.image('foot', 'assets/foot.png');
     this.load.image('slipper', 'assets/slipper.png');
 
-    this.load.image('frogHaus', 'assets/froghaus.png');
+    this.load.image('frogHaus', 'assets/froghaus_color.jpg');
     this.load.spritesheet('frogPlayer', 'assets/naked_runner.png', 160, 190, 3);
     this.load.spritesheet('frogChaser', 'assets/frogrun.png', 152, 189, 4);
     this.load.spritesheet('leftShoe', 'assets/left_shoe.png', 48, 110, 3);
