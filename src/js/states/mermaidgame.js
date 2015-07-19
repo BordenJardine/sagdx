@@ -13,7 +13,7 @@ MermaidGame.prototype = {
     this.game.stage.backgroundColor = '#327ed0';
 
     this.filter = new Phaser.Filter(this.game, null, waterShader);
-	this.filter.setResolution(this.game.stage.width, this.game.stage.height);
+    this.filter.setResolution(this.game.stage.width, this.game.stage.height);
 
     this.ready = false;
     this.clamReady = false;
@@ -67,10 +67,10 @@ MermaidGame.prototype = {
       this.ready = true;
       this.clamReady = true;
       var filterSprite = this.game.add.sprite();
-	  filterSprite.width = this.game.stage.width;
-	  filterSprite.height = this.game.stage.height;
+      filterSprite.width = this.game.stage.width;
+	    filterSprite.height = this.game.stage.height;
       filterSprite.fixedToCamera = false;
-	  filterSprite.filters = [ this.filter ];
+	    filterSprite.filters = [ this.filter ];
       this.Timer = new Timer(this.game, this.gameTime, this.onTimerComplete, this, true);
       this.Timer.start();
     }, this);

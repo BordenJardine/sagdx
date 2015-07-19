@@ -29,6 +29,15 @@ CinderProfiles.PROFILES = [
     revealText: 'OH OH HOW DOES THIS WORK?',
     minigame: 'MermaidGame',
     minigameDirection: 1
+  },
+  {
+    name: 'Raver Dude',
+    image: 'demo.png',
+    correctDirection: 0,
+    revealImage: 'reveal.png',
+    revealText: 'WANNA DANCE?',
+    minigame: 'DDRGame',
+    minigameDirection: 0
   }
 ];
 

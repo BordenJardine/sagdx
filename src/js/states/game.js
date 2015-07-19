@@ -14,7 +14,7 @@ Game.prototype = {
   create: function () {
 
     this.game.world.width = 414;
-    this.game.plugins.add(new SwipeManager(this.game, {}, this.swipe, this));
+    this.game.plugins.add(new SwipeManager(this.game, this.swipe, this));
     this.TextManager = new TextManager(this.game);
     this.Timer = new Timer(this.game, 2500, this.onTimerTweenComplete, this);
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
