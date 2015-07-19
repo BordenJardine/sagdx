@@ -4,7 +4,7 @@ var Timer = require('../entities/Timer.js');
 var SwipeManager = require('../utilities/SwipeManager.js');
 
 var SWIPES_PER_STAGE = 4;
-var BASE_STAGE_TIME = 1500;
+var BASE_STAGE_TIME = 1000;
 
 var SnakeGame = function () {
 };
@@ -20,14 +20,14 @@ SnakeGame.prototype = {
 
     this.game.plugins.add(new SwipeManager(this.game, {}, this.swipe, this));
 
-    this.TimeUp = new Timer(this.game, 6000, this.onTimeUp, this);
+    this.TimeUp = new Timer(this.game, 10000, this.onTimeUp, this);
 
     this.stageTime = BASE_STAGE_TIME / (window.SpeedMultiplier / 2);
 
     this.condomTimer = null;
 
     this.snake = this.game.add.sprite(0, 190, 'snake');
-    this.condom = this.game.add.sprite(0, 92, 'condom');
+    this.condom = this.game.add.sprite(0, 95, 'condom');
 
     this.condomState = 0;
     this.swipeCount = 0;
@@ -68,6 +68,7 @@ SnakeGame.prototype = {
 
   onSwipeDown: function() {
     this.swipeCount++;
+    console.log(this.swipeCount, SWIPES_PER_STAGE);
     if(this.swipeCount >= SWIPES_PER_STAGE) this.changeCondomState(1);
   },
 
@@ -105,7 +106,13 @@ SnakeGame.prototype = {
   },
 
   onTimeUp: function () {
+    this.snakeBite();
     this.lose();
+  },
+
+  snakeBite: function () {
+    this.game.add.image(80, 45, 'snakeBite');
+    this.condom.angle += 35;
   },
 
   lose: function () {

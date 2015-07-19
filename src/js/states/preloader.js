@@ -35,6 +35,7 @@ Preloader.prototype = {
     this.load.spritesheet('leftShoe', 'assets/left_shoe.png', 48, 110, 3);
     this.load.spritesheet('rightShoe', 'assets/right_shoe.png', 48, 110, 3);
 
+    this.load.image('snakeBite', 'assets/snake_bite.png');
     this.load.spritesheet('snake', 'assets/snake_sprite.png', 173, 416, 2);
     this.load.spritesheet('condom', 'assets/condom_sprite.png', 208, 499, 4);
 
