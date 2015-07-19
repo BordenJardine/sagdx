@@ -42,6 +42,11 @@ Preloader.prototype = {
     this.load.spritesheet('clam', 'assets/clam.png', 202, 215, 4);
     this.load.spritesheet('fish', 'assets/fish.png', 75, 50, 4);
 
+    this.load.spritesheet('up-arrow', 'assets/up-arrow.png', 50, 90, 4);
+    this.load.spritesheet('down-arrow', 'assets/down-arrow.png', 50, 90, 4);
+    this.load.spritesheet('right-arrow', 'assets/right-arrow.png', 90, 50, 4);
+    this.load.spritesheet('left-arrow', 'assets/left-arrow.png', 90, 50, 4);
+
     this.game.load.audio('good', 'assets/sounds/good.wav');
     this.game.load.audio('bad', 'assets/sounds/bad.wav');
 

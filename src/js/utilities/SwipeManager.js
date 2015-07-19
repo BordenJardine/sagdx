@@ -48,7 +48,7 @@ SwipeManager.prototype.update = function() {
 
 SwipeManager.SWIPE_TIME = 250;
 SwipeManager.SWIPE_DIST = 100;
-SwipeManager.SWIPE_COOLDOWN = 50;
+SwipeManager.SWIPE_COOLDOWN = 10;
 SwipeManager.SWIPE_DIRECTIONS = {
   LEFT: 0,
   RIGHT: 1,

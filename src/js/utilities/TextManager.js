@@ -49,7 +49,7 @@ TextManager.prototype.statusText = function(text) {
   textObj.y -= (textObj.height / 2);
 
   var flashTween = this.game.add.tween(textObj);
-  flashTween.to({ visible: !textObj.visible } , 10, Phaser.Easing.Linear.None, true, 5, true, true);
+  flashTween.to({ visible: !textObj.visible }, 20, Phaser.Easing.Linear.None, true, 20, -1, true);
   flashTween.start();
 }
 
