@@ -2,7 +2,6 @@ var CinderProfiles = function() {
 };
 
 CinderProfiles.PROFILES = [
-/*
   {
     name: 'Girl Next Door',
     image: 'frog_profile.png',
@@ -49,7 +48,6 @@ CinderProfiles.PROFILES = [
     minigame: 'SnakeGame',
     minigameDirection: 1
   },
-*/
   {
     name: 'Dr. Huxtable',
     image: 'demo.png',
@@ -57,6 +55,15 @@ CinderProfiles.PROFILES = [
     revealImage: 'reveal.png',
     revealText: "Zip Zop Zoobity Bop!",
     minigame: 'CupGame',
+    minigameDirection: 1
+  },
+  {
+    name: 'AynRand',
+    image: 'demo.png',
+    correctDirection: 1,
+    revealImage: 'reveal.png',
+    revealText: 'LIBERTARIANS',
+    minigame: 'FlatTaxGame',
     minigameDirection: 1
   }
 ];
