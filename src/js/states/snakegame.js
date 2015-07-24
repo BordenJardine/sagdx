@@ -4,7 +4,7 @@ var Timer = require('../entities/Timer.js');
 var SwipeManager = require('../utilities/SwipeManager.js');
 
 var SWIPES_PER_STAGE = 4;
-var BASE_STAGE_TIME = 1500;
+var BASE_STAGE_TIME = 1600;
 
 var SnakeGame = function () {
 };
@@ -36,7 +36,7 @@ SnakeGame.prototype = {
     this.condom.x = (this.game.width / 2) - (this.condom.width / 2);
 
     this.snake.animations.add('wriggle');
-    this.snake.animations.play('wriggle', 2 * window.SpeedMultiplier, true);
+    this.snake.animations.play('wriggle', 1.2 * window.SpeedMultiplier, true);
 
     this.ready = false;
 
@@ -67,6 +67,7 @@ SnakeGame.prototype = {
 
   onSwipeDown: function() {
     this.swipeCount++;
+    console.log('swipe!', this.swipeCount, SWIPES_PER_STAGE);
     if(this.swipeCount >= SWIPES_PER_STAGE) this.changeCondomState(1);
   },
 
@@ -78,20 +79,22 @@ SnakeGame.prototype = {
   },
 
   retreatCondom: function() {
-       this.changeCondomState(-1);
+    this.changeCondomState(-1);
   },
 
   changeCondomState: function(change) {
     if (!this.ready) return;
 
+    this.restartCondomTimer();
+
     this.swipeCount = 0;
+
+    this.condomState += change;
 
     if(this.condomState < 0) {
       this.condomState = 0;
       return;
     };
-
-    this.condomState += change;
 
     this.condom.frame = this.condomState;
 
@@ -99,8 +102,6 @@ SnakeGame.prototype = {
       this.win();
       return;
     };
-
-    this.restartCondomTimer();
   },
 
   onTimeUp: function () {

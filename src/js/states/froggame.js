@@ -33,8 +33,8 @@ FrogGame.prototype = {
 
     this.setupShoes();
 
-    this.frogSpeed = 2.5 * window.SpeedMultiplier;
-    this.playerSpeed = 25 * window.SpeedMultiplier;
+    this.frogSpeed = 1.5 + window.SpeedMultiplier;
+    this.playerSpeed = 25 + window.SpeedMultiplier;
 
     this.ready = false;
 

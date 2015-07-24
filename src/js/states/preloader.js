@@ -39,6 +39,10 @@ Preloader.prototype = {
     this.load.spritesheet('snake', 'assets/snake_sprite.png', 173, 416, 2);
     this.load.spritesheet('condom', 'assets/condom_sprite.png', 208, 499, 4);
 
+    this.load.image('cosbyBg', 'assets/cosby_bg.jpg');
+    this.load.image('cup', 'assets/solo_cup.png');
+    this.load.spritesheet('pill', 'assets/pill.png', 50, 50, 6);
+
     this.load.spritesheet('clam', 'assets/clam.png', 202, 215, 4);
     this.load.spritesheet('fish', 'assets/fish.png', 75, 50, 4);
 
