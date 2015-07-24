@@ -6,15 +6,36 @@ var Timer = require('../entities/Timer.js');
 var FlatTaxGame = function () {
 };
 
+NUM_SEGMENTS = 5;
 
 FlatTaxGame.prototype = {
   create: function () {
     this.ready = false;
-    this.Timer = null;
+    this.Timer = new Timer(this.game, 6500, this.onTimerComplete, this, true);
     this.TextManager = new TextManager(this.game);
     this.game.plugins.add(new SwipeManager(this.game, this.swipe, this, true));
+    this.segments = [];
 
-    // generate a curved line segment
+    var segmentLength = this.game.width / NUM_SEGMENTS;
+    var top = 10;
+    var bot = this.game.height - 20;
+    var level = (this.game.height / 2);
+    var whereToGo = {
+      0: top,
+      1: level,
+      2: bot
+    };
+    var start = { x: 0, y: whereToGo[Math.floor(Math.random() * 3)] };
+
+    for (var i = 0; i < NUM_SEGMENTS; i++) {
+      var end = {
+        x: start.x + segmentLength,
+        y: whereToGo[Math.floor(Math.random() * 3)]
+      };
+      var line = new Phaser.Line(start.x, start.y, end.x, end.y);
+      this.segments.push(line);
+      start = { x: end.x, y: end.y };
+    }
     // detect swipes
     // on swipe, determine if intersected line segment
     // find first point of intersection, and compare the
@@ -26,7 +47,6 @@ FlatTaxGame.prototype = {
 
     this.inter = new Interstitial(this.game, "FLATTEN THE TAX", 4000, function() {
       this.inter.destroy();
-      this.Timer = new Timer(this.game, 6500, this.onTimerComplete, this, true);
       this.Timer.start();
       this.ready = true;
     }, this);
@@ -35,6 +55,12 @@ FlatTaxGame.prototype = {
   update: function () {
     if (!this.ready)
       return;
+  },
+
+  render: function() {
+    for (var i = 0; i < this.segments.length; i++) {
+      this.game.debug.geom(this.segments[i]);
+    }
   },
 
   onTimerComplete: function () {
