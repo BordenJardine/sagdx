@@ -6,11 +6,15 @@ var Timer = require('../entities/Timer.js');
 var DDRGame = function () {
 };
 
+var REQUIRED_HIT_PERCENTAGE = .75;
+
 DDRGame.prototype = {
   create: function () {
     this.ready = false;
     this.Timer = null;
     this.TextManager = new TextManager(this.game);
+
+    this.game.stage.backgroundColor = "#7C8F9B";
 
     this.game.plugins.add(new SwipeManager(this.game, this.swipe, this, true));
 
@@ -38,6 +42,12 @@ DDRGame.prototype = {
     this.cooldown = 0;
     this.onCooldown = false;
 
+    this.hits = 0;
+    this.arrowCount = 0;
+
+    this.emitter = this.game.add.emitter(0, 0, 100);
+    this.emitter.makeParticles('spark');
+
     this.inter = new Interstitial(this.game, "DANCE OFF", 4000, function() {
       this.inter.destroy();
       this.Timer = new Timer(this.game, 6500, this.onTimerComplete, this, true);
@@ -56,9 +66,11 @@ DDRGame.prototype = {
 
     for (var i = 0; i < this.arrows.length; i++) {
       var arrow = this.arrows[i];
+
       if (((arrow.dir === 3 || arrow.dir === 2) && arrow.y <= this.up.y) ||
           ((arrow.dir === 1 || arrow.dir == 0) && arrow.y <= this.right.y)) {
         removeIdx = i;
+        this.arrowCount += 1;
         arrow.destroy();
       }
       else
@@ -105,6 +117,10 @@ DDRGame.prototype = {
   },
 
   onTimerComplete: function () {
+    if (this.hits > this.arrowCount * REQUIRED_HIT_PERCENTAGE)
+      this.win();
+    else
+      this.lose();
   },
 
   lose: function () {
@@ -128,40 +144,60 @@ DDRGame.prototype = {
     for (var i = 0; i < this.arrows.length; i++) {
       var arrow = this.arrows[i];
       if (arrow.y <= this.up.y + this.up.height) {
-        hit = true;
         if (arrow.dir === dir) {
-          // add to score
-          // special tween
+          hit = true;
+          this.hits += 1;
         } else {
-          // bad tween
+          hit = false;
+          this.hits -= 1;
+        }
+
+        if (hit) {
+          switch (dir) {
+          case 0:
+            this.emitter.x = this.left.x + this.left.width / 2;
+            this.emitter.y = this.left.y + this.left.height / 2;
+            break;
+          case 1:
+            this.emitter.x = this.right.x + this.right.width / 2;
+            this.emitter.y = this.right.y + this.right.height / 2;
+            break;
+          case 2:
+            this.emitter.x = this.up.x + this.up.width / 2;
+            this.emitter.y = this.up.y + this.up.height / 2;
+            break;
+          case 3:
+            this.emitter.x = this.down.x + this.down.width / 2;
+            this.emitter.y = this.down.y + this.down.height / 2;
+            break;
+          }
+          this.emitter.start(true, 1000, null, 10);
         }
       }
     }
 
-    if (!hit) {
-      // subtract from score
-      switch (dir) {
-      case 0:
-        this.game.add.tween(this.left.scale)
-          .to({ x: 1.2, y: 1.2 }, 100, Phaser.Easing.Linear.None, true, 0, 0, true);
-        break;
-      case 1:
-        this.game.add.tween(this.right.scale)
-          .to({ x: 1.2, y: 1.2 }, 100, Phaser.Easing.Linear.None, true, 0, 0, true);
-        break;
-      case 2:
-        this.game.add.tween(this.up.scale)
-          .to({ x: 1.2, y: 1.2 }, 100, Phaser.Easing.Linear.None, true, 0, 0, true);
-        break;
-      case 3:
-        this.game.add.tween(this.down.scale)
-          .to({ x: 1.2, y: 1.2 }, 100, Phaser.Easing.Linear.None, true, 0, 0, true);
-        break;
-      }
+    switch (dir) {
+    case 0:
+    this.game.add.tween(this.left.scale)
+        .to({ x: 1.2, y: 1.2 }, 100, Phaser.Easing.Linear.None, true, 0, 0, true);
+    break;
+    case 1:
+    this.game.add.tween(this.right.scale)
+        .to({ x: 1.2, y: 1.2 }, 100, Phaser.Easing.Linear.None, true, 0, 0, true);
+    break;
+    case 2:
+    this.game.add.tween(this.up.scale)
+        .to({ x: 1.2, y: 1.2 }, 100, Phaser.Easing.Linear.None, true, 0, 0, true);
+    break;
+    case 3:
+    this.game.add.tween(this.down.scale)
+        .to({ x: 1.2, y: 1.2 }, 100, Phaser.Easing.Linear.None, true, 0, 0, true);
+    break;
     }
   },
 
   end: function() {
+    this.game.stage.backgroundColor = "#ffffff";
     this.game.state.start('Game');
   }
 };
