@@ -17,8 +17,8 @@ FlatTaxGame.prototype = {
     this.segments = [];
 
     var segmentLength = this.game.width / NUM_SEGMENTS;
-    var top = 10;
-    var bot = this.game.height - 20;
+    var top = 40;
+    var bot = this.game.height - 40;
     var level = (this.game.height / 2);
     var whereToGo = {
       0: top,
@@ -26,30 +26,96 @@ FlatTaxGame.prototype = {
       2: bot
     };
     var start = { x: 0, y: whereToGo[Math.floor(Math.random() * 3)] };
-
     for (var i = 0; i < NUM_SEGMENTS; i++) {
+      var endY = (start.y === top) ? level :
+            (start.y === bot) ? level : whereToGo[Math.floor(Math.random() * 3)];
       var end = {
         x: start.x + segmentLength,
-        y: whereToGo[Math.floor(Math.random() * 3)]
+        y: endY
       };
       var line = new Phaser.Line(start.x, start.y, end.x, end.y);
+      line.leveled = false;
       this.segments.push(line);
+      if (line.start.y === line.end.y) line.leveled = true;
       start = { x: end.x, y: end.y };
     }
-    // detect swipes
-    // on swipe, determine if intersected line segment
-    // find first point of intersection, and compare the
-    // y value of that point to the average y value of the
-    // line
-    // if its less than the average, and the swipe direction was up
-    // then flatten the line somehow. and the reverse if it was down
-    // and greater than the average
 
     this.inter = new Interstitial(this.game, "FLATTEN THE TAX", 4000, function() {
       this.inter.destroy();
       this.Timer.start();
       this.ready = true;
     }, this);
+  },
+
+  findSlopeDirection: function(line) {
+    return (line.start.y < line.end.y) ? -1 :
+      (line.start.y === line.end.y) ? 0 : 1;
+  },
+
+  flattenLine: function(line) {
+    var slopeDir = this.findSlopeDirection(line);
+    switch (slopeDir) {
+    case 1:
+      if (line.end.y >= (this.game.height / 2)) line.start.y = line.end.y;
+      else line.end.y = line.start.y;
+      break;
+    case -1:
+      if (line.end.y > (this.game.height / 2)) line.end.y = line.start.y;
+      else line.start.y = line.end.y;
+      break;
+    case 0:
+      return;
+    }
+  },
+
+  swipe: function (dir, start, end) {
+    var swipeLine = new Phaser.Line(start.x, start.y, end.x, end.y);
+    for (var i = 0; i < this.segments.length; i++) {
+      var seg = this.segments[i];
+      var flatten = false;
+
+      if (seg.leveled) continue;
+
+      var int = swipeLine.intersects(seg, true);
+
+      if (int) {
+        console.log(int);
+        if (int.y > (this.game.height / 2)) {
+          if (dir !== 2) continue;
+          flatten = true;
+        }
+        else if (int.y < (this.game.height / 2)) {
+          if (dir !== 3) continue;
+          flatten = true;
+        }
+
+        if (flatten) {
+          var slopeDir = this.findSlopeDirection(seg);
+          var nextSlope = 0;
+          var prevSlope = 0;
+
+          if (i !== 0) {
+            var prev = this.segments[i - 1];
+            if (prev)
+                prevSlope = this.findSlopeDirection(prev);
+            var next = this.segments[i + 1];
+            if (next)
+                nextSlope = this.findSlopeDirection(next);
+
+            if (nextSlope != slopeDir && nextSlope != 0) {
+                this.flattenLine(next);
+                next.leveled = true;
+            }
+            else if (prevSlope != slopeDir && prevSlope != 0) {
+                this.flattenLine(prev);
+                prev.leveled = true;
+            }
+          }
+          this.flattenLine(seg);
+          seg.leveled = true;
+        }
+      }
+    }
   },
 
   update: function () {
@@ -79,9 +145,6 @@ FlatTaxGame.prototype = {
     window.Score += 100;
     this.TextManager.statusText("WIN!");
     this.game.time.events.add(4000, this.end, this);
-  },
-
-  swipe: function (dir) {
   },
 
   end: function() {

@@ -31,7 +31,7 @@ SwipeManager.prototype.update = function() {
             SwipeManager.SWIPE_DIRECTIONS.UP;
       }
 
-      this.onSwipe(swipeDirection);
+      this.onSwipe(swipeDirection, start, end);
       this.onCooldown = true;
     }
   }
