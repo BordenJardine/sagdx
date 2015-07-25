@@ -98,7 +98,6 @@ FlatTaxGame.prototype = {
       var int = swipeLine.intersects(seg, true);
 
       if (int) {
-        console.log(int);
         if (int.y > (this.game.height / 2)) {
           if (dir !== 2) continue;
           flatten = true;
@@ -182,10 +181,10 @@ FlatTaxGame.prototype = {
   },
 
   onTimerComplete: function () {
-    var lose = true;
+    var lose = false;
     for (var i = 0; i < this.segments.length; i++) {
       if (!this.segments[i].leveled || this.segments[i].leveled === undefined) {
-        lose = false;
+        lose = true;
         break;
       }
     }
