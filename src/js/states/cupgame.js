@@ -2,8 +2,8 @@ var TextManager = require('../utilities/TextManager.js');
 var Interstitial = require('../entities/Interstitial.js');
 var Timer = require('../entities/Timer.js');
 
-var CUP_SWAPS = 4;
-var CUP_X = 80;
+var BASE_CUP_SWAPS = 4;
+var CUP_X = 100;
 
 var Cup = function(game, x, y, drugged) {
   Phaser.Sprite.call(this, game, x, y, 'cup');
@@ -19,11 +19,10 @@ var CupGame = function () {
 
 CupGame.prototype = {
   create: function () {
-    var self = this;
+    var state = this;
     if (!this.game.device.desktop) this.input.onDown.add(this.goFullscreen, this);
 
     this.TextManager = new TextManager(this.game);
-
 
     this.ready = false;
     
@@ -35,14 +34,18 @@ CupGame.prototype = {
       this.cups.add(cup);
     }
 
+    this.cupSwaps = BASE_CUP_SWAPS * Math.floor(window.SpeedMultiplier);
+
     this.TimeUp = new Timer(this.game, 10000, this.onTimeUp, this);
 
     this.inter = new Interstitial(this.game, "CHUG A LUG", 1000, function() {
       this.inter.destroy();
-      this.drugAnimation(function() {
-        self.scrambleCups(CUP_SWAPS, function() {
-          self.ready = true;
-          self.TimeUp.start();
+
+      this.drugCups(function() {
+        state.scrambleCups(state.cupSwaps, function() {
+          state.ready = true;
+          state.TimeUp.start();
+          state.cupSelection();
         });
       });
 
@@ -54,10 +57,6 @@ CupGame.prototype = {
     if (this.game.scale.isFullScreen) return;
     this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.game.scale.startFullScreen(true);
-  },
-
-  update: function() {
-    if (!this.ready) return;
   },
 
   onTimeUp: function () {
@@ -86,16 +85,9 @@ CupGame.prototype = {
   },
 
   scrambleCups: function(swapsRemaining, callback) {
-    var rands = [0, 0];
-
-    while(rands[0] == rands[1]) {
-      rands[0] = Math.floor(Math.random() * 3);
-      rands[1] = Math.floor(Math.random() * 3);
-    }
-
-    rands.sort();
+    var cupIndexes = this.twoRandomCupIndexes();
     
-    this.swapCups(rands[0], rands[1], (function() {
+    this.swapCups(cupIndexes[0], cupIndexes[1], (function() {
       if(!swapsRemaining) {
         callback();
       } else {
@@ -108,6 +100,7 @@ CupGame.prototype = {
   swapCups: function(index1, index2, callback) {
     var cup1 = this.cups.children[index1];
     var cup2 = this.cups.children[index2];
+
     var yCoord = cup1.y + (cup2.y - cup1.y)
     var leftX = 0 - this.game.width / 3;
     var rightX = this.game.width - cup1.width + this.game.width / 3;
@@ -135,19 +128,83 @@ CupGame.prototype = {
     cup2Tween.onComplete.add(callback, this);
   },
 
+  twoRandomCupIndexes: function() {
+    var rands = [0, 0];
+
+    while(rands[0] == rands[1]) {
+      rands[0] = Math.floor(Math.random() * 3);
+      rands[1] = Math.floor(Math.random() * 3);
+    }
+
+    rands.sort();
+
+    return [rands[0], rands[1]];
+  },
+
   swapCupDisplayOrder: function(index1, index2) {
     var tmp = this.cups.children[index1];
     this.cups.children[index1] = this.cups.children[index2];
     this.cups.children[index2] = tmp;
   },
 
-  drugAnimation: function(callback) {
+  drugCups: function(callback) {
+    var state = this;
+    var indexes = this.twoRandomCupIndexes();
+    var cup1 = this.cups.children[indexes[0]];
+    var cup2 = this.cups.children[indexes[1]];
+
+    this.drugAnimation(cup1, function() {
+      state.drugAnimation(cup2, function() {
+        callback();
+      });
+    });
+  },
+
+  drugAnimation: function(cup, callback) {
+    var state = this;
+
     var pill = this.game.add.sprite(this.game.width / 2, -50, 'pill');
     pill.animations.add('flip');
     pill.animations.play('flip', 10, true);
 
-    pillTween = this.game.add.tween(pill).to({y: this.cups.children[0].y + 50 }, 1000).start();
-    pillTween.onComplete.add(callback, this);
+    var pillTween = this.game.add.tween(pill).to({y: cup.y + 25 }, 500).start();
+    pillTween.onComplete.add(function() {
+      cup.drugged = true;
+      this.splashAnimation(pill, callback);
+    }, this);
+  },
+
+  splashAnimation: function(pill, callback) {
+      var splash = this.game.add.sprite(0, 0, 'splash');
+
+      splash.x = (pill.x + pill.width / 2) - splash.width / 2
+      splash.y = (pill.y + pill.height / 2) - splash.height / 2
+
+      var anim = splash.animations.add('splash');
+
+      anim.onComplete.add(function() {
+        splash.kill();
+        callback();
+      });
+
+      anim.play(10);
+      pill.kill();
+  },
+
+  cupSelection: function(){
+    var state = this;
+    var cups = this.cups.children;
+
+    for(i in cups) {
+      (function(cup) {
+        cup.events.onInputDown.add(function() {
+          if(cup.drugged) return state.lose();
+          return state.win();
+        }, state);
+
+        cup.inputEnabled = true;
+      })(cups[i]);
+    }
   }
 };
 

@@ -44,6 +44,7 @@ Preloader.prototype = {
     this.load.image('cosbyBg', 'assets/cosby_bg.jpg');
     this.load.image('cup', 'assets/solo_cup.png');
     this.load.spritesheet('pill', 'assets/pill.png', 50, 50, 6);
+    this.load.spritesheet('splash', 'assets/splash.png', 250, 90, 4);
 
     this.load.spritesheet('clam', 'assets/clam.png', 202, 215, 4);
     this.load.spritesheet('fish', 'assets/fish.png', 75, 50, 4);
