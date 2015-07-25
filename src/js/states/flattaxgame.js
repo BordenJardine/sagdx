@@ -130,6 +130,16 @@ FlatTaxGame.prototype = {
   },
 
   onTimerComplete: function () {
+    var lose = true;
+    for (var i = 0; i < this.segments.length; i++) {
+      if (!this.segments[0].leveled) {
+        lose = false;
+        break;
+      }
+    }
+
+    if (lose) this.lose();
+    else this.win();
   },
 
   lose: function () {
