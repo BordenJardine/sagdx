@@ -18,6 +18,7 @@ FlatTaxGame.prototype = {
     this.graphics = this.game.add.graphics(0, 0);
     this.graphics.lineStyle(3, 0x000000);
 
+    this.game.add.sprite(0, 0, 'taxbg');
     var header = this.game.add.text(this.game.world.centerX, 20, "U.S. Tax Code", {
       font: '45px serif',
       fill: '#000000',
