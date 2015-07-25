@@ -15,10 +15,26 @@ FlatTaxGame.prototype = {
     this.TextManager = new TextManager(this.game);
     this.game.plugins.add(new SwipeManager(this.game, this.swipe, this, true));
     this.segments = [];
+    this.graphics = this.game.add.graphics(0, 0);
+    this.graphics.lineStyle(3, 0x000000);
+
+    var header = this.game.add.text(this.game.world.centerX, 20, "U.S. Tax Code", {
+      font: '45px serif',
+      fill: '#000000',
+      align: 'center'
+    });
+    header.x -= (header.width / 2);
+    var sub = this.game.add.text(this.game.world.centerX, 24 + header.height,
+                                 "Fig 2.0.1, Marginal Tax Rate", {
+      font: '24px serif',
+      fill: '#000000',
+      align: 'center'
+    });
+    sub.x -= (sub.width / 2);
 
     var segmentLength = this.game.width / NUM_SEGMENTS;
-    var top = 40;
-    var bot = this.game.height - 40;
+    var top = this.game.height / 1.5;
+    var bot = this.game.height / 3;
     var level = (this.game.height / 2);
     var whereToGo = {
       0: top,
@@ -39,6 +55,8 @@ FlatTaxGame.prototype = {
       if (line.start.y === line.end.y) line.leveled = true;
       start = { x: end.x, y: end.y };
     }
+
+    this.graphics.moveTo(this.segments[0].start.x, this.segments[0].start.y);
 
     this.inter = new Interstitial(this.game, "FLATTEN THE TAX", 4000, function() {
       this.inter.destroy();
@@ -124,15 +142,48 @@ FlatTaxGame.prototype = {
   },
 
   render: function() {
-    for (var i = 0; i < this.segments.length; i++) {
-      this.game.debug.geom(this.segments[i]);
+    this.graphics.clear();
+    for (i = 0; i < this.segments.length; i++) {
+      this.graphics.lineStyle(3, 0x000000);
+      var seg = this.segments[i];
+      var slope = this.findSlopeDirection(seg);
+      var cpx1 = 0;
+      var cpx2 = 0;
+      var cpy1 = 0;
+      var cpy2 = 0;
+      var wDiff = seg.start.x - seg.end.x;
+      var hDiff = Math.abs(seg.start.y - seg.end.y);
+      this.graphics.moveTo(seg.start.x, seg.start.y);
+
+      switch (slope) {
+      case 0:
+        cpx1 = seg.start.x + (wDiff / 3);
+        cpx2 = seg.start.x + (wDiff / 3) * 2;
+        cpy1 = seg.start.y;
+        cpy2 = seg.start.y;
+        break;
+      case 1:
+      case -1:
+        cpx1 = seg.end.x;
+        cpy1 = seg.start.y;
+        cpx2 = seg.start.x;
+        cpy2 = seg.end.y;
+        break;
+      }
+
+      this.graphics.bezierCurveTo(cpx1,
+                                  cpy1,
+                                  cpx2,
+                                  cpy2,
+                                  seg.end.x,
+                                  seg.end.y);
     }
   },
 
   onTimerComplete: function () {
     var lose = true;
     for (var i = 0; i < this.segments.length; i++) {
-      if (!this.segments[0].leveled) {
+      if (!this.segments[i].leveled || this.segments[i].leveled === undefined) {
         lose = false;
         break;
       }
