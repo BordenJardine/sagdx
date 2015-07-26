@@ -1,7 +1,8 @@
 var TextManager = require('../utilities/TextManager.js');
 var Interstitial = require('../entities/Interstitial.js');
 var Timer = require('../entities/Timer.js');
-var FLOOR_Y = 1080;
+var BASE_CAT_X_VEL = 150;
+var BASE_CAT_Y_VEL = 50;
 
 var Collidable = function(game, x, y, sprite, broken) {
   Phaser.Sprite.call(this, game, x, y, sprite);
@@ -45,27 +46,56 @@ ThisCatIsHorseShit.prototype = {
       this.inter.destroy();
       this.ready = true;
       this.initGame();
-      this.Timer = new Timer(this.game, 2500, this.onTimerComplete, this);
+      this.Timer = new Timer(this.game, 2500, this.onTimeUp, this);
       this.Timer.start();
     }, this);
   },
 
   initGame: function() {
-    this.game.physics.arcade.setBounds(0, 124, 414, 252);
+    this.game.physics.arcade.setBounds(0, 154, 414, 222);
 
     this.game.physics.enable(this.cat, Phaser.Physics.ARCADE);
-    for(i in this.collidables) {
+
+    this.initCollidables();
+    this.initCat();
+
+  },
+
+  initCollidables: function() {
+    for (i in this.collidables) {
       var collidable = this.collidables[i];
 
       this.game.physics.enable(collidable, Phaser.Physics.ARCADE);
       collidable.body.immovable = true;
-    }
 
-    this.cat.body.velocity.setTo(300, 200);
+      collidable.events.onInputDown.add(this.onClickCollidable , this);
+      collidable.inputEnabled = true;
+    }
+  },
+
+  initCat: function() {
+    var randX = Math.floor(Math.random() * 50);
+    var randY = Math.floor(Math.random() * 50);
+    var randXSign = (Math.random() > .5) ? 1 : -1;
+    var randYSign = (Math.random() > .5) ? 1 : -1;
+
+    var speedModifier = ((window.SpeedMultiplier - 1) / 2) + 1
+
+    var velX = (BASE_CAT_X_VEL + randX + speedModifier) * randXSign;
+    var velY = (BASE_CAT_Y_VEL + randY + speedModifier) * randYSign;
+
+    this.cat.body.velocity.setTo(velX, velY);
 
     this.cat.body.collideWorldBounds = true;
 
     this.cat.body.bounce.set(1.0);
+  },
+
+  onClickCollidable: function(collidable) {
+    if (this.ready) {
+      collidable.broken = false;
+      collidable.frame = 0;
+    }
   },
 
   goFullscreen: function() {
@@ -79,22 +109,33 @@ ThisCatIsHorseShit.prototype = {
 
     for(i in this.collidables) {
       var collidable = this.collidables[i];
-      this.game.physics.arcade.collide(this.cat, collidable, function() {
+      this.game.physics.arcade.overlap(this.cat, collidable, function() {
         collidable.broken = true;
         collidable.frame = 1;
       }, null, this);
     }
-
   },
 
-  lose: function () {
+  onTimeUp: function() {
+    var brokenItems = 0;
+
+    this.cat.body.velocity.setTo(0,0);
+
+    for (i in this.collidables) {
+      if(this.collidables[i].broken) return this.lose();
+    }
+
+    this.win();
+  },
+
+  lose: function() {
     this.ready = false;
     window.Score -= 100;
     this.TextManager.statusText("LOSE!");
     this.game.time.events.add(2000, this.end, this);
   },
 
-  win: function () {
+  win: function() {
     this.ready = false;
     window.SpeedMultiplier += 0.5;
     window.Score += 100;
