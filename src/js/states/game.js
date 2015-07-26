@@ -15,7 +15,6 @@ Game.prototype = {
     this.game.world.width = 414;
     this.game.plugins.add(new SwipeManager(this.game, this.swipe, this));
     this.TextManager = new TextManager(this.game);
-    this.Timer = new Timer(this.game, 2500, this.onTimerTweenComplete, this);
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
 
     if (!this.game.device.desktop) this.input.onDown.add(this.goFullscreen, this);
@@ -27,13 +26,19 @@ Game.prototype = {
     this.xButton = this.add.button(120, 485, 'xButton', this.nopeButtonCallback.bind(this));
     this.heartButton = this.add.button(212, 485, 'heartButton', this.yepButtonCallback.bind(this));
 
+    var heartPadding = 8;
+    var heartW = this.game.cache.getImage('heart').width;
+    var startX = this.game.width / 2 - (heartW * 4 + heartPadding * 3) / 2;
+    for (var i = 0; i < window.Lives; i++) {
+      // lives sprite / animation
+      this.game.add.sprite(startX + i * (heartW + heartPadding), this.game.height - 40, 'heart');
+    }
+
     this.baseSwipeScore = 25;
     this.swipeScore = this.baseSwipeScore;
     this.updateTime = 0;
 
     this.swipeEnabled = true;
-
-    this.Timer.start();
   },
 
   goFullscreen: function() {
@@ -48,8 +53,6 @@ Game.prototype = {
 
     var to = -this.game.width * 3;
     var angle = -90;
-
-    this.Timer.end();
 
     lastSwipeDirection = swipeDirection;
 
@@ -111,11 +114,8 @@ Game.prototype = {
 
   nextProfile: function() {
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
-
     this.swipeScore = this.baseSwipeScore;
-
     this.swipeEnabled = true;
-    this.Timer.start();
   },
 
   update: function () {
@@ -127,11 +127,6 @@ Game.prototype = {
 
   onTimerTweenComplete: function() {
     this.bad.play();
-    if (!this.Timer.timerDestroyed) {
-      window.Score -= (this.baseSwipeScore / 2);
-      this.TextManager.addFloatingText("-" + (this.baseSwipeScore / 2), "down", "out of time!");
-      this.swipeScore = 0;
-    }
   },
 
   nopeButtonCallback: function() {
