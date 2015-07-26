@@ -23,9 +23,9 @@ CinderProfiles.PROFILES = [
   },
   {
     name: 'Mermaid',
-    image: 'mermaid.png',
+    image: 'mermaid_profile.jpg',
     correctDirection: 1,
-    revealImage: 'reveal.png',
+    revealImage: 'mermaid.png',
     revealText: 'OH OH HOW DOES THIS WORK?',
     minigame: 'MermaidGame',
     minigameDirection: 1
