@@ -46,7 +46,7 @@ ThisCatIsHorseShit.prototype = {
       this.inter.destroy();
       this.ready = true;
       this.initGame();
-      this.Timer = new Timer(this.game, 2500, this.onTimeUp, this);
+      this.Timer = new Timer(this.game, 1500, this.onTimeUp, this);
       this.Timer.start();
     }, this);
   },

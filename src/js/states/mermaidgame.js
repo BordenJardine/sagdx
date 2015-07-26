@@ -62,7 +62,7 @@ MermaidGame.prototype = {
     this.clamCooldown = 2000;
     this.clamDown = 750;
 
-    this.inter = new Interstitial(this.game, "PROTECT THE CLAM", 3500, function() {
+    this.inter = new Interstitial(this.game, "PROTECT THE CLAM", 1500, function() {
       this.inter.destroy();
       this.ready = true;
       this.clamReady = true;

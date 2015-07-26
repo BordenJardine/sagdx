@@ -20,7 +20,7 @@ CinderellaGame.prototype = {
     this.ready = false;
 
     var that = this;
-    this.inter = new Interstitial(this.game, "GET THE FOOT", 4000, function() {
+    this.inter = new Interstitial(this.game, "GET THE FOOT", 1500, function() {
       this.inter.destroy();
       this.ready = true;
       this.Timer = new Timer(this.game, 2500, this.onTimerComplete, this);

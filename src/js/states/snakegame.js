@@ -40,7 +40,7 @@ SnakeGame.prototype = {
 
     this.ready = false;
 
-    this.inter = new Interstitial(this.game, "WRAP IT UP", 1000, function() {
+    this.inter = new Interstitial(this.game, "WRAP IT UP", 1500, function() {
       this.inter.destroy();
       this.ready = true;
       this.TimeUp.start();

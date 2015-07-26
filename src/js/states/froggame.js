@@ -40,7 +40,7 @@ FrogGame.prototype = {
 
     this.game.camera.follow(this.player);
 
-    this.inter = new Interstitial(this.game, "GET OUT", 1000, function() {
+    this.inter = new Interstitial(this.game, "GET OUT", 1500, function() {
       this.inter.destroy();
       this.ready = true;
     }, this);

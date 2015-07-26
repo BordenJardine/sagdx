@@ -48,7 +48,7 @@ DDRGame.prototype = {
     this.emitter = this.game.add.emitter(0, 0, 100);
     this.emitter.makeParticles('spark');
 
-    this.inter = new Interstitial(this.game, "DANCE OFF", 4000, function() {
+    this.inter = new Interstitial(this.game, "DANCE OFF", 1500, function() {
       this.inter.destroy();
       this.Timer = new Timer(this.game, 6500, this.onTimerComplete, this, true);
       this.game.time.events.add(1500, function() {

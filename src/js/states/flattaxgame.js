@@ -59,7 +59,7 @@ FlatTaxGame.prototype = {
 
     this.graphics.moveTo(this.segments[0].start.x, this.segments[0].start.y);
 
-    this.inter = new Interstitial(this.game, "FLATTEN THE TAX", 4000, function() {
+    this.inter = new Interstitial(this.game, "FLATTEN THE TAX", 1500, function() {
       this.inter.destroy();
       this.Timer.start();
       this.ready = true;
