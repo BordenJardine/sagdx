@@ -38,7 +38,7 @@ CupGame.prototype = {
 
     this.TimeUp = new Timer(this.game, 10000, this.onTimeUp, this);
 
-    this.inter = new Interstitial(this.game, "CHUG A LUG", 1000, function() {
+    this.inter = new Interstitial(this.game, "ZIP ZOP ZOOBITY BOP", 1000, function() {
       this.inter.destroy();
 
       this.drugCups(function() {

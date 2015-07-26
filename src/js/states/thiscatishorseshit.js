@@ -1,8 +1,8 @@
 var TextManager = require('../utilities/TextManager.js');
 var Interstitial = require('../entities/Interstitial.js');
 var Timer = require('../entities/Timer.js');
-var BASE_CAT_X_VEL = 150;
-var BASE_CAT_Y_VEL = 50;
+var BASE_CAT_X_VEL = 200;
+var BASE_CAT_Y_VEL = 100;
 
 var Collidable = function(game, x, y, sprite, broken) {
   Phaser.Sprite.call(this, game, x, y, sprite);
@@ -81,8 +81,8 @@ ThisCatIsHorseShit.prototype = {
 
     var speedModifier = ((window.SpeedMultiplier - 1) / 2) + 1
 
-    var velX = (BASE_CAT_X_VEL + randX + speedModifier) * randXSign;
-    var velY = (BASE_CAT_Y_VEL + randY + speedModifier) * randYSign;
+    var velX = (BASE_CAT_X_VEL + randX * speedModifier) * randXSign;
+    var velY = (BASE_CAT_Y_VEL + randY * speedModifier) * randYSign;
 
     this.cat.body.velocity.setTo(velX, velY);
 

@@ -57,33 +57,27 @@ Game.prototype = {
     lastSwipeDirection = swipeDirection;
 
     if (swipeDirection == SwipeManager.SWIPE_DIRECTIONS.RIGHT) {
+      this.good.play();
       to = to * -1;
       angle = angle * -1;
-    }
-
-    var scoreMultiplier = 1;
-    if (swipeDirection !== currentCinderProfile.profile.correctDirection) {
-      scoreMultiplier = -1;
-      this.swipeScore = this.baseSwipeScore;
-    }
-
-    var scoreChange = this.swipeScore * scoreMultiplier;
-    window.Score += scoreChange;
-
-    if (swipeScore > 0) {
-      if (scoreMultiplier > 0) this.good.play();
-      else this.bad.play();
-
-      var modifier = scoreMultiplier > 0 ? "+" : "";
-      var reason = scoreMultiplier > 0 ? "good match!" : "bad match!";
-      this.TextManager.addFloatingText(modifier + scoreChange, "up", reason);
+    } else {
+      this.bad.play();
+      this.swipePenalty();
     }
 
     this.swipeTo(to, angle);
   },
 
+  swipePenalty: function() {
+    window.Score -= this.baseSwipeScore;
+
+
+    this.TextManager.addFloatingText('-' + this.baseSwipeScore, "up", 'boo');
+  },
+
   onSwipeComplete: function() {
-    this.handleReveal();
+    if (lastSwipeDirection == 1) this.handleReveal();
+    else this.nextProfile();
   },
 
   handleReveal: function() {
