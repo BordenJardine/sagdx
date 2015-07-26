@@ -4,6 +4,7 @@ var game = new Phaser.Game(414, 606, Phaser.AUTO, 'body');
 
 window.Utils = require('./utils');
 window.Score = 0;
+window.Lives = 4;
 window.SpeedMultiplier = 1.0;
 
 game.state.add('Boot', require('./states/boot'));

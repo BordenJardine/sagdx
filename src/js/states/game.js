@@ -26,6 +26,14 @@ Game.prototype = {
     this.xButton = this.add.button(120, 485, 'xButton', this.nopeButtonCallback.bind(this));
     this.heartButton = this.add.button(212, 485, 'heartButton', this.yepButtonCallback.bind(this));
 
+    var heartPadding = 8;
+    var heartW = this.game.cache.getImage('heart').width;
+    var startX = this.game.width / 2 - (heartW * 4 + heartPadding * 3) / 2;
+    for (var i = 0; i < window.Lives; i++) {
+      // lives sprite / animation
+      this.game.add.sprite(startX + i * (heartW + heartPadding), this.game.height - 40, 'heart');
+    }
+
     this.baseSwipeScore = 25;
     this.swipeScore = this.baseSwipeScore;
     this.updateTime = 0;
@@ -106,9 +114,7 @@ Game.prototype = {
 
   nextProfile: function() {
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
-
     this.swipeScore = this.baseSwipeScore;
-
     this.swipeEnabled = true;
   },
 
