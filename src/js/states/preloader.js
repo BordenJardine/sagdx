@@ -46,6 +46,12 @@ Preloader.prototype = {
     this.load.spritesheet('pill', 'assets/pill.png', 50, 50, 6);
     this.load.spritesheet('splash', 'assets/splash.png', 250, 90, 4);
 
+    this.load.image('tchBackground', 'assets/tch_bg.jpg');
+    this.load.spritesheet('vase', 'assets/vase.png', 29, 40, 2);
+    this.load.spritesheet('bottle', 'assets/bottle.png', 35, 35, 2);
+    this.load.spritesheet('coatRack', 'assets/coat_rack.png', 53, 176, 2);
+    this.load.spritesheet('cat', 'assets/cat.png', 53, 24, 4);
+
     this.load.spritesheet('clam', 'assets/clam.png', 202, 215, 4);
     this.load.spritesheet('fish', 'assets/fish.png', 75, 50, 4);
 

@@ -18,5 +18,6 @@ game.state.add('DDRGame', require('./states/ddrgame'));
 game.state.add('SnakeGame', require('./states/snakegame'));
 game.state.add('CupGame', require('./states/cupgame'));
 game.state.add('FlatTaxGame', require('./states/flattaxgame'));
+game.state.add('ThisCatIsHorseShit', require('./states/thiscatishorseshit'));
 
 game.state.start('Boot');

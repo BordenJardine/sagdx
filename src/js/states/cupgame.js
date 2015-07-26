@@ -198,6 +198,7 @@ CupGame.prototype = {
     for(i in cups) {
       (function(cup) {
         cup.events.onInputDown.add(function() {
+          if(!state.ready) return;
           if(cup.drugged) return state.lose();
           return state.win();
         }, state);

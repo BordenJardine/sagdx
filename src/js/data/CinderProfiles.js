@@ -5,7 +5,7 @@ CinderProfiles.PROFILES = [
   {
     name: 'Girl Next Door',
     image: 'frog_profile.png',
-    correctDirection: 0,
+    correctDirection: 1,
     revealImage: 'frog_reveal.png',
     revealImage2: 'frog_reveal2.png',
     revealText: 'GET OUT',
@@ -33,11 +33,11 @@ CinderProfiles.PROFILES = [
   {
     name: 'Raver Dude',
     image: 'demo.png',
-    correctDirection: 0,
+    correctDirection: 1,
     revealImage: 'reveal.png',
     revealText: 'WANNA DANCE?',
     minigame: 'DDRGame',
-    minigameDirection: 0
+    minigameDirection: 1
   },
   {
     name: 'Gorgon Girl',
@@ -64,6 +64,15 @@ CinderProfiles.PROFILES = [
     revealImage: 'reveal.png',
     revealText: 'LIBERTARIANS',
     minigame: 'FlatTaxGame',
+    minigameDirection: 1
+  },
+  {
+    name: 'Tazwell',
+    image: 'tch_profile.png',
+    correctDirection: 1,
+    revealImage: 'tch_reveal.png',
+    revealText: 'THIS CAT IS HORSESHIT',
+    minigame: 'ThisCatIsHorseShit',
     minigameDirection: 1
   }
 ];
