@@ -15,7 +15,6 @@ Game.prototype = {
     this.game.world.width = 414;
     this.game.plugins.add(new SwipeManager(this.game, this.swipe, this));
     this.TextManager = new TextManager(this.game);
-    this.Timer = new Timer(this.game, 2500, this.onTimerTweenComplete, this);
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
 
     if (!this.game.device.desktop) this.input.onDown.add(this.goFullscreen, this);
@@ -32,8 +31,6 @@ Game.prototype = {
     this.updateTime = 0;
 
     this.swipeEnabled = true;
-
-    this.Timer.start();
   },
 
   goFullscreen: function() {
@@ -48,8 +45,6 @@ Game.prototype = {
 
     var to = -this.game.width * 3;
     var angle = -90;
-
-    this.Timer.end();
 
     lastSwipeDirection = swipeDirection;
 
@@ -115,7 +110,6 @@ Game.prototype = {
     this.swipeScore = this.baseSwipeScore;
 
     this.swipeEnabled = true;
-    this.Timer.start();
   },
 
   update: function () {
@@ -127,11 +121,6 @@ Game.prototype = {
 
   onTimerTweenComplete: function() {
     this.bad.play();
-    if (!this.Timer.timerDestroyed) {
-      window.Score -= (this.baseSwipeScore / 2);
-      this.TextManager.addFloatingText("-" + (this.baseSwipeScore / 2), "down", "out of time!");
-      this.swipeScore = 0;
-    }
   },
 
   nopeButtonCallback: function() {
