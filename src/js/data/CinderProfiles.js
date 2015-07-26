@@ -50,9 +50,9 @@ CinderProfiles.PROFILES = [
   },
   {
     name: 'Dr. Huxtable',
-    image: 'cosby_before.jpeg',
+    image: 'cosby_before.jpg',
     correctDirection: 1,
-    revealImage: 'cosby_after.jpeg',
+    revealImage: 'cosby_after.jpg',
     revealText: "Zip Zop Zoobity Bop!",
     minigame: 'CupGame',
     minigameDirection: 1
