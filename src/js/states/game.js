@@ -31,11 +31,21 @@ Game.prototype = {
     var cinderFrameW = this.game.cache.getImage('cinderFrame').width;
     var startX = (this.game.width - cinderFrameW) / 2;
     for (var i = 0; i < window.Lives; i++) {
+      var h = null;
+
       // lives sprite / animation
-      if (i === 2) startX = startX + this.xButton.width * 2 + 14;
-      var h = this.game.add.sprite(startX + i * (32 + heartPadding),
-                                   this.xButton.y + this.xButton.height / 2 - 16,
-                                   'heart');
+      if (i === 4) startX = startX + this.xButton.width * 2 + 14;
+      if (i % 2 !== 0) {
+        h = this.game.add.sprite(startX + ((i - 1) / 2) * (32 + heartPadding),
+                                this.xButton.y + this.xButton.height / 2 - 16,
+                                'heart');
+      }
+      else {
+        h = this.game.add.sprite(startX + (i / 2) * (32 + heartPadding) + 8,
+                                 this.xButton.y + this.xButton.height / 2 - 8,
+                                 'smallheart');
+      }
+
       this.hearts.push(h);
     }
 
