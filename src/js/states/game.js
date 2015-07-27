@@ -2,7 +2,6 @@ var SwipeManager = require('../utilities/SwipeManager.js');
 var CinderProfile = require('../entities/CinderProfile.js');
 var ProfileReveal = require('../entities/ProfileReveal.js');
 var TextManager = require('../utilities/TextManager.js');
-var Timer = require('../entities/Timer.js');
 
 var Game = function () {
   currentCinderProfile = null;
@@ -23,15 +22,17 @@ Game.prototype = {
     this.bad = this.game.add.audio('bad');
     this.good = this.game.add.audio('good');
 
-    this.xButton = this.add.button(120, 485, 'xButton', this.nopeButtonCallback.bind(this));
-    this.heartButton = this.add.button(212, 485, 'heartButton', this.yepButtonCallback.bind(this));
+    this.xButton = this.add.button(115, 485, 'xButton', this.nopeButtonCallback.bind(this));
+    this.heartButton = this.add.button(207, 485, 'heartButton', this.yepButtonCallback.bind(this));
 
     var heartPadding = 8;
-    var heartW = this.game.cache.getImage('heart').width;
-    var startX = this.game.width / 2 - (heartW * 4 + heartPadding * 3) / 2;
+    var cinderFrameW = this.game.cache.getImage('cinderFrame').width;
+    var startX = (this.game.width - cinderFrameW) / 2;
     for (var i = 0; i < window.Lives; i++) {
       // lives sprite / animation
-      this.game.add.sprite(startX + i * (heartW + heartPadding), this.game.height - 40, 'heart');
+      if (i === 2) startX = startX + this.xButton.width * 2 + 14;
+      this.game.add.sprite(startX + i * (32 + heartPadding),
+                           this.xButton.y + this.xButton.height / 2 - 16, 'heart');
     }
 
     this.baseSwipeScore = 25;
