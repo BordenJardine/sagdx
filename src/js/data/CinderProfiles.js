@@ -32,7 +32,7 @@ CinderProfiles.PROFILES = [
   },
   {
     name: 'Raver Dude',
-    image: 'dancing_profile.jpg',
+    image: 'dance_profile.jpg',
     correctDirection: 1,
     revealImage: 'dancing_reveal.jpg',
     revealText: 'WANNA DANCE?',
