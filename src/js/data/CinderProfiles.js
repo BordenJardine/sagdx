@@ -59,9 +59,9 @@ CinderProfiles.PROFILES = [
   },
   {
     name: 'AynRand',
-    image: 'demo.png',
+    image: 'lib_profile.jpg',
     correctDirection: 1,
-    revealImage: 'reveal.png',
+    revealImage: 'lib_reveal.jpg',
     revealText: 'LIBERTARIANS',
     minigame: 'FlatTaxGame',
     minigameDirection: 1
