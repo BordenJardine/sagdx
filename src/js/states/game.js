@@ -25,14 +25,18 @@ Game.prototype = {
     this.xButton = this.add.button(115, 485, 'xButton', this.nopeButtonCallback.bind(this));
     this.heartButton = this.add.button(207, 485, 'heartButton', this.yepButtonCallback.bind(this));
 
+    this.hearts = [];
+
     var heartPadding = 8;
     var cinderFrameW = this.game.cache.getImage('cinderFrame').width;
     var startX = (this.game.width - cinderFrameW) / 2;
     for (var i = 0; i < window.Lives; i++) {
       // lives sprite / animation
       if (i === 2) startX = startX + this.xButton.width * 2 + 14;
-      this.game.add.sprite(startX + i * (32 + heartPadding),
-                           this.xButton.y + this.xButton.height / 2 - 16, 'heart');
+      var h = this.game.add.sprite(startX + i * (32 + heartPadding),
+                                   this.xButton.y + this.xButton.height / 2 - 16,
+                                   'heart');
+      this.hearts.push(h);
     }
 
     this.baseSwipeScore = 25;
@@ -63,6 +67,14 @@ Game.prototype = {
       angle = angle * -1;
     } else {
       this.bad.play();
+      window.Lives -= 1;
+      this.hearts[this.hearts.length - 1].destroy();
+      this.hearts.splice(this.hearts.length - 1, 1);
+
+      if (window.Lives === 0) {
+        // lose game
+      }
+
       this.swipePenalty();
     }
 
