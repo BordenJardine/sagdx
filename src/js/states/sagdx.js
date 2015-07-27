@@ -1,17 +1,17 @@
-var Menu = function () {
+var SAGDX = function () {
 };
 
-module.exports = Menu;
+module.exports = SAGDX;
 
-Menu.prototype = {
+SAGDX.prototype = {
   create: function () {
     this.game.stage.backgroundColor = '#9CD4E6';
 
-    var cinderLogoW = this.game.cache.getImage('SAGDX').width;
-    var cinderLogoH = this.game.cache.getImage('SAGDX').height;
+    var logoW = this.game.cache.getImage('SAGDX').width;
+    var logoH = this.game.cache.getImage('SAGDX').height;
 
-    var x = (this.game.width / 2) - (cinderLogoW / 2);
-    var y = (this.game.height / 2) - (cinderLogoH / 2);
+    var x = (this.game.width / 2) - (logoW / 2);
+    var y = (this.game.height / 2) - (logoH / 2);
 
     this.game.add.sprite(x, y, 'SAGDX');
 

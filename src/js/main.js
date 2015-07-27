@@ -10,7 +10,7 @@ window.SpeedMultiplier = 1.0;
 game.state.add('Boot', require('./states/boot'));
 game.state.add('Preloader', require('./states/preloader'));
 game.state.add('Splash', require('./states/splash'));
-//game.state.add('ClickMe', require('./states/click_me'));
+game.state.add('ClickMe', require('./states/clickme'));
 //game.state.add('warning', require('./states/warning'));
 game.state.add('SAGDX', require('./states/sagdx'));
 game.state.add('Menu', require('./states/menu'));
