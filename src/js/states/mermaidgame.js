@@ -115,8 +115,16 @@ MermaidGame.prototype = {
             this.lost = true;
           } else {
             var tmp = this.attackers[i];
+            var run = this.game.add.tween(tmp)
+                  .to({ x: Math.floor(Math.random() * this.game.width),
+                        y: -100 },
+                      850,
+                      Phaser.Easing.Linear.None,
+                      false,
+                      0);
+            run.onComplete.add(function() { tmp.destroy(); });
+            run.start();
             this.attackers.splice(i, 1);
-            tmp.destroy();
           }
         }
       }
