@@ -17,6 +17,7 @@ Preloader.prototype = {
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);
+    this.load.image('SAGDX', 'assets/sagdx_logo.png');
     this.load.image('cinderLogo', 'assets/cinder-logo.png');
     this.load.image('cinderFrame', 'assets/cinder-frame.png');
     this.load.image('nope', 'assets/NOPE.png');
@@ -102,7 +103,7 @@ Preloader.prototype = {
 
   update: function () {
     if (!!this.ready) {
-      this.game.state.start('Menu');
+      this.game.state.start('SAGDX');
     }
   },
 

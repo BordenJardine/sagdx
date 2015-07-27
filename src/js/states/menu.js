@@ -5,6 +5,8 @@ module.exports = Menu;
 
 Menu.prototype = {
   create: function () {
+    this.game.stage.backgroundColor = '#ffffff';
+
     var startText = "Press to start!";
     var textProps = { font: '24pt Arial',
                       fill: '#C24300',

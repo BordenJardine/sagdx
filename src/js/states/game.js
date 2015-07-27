@@ -12,6 +12,7 @@ var Game = function () {
 
 Game.prototype = {
   create: function () {
+    this.game.stage.backgroundColor = '#ffffff';
     this.game.world.width = 414;
     this.game.plugins.add(new SwipeManager(this.game, this.swipe, this));
     this.TextManager = new TextManager(this.game);
@@ -70,7 +71,6 @@ Game.prototype = {
 
   swipePenalty: function() {
     window.Score -= this.baseSwipeScore;
-
 
     this.TextManager.addFloatingText('-' + this.baseSwipeScore, "up", 'boo');
   },
