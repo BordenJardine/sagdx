@@ -31,7 +31,7 @@ CinderProfiles.PROFILES = [
     minigameDirection: 1
   },
   {
-    name: 'Raver Dude',
+    name: 'loliterallydead',
     image: 'dance_profile.jpg',
     correctDirection: 1,
     revealImage: 'dancing_reveal.jpg',
@@ -58,7 +58,7 @@ CinderProfiles.PROFILES = [
     minigameDirection: 1
   },
   {
-    name: 'AynRand',
+    name: 'Liberty Abs',
     image: 'lib_profile.jpg',
     correctDirection: 1,
     revealImage: 'lib_reveal.jpg',

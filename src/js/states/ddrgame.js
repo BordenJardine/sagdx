@@ -14,7 +14,11 @@ DDRGame.prototype = {
     this.Timer = null;
     this.TextManager = new TextManager(this.game);
 
-    this.game.stage.backgroundColor = "#7C8F9B";
+    this.game.stage.backgroundColor = "#000000";
+
+    this.skelly = this.game.add.sprite(50, 100, 'skelly');
+    this.skelly.animations.add('dance');
+    this.skelly.animations.play('dance', 1.2 * window.SpeedMultiplier, true);
 
     this.game.plugins.add(new SwipeManager(this.game, this.swipe, this, true));
 

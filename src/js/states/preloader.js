@@ -59,6 +59,7 @@ Preloader.prototype = {
     this.load.spritesheet('clam', 'assets/clam.png', 202, 215, 4);
     this.load.spritesheet('fish', 'assets/fish.png', 75, 50, 4);
 
+    this.load.spritesheet('skelly', 'assets/skelly.png', 383, 500, 6);
     this.load.spritesheet('up-arrow', 'assets/up-arrow.png', 50, 90, 4);
     this.load.spritesheet('down-arrow', 'assets/down-arrow.png', 50, 90, 4);
     this.load.spritesheet('right-arrow', 'assets/right-arrow.png', 90, 50, 4);
