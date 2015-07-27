@@ -112,23 +112,22 @@ FlatTaxGame.prototype = {
           var nextSlope = 0;
           var prevSlope = 0;
 
-          if (i !== 0) {
-            var prev = this.segments[i - 1];
-            if (prev)
-                prevSlope = this.findSlopeDirection(prev);
-            var next = this.segments[i + 1];
-            if (next)
-                nextSlope = this.findSlopeDirection(next);
+          var prev = this.segments[i - 1];
+          if (prev)
+            prevSlope = this.findSlopeDirection(prev);
+          var next = this.segments[i + 1];
+          if (next)
+            nextSlope = this.findSlopeDirection(next);
 
-            if (nextSlope != slopeDir && nextSlope != 0) {
-                this.flattenLine(next);
-                next.leveled = true;
-            }
-            else if (prevSlope != slopeDir && prevSlope != 0) {
-                this.flattenLine(prev);
-                prev.leveled = true;
-            }
+          if (nextSlope != slopeDir && nextSlope != 0) {
+            this.flattenLine(next);
+            next.leveled = true;
           }
+          else if (prevSlope != slopeDir && prevSlope != 0) {
+            this.flattenLine(prev);
+            prev.leveled = true;
+          }
+
           this.flattenLine(seg);
           seg.leveled = true;
         }
@@ -196,6 +195,7 @@ FlatTaxGame.prototype = {
   lose: function () {
     this.ready = false;
     window.Score -= 100;
+    window.Live -= 2;
     this.TextManager.statusText("LOSE!");
     this.game.time.events.add(4000, this.end, this);
   },
