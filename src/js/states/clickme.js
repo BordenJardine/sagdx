@@ -33,6 +33,10 @@ ClickMe.prototype = {
   },
 
   startGame: function() {
-    this.game.state.start('SAGDX');
+    if (this.game.device.desktop) {
+      this.game.state.start('warning');
+    } else {
+      this.game.state.start('SAGDX');
+    }
   }
 };
