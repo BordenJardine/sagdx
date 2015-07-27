@@ -31,7 +31,9 @@ Preloader.prototype = {
     this.load.image('slipper', 'assets/slipper.png');
     this.load.image('spark', 'assets/particle.png');
     this.load.image('taxbg', 'assets/taxbg.png');
+
     this.load.image('heart', 'assets/heart.png');
+    this.load.image('smallheart', 'assets/heartsmall.png');
 
     this.load.image('frogHaus', 'assets/froghaus_color.jpg');
     this.load.spritesheet('frogPlayer', 'assets/naked_runner.png', 160, 190, 3);

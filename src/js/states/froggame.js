@@ -118,6 +118,7 @@ FrogGame.prototype = {
   lose: function () {
     this.ready = false;
     window.Score -= 100;
+    window.Lives -= 2;
     this.TextManager.statusText("LOSE!");
     this.game.time.events.add(2000, this.end, this);
   },
