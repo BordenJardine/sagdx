@@ -67,7 +67,6 @@ SnakeGame.prototype = {
 
   onSwipeDown: function() {
     this.swipeCount++;
-    console.log('swipe!', this.swipeCount, SWIPES_PER_STAGE);
     if(this.swipeCount >= SWIPES_PER_STAGE) this.changeCondomState(1);
   },
 

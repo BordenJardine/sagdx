@@ -20,6 +20,7 @@ Preloader.prototype = {
     this.load.image('SAGDX', 'assets/sagdx_logo.png');
     this.load.image('cinderLogo', 'assets/cinder-logo.png');
     this.load.image('cinderFrame', 'assets/cinder-frame.png');
+    this.load.image('match', 'assets/its_a_match.jpg');
     this.load.image('nope', 'assets/NOPE.png');
     this.load.image('like', 'assets/like.png');
     this.load.image('header', 'assets/header.png');
