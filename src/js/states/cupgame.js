@@ -25,7 +25,7 @@ CupGame.prototype = {
     this.TextManager = new TextManager(this.game);
 
     this.ready = false;
-    
+
     this.background = this.game.add.image(0, 0, 'cosbyBg');
 
     this.cups = this.game.add.group();
@@ -66,6 +66,7 @@ CupGame.prototype = {
   lose: function () {
     this.ready = false;
     window.Score -= 100;
+    window.Lives -= 2;
     this.TextManager.statusText("LOSE!");
     this.game.time.events.add(2000, this.end, this);
   },

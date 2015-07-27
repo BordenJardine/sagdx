@@ -126,6 +126,7 @@ DDRGame.prototype = {
   lose: function () {
     this.ready = false;
     window.Score -= 100;
+    window.Lives -= 2;
     this.TextManager.statusText("LOSE!");
     this.game.time.events.add(4000, this.end, this);
   },
