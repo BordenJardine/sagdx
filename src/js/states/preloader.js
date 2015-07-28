@@ -68,6 +68,8 @@ Preloader.prototype = {
 
     this.game.load.audio('good', 'assets/sounds/good.wav');
     this.game.load.audio('bad', 'assets/sounds/bad.wav');
+    this.game.load.audio('wabang', 'assets/sounds/wa-bang.wav');
+    this.game.load.audio('bgMusic', 'assets/sounds/switch-it-up.mp3');
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);

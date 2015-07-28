@@ -11,6 +11,10 @@ NUM_SEGMENTS = 5;
 FlatTaxGame.prototype = {
   create: function () {
     this.ready = false;
+
+    this.bad = this.game.add.audio('bad');
+    this.good = this.game.add.audio('good');
+
     this.Timer = new Timer(this.game, 6500, this.onTimerComplete, this, true);
     this.TextManager = new TextManager(this.game);
     this.game.plugins.add(new SwipeManager(this.game, this.swipe, this, true));
@@ -193,6 +197,7 @@ FlatTaxGame.prototype = {
   },
 
   lose: function () {
+    this.bad.play();
     this.ready = false;
     window.Score -= 100;
     window.Live -= 2;
@@ -201,6 +206,7 @@ FlatTaxGame.prototype = {
   },
 
   win: function () {
+    this.good.play();
     this.ready = false;
     window.SpeedMultiplier += 0.5;
     window.Score += 100;

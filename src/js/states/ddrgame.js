@@ -10,6 +10,10 @@ var REQUIRED_HIT_PERCENTAGE = .75;
 
 DDRGame.prototype = {
   create: function () {
+
+    this.bad = this.game.add.audio('bad');
+    this.good = this.game.add.audio('good');
+
     this.ready = false;
     this.Timer = null;
     this.TextManager = new TextManager(this.game);
@@ -128,6 +132,7 @@ DDRGame.prototype = {
   },
 
   lose: function () {
+    this.bad.play();
     this.ready = false;
     window.Score -= 100;
     window.Lives -= 2;
@@ -136,6 +141,7 @@ DDRGame.prototype = {
   },
 
   win: function () {
+    this.good.play();
     this.ready = false;
     window.SpeedMultiplier += 0.5;
     window.Score += 100;

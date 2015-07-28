@@ -10,6 +10,9 @@ CinderellaGame.prototype = {
     var slipperW = this.game.cache.getImage('slipper').width;
     var slipperH = this.game.cache.getImage('slipper').height;
 
+    this.bad = this.game.add.audio('bad');
+    this.good = this.game.add.audio('good');
+
     this.TextManager = new TextManager(this.game);
     this.Timer = null;
 
@@ -45,6 +48,7 @@ CinderellaGame.prototype = {
   },
 
   lose: function () {
+    this.bad.play();
     this.ready = false;
     window.Score -= 100;
     window.Lives -= 2;
@@ -53,6 +57,7 @@ CinderellaGame.prototype = {
   },
 
   win: function () {
+    this.good.play();
     this.ready = false;
     window.SpeedMultiplier += 0.5;
     window.Score += 100;

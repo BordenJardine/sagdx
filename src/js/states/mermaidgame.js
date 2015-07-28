@@ -7,6 +7,10 @@ var MermaidGame = function () {
 
 MermaidGame.prototype = {
   create: function () {
+
+    this.bad = this.game.add.audio('bad');
+    this.good = this.game.add.audio('good');
+
     this.gameTime = 4000;
     this.TextManager = new TextManager(this.game);
     this.Timer = null;
@@ -154,6 +158,7 @@ MermaidGame.prototype = {
   },
 
   lose: function () {
+    this.bad.play();
     this.ready = false;
     window.Score -= 100;
     window.Lives -= 2;
@@ -162,6 +167,7 @@ MermaidGame.prototype = {
   },
 
   win: function () {
+    this.good.play();
     this.ready = false;
     window.SpeedMultiplier += 0.5;
     window.Score += 100;

@@ -20,6 +20,9 @@ ThisCatIsHorseShit.prototype = {
   create: function () {
     var self = this;
 
+    this.bad = this.game.add.audio('bad');
+    this.good = this.game.add.audio('good');
+
     if (!this.game.device.desktop) this.input.onDown.add(this.goFullscreen, this);
 
     this.background = this.game.add.image(0, 0, 'tchBackground');
@@ -129,6 +132,7 @@ ThisCatIsHorseShit.prototype = {
   },
 
   lose: function() {
+    this.bad.play();
     this.ready = false;
     window.Score -= 100;
     window.Lives -= 2;
@@ -137,6 +141,7 @@ ThisCatIsHorseShit.prototype = {
   },
 
   win: function() {
+    this.good.play();
     this.ready = false;
     window.SpeedMultiplier += 0.5;
     window.Score += 100;

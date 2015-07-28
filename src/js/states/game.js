@@ -22,6 +22,7 @@ Game.prototype = {
     this.header = this.add.sprite(0, 0, 'header');
     this.bad = this.game.add.audio('bad');
     this.good = this.game.add.audio('good');
+    this.wabang = this.game.add.audio('wabang');
 
     this.xButton = this.add.button(115, 485, 'xButton', this.nopeButtonCallback.bind(this));
     this.heartButton = this.add.button(207, 485, 'heartButton', this.yepButtonCallback.bind(this));
@@ -99,11 +100,12 @@ Game.prototype = {
   },
 
   onSwipeComplete: function() {
-    if (lastSwipeDirection == 1) this.handleReveal();
+    if (lastSwipeDirection == 1) this.reveal();
     else this.nextProfile();
   },
 
-  handleReveal: function() {
+  reveal: function() {
+    this.wabang.play();
     this.currentReveal = new ProfileReveal(this.game, 0, this.header.height, currentCinderProfile.profile);
 
     this.game.add.existing(this.currentReveal);

@@ -11,6 +11,8 @@ var SnakeGame = function () {
 
 SnakeGame.prototype = {
   create: function () {
+    this.bad = this.game.add.audio('bad');
+    this.good = this.game.add.audio('good');
 
     if (!this.game.device.desktop) this.input.onDown.add(this.goFullscreen, this);
 
@@ -114,6 +116,7 @@ SnakeGame.prototype = {
   },
 
   lose: function () {
+    this.bad.play();
     this.ready = false;
     window.Score -= 100;
     window.Lives -= 2;
@@ -122,6 +125,7 @@ SnakeGame.prototype = {
   },
 
   win: function () {
+    this.good.play();
     this.ready = false;
     window.SpeedMultiplier += 0.5;
     window.Score += 100;
