@@ -12,6 +12,10 @@ FrogGame.prototype = {
   create: function () {
     var self = this;
 
+    this.bad = this.game.add.audio('bad');
+    this.blip = this.game.add.audio('blip');
+    this.good = this.game.add.audio('good');
+
     if (!this.game.device.desktop) this.input.onDown.add(this.goFullscreen, this);
 
     this.game.world.width = 1200;
@@ -107,6 +111,7 @@ FrogGame.prototype = {
   },
 
   movePlayer: function() {
+    this.blip.play('', 0, 0.6);
     if (!this.ready) return;
     this.player.x += this.playerSpeed;
   },
@@ -116,6 +121,7 @@ FrogGame.prototype = {
   },
 
   lose: function () {
+    this.bad.play();
     this.ready = false;
     window.Score -= 100;
     window.Lives -= 2;
@@ -124,6 +130,7 @@ FrogGame.prototype = {
   },
 
   win: function () {
+    this.good.play();
     this.ready = false;
     window.SpeedMultiplier += 0.5;
     window.Score += 100;

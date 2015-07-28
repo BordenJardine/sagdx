@@ -41,10 +41,12 @@ Preloader.prototype = {
     this.load.spritesheet('frogChaser', 'assets/frogrun.png', 152, 189, 4);
     this.load.spritesheet('leftShoe', 'assets/left_shoe.png', 48, 110, 3);
     this.load.spritesheet('rightShoe', 'assets/right_shoe.png', 48, 110, 3);
+    this.game.load.audio('blip', 'assets/sounds/blip.mp3');
 
     this.load.image('snakeBite', 'assets/snake_bite.png');
     this.load.spritesheet('snake', 'assets/snake_sprite.png', 173, 416, 2);
     this.load.spritesheet('condom', 'assets/condom_sprite.png', 208, 499, 4);
+    this.game.load.audio('hiss', 'assets/sounds/hiss.mp3');
 
     this.load.image('cosbyBg', 'assets/cosby_bg.jpg');
     this.load.image('cup', 'assets/solo_cup.png');
@@ -56,6 +58,7 @@ Preloader.prototype = {
     this.load.spritesheet('bottle', 'assets/bottle.png', 35, 35, 2);
     this.load.spritesheet('coatRack', 'assets/coat_rack.png', 53, 176, 2);
     this.load.spritesheet('cat', 'assets/cat.png', 53, 24, 4);
+    this.game.load.audio('crash', 'assets/sounds/crash.mp3');
 
     this.load.spritesheet('clam', 'assets/clam.png', 202, 215, 4);
     this.load.spritesheet('fish', 'assets/fish.png', 75, 50, 4);
@@ -67,6 +70,7 @@ Preloader.prototype = {
     this.load.spritesheet('left-arrow', 'assets/left-arrow.png', 90, 50, 4);
 
     this.game.load.audio('good', 'assets/sounds/good.wav');
+    this.game.load.audio('goodDing', 'assets/sounds/ding.mp3');
     this.game.load.audio('bad', 'assets/sounds/bad.wav');
     this.game.load.audio('wabang', 'assets/sounds/wa-bang.wav');
     this.game.load.audio('bgMusic', 'assets/sounds/switch-it-up.mp3');

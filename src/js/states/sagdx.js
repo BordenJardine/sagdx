@@ -5,6 +5,11 @@ module.exports = SAGDX;
 
 SAGDX.prototype = {
   create: function () {
+    if(!window.bgMusic) {
+      window.bgMusic = this.game.add.audio('bgMusic');
+      window.bgMusic.play('', 0, 0.5, true);
+    }
+    this.blue = true;
     this.game.stage.backgroundColor = '#9CD4E6';
 
     var logoW = this.game.cache.getImage('SAGDX').width;
@@ -20,6 +25,13 @@ SAGDX.prototype = {
   },
 
   update: function () {
+    if(this.blue) {
+      this.game.stage.backgroundColor = '#ACE4F6';
+      this.blue = false;
+    } else {
+      this.game.stage.backgroundColor = '#8CC4D6';
+      this.blue = true;
+    }
   },
 
   onDown: function () {

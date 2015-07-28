@@ -10,6 +10,7 @@ MermaidGame.prototype = {
 
     this.bad = this.game.add.audio('bad');
     this.good = this.game.add.audio('good');
+    this.wabang = this.game.add.audio('wabang');
 
     this.gameTime = 4000;
     this.TextManager = new TextManager(this.game);
@@ -180,6 +181,7 @@ MermaidGame.prototype = {
       return;
 
     this.clam.animations.play('shut', 20);
+    this.wabang.play();
     this.clamReady = false;
     this.vuln = false;
     this.game.time.events.add(this.clamCooldown, function() { this.clamReady = true; }.bind(this));

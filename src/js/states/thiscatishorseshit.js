@@ -20,6 +20,9 @@ ThisCatIsHorseShit.prototype = {
   create: function () {
     var self = this;
 
+    this.crash = this.game.add.audio('crash');
+    this.ding = this.game.add.audio('goodDing');
+
     this.bad = this.game.add.audio('bad');
     this.good = this.game.add.audio('good');
 
@@ -98,6 +101,7 @@ ThisCatIsHorseShit.prototype = {
     if (this.ready) {
       collidable.broken = false;
       collidable.frame = 0;
+      this.ding.play();
     }
   },
 
@@ -113,6 +117,7 @@ ThisCatIsHorseShit.prototype = {
     for(i in this.collidables) {
       var collidable = this.collidables[i];
       this.game.physics.arcade.overlap(this.cat, collidable, function() {
+        this.crash.play('', 0, 0.2, false);
         collidable.broken = true;
         collidable.frame = 1;
       }, null, this);

@@ -5,7 +5,6 @@ module.exports = Menu;
 
 Menu.prototype = {
   create: function () {
-    this.game.add.audio('bgMusic').play('', 0, 0.5, true);
     this.game.stage.backgroundColor = '#ffffff';
 
     var startText = "Press to start!";
