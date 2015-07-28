@@ -101,10 +101,10 @@ MermaidGame.prototype = {
         var tween = this.game.add.tween(this.attackers[i])
               .to({ x: this.clam.x + (this.clam.width / 2.5),
                     y: this.clam.y + (this.clam.height / 2) },
-                  750,
+                  760 - (window.SpeedMultiplier * 20),
                   Phaser.Easing.Linear.None,
                   false,
-                  100)
+                  100 - (window.SpeedMultipler * 20))
               .start();
       }
 
