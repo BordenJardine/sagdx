@@ -11,6 +11,9 @@ var Game = function () {
 
 Game.prototype = {
   create: function () {
+    if (window.Lives === 0)
+      this.game.state.start('gameover');
+
     this.game.stage.backgroundColor = '#ffffff';
     this.game.world.width = 414;
     this.game.plugins.add(new SwipeManager(this.game, this.swipe, this));
@@ -83,7 +86,7 @@ Game.prototype = {
       this.hearts.splice(this.hearts.length - 1, 1);
 
       if (window.Lives === 0) {
-        // lose game
+        this.game.state.start('gameover');
       }
 
       this.swipePenalty();
