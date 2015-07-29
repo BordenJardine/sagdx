@@ -11,7 +11,7 @@ var Game = function () {
 
 Game.prototype = {
   create: function () {
-    if (window.Lives === 0)
+    if (window.Lives === 0 || window.Games === window.TOTAL_GAMES)
       this.game.state.start('gameover');
 
     this.game.stage.backgroundColor = '#ffffff';
@@ -71,6 +71,8 @@ Game.prototype = {
     if (!this.swipeEnabled) return;
     this.swipeEnabled = false;
 
+    window.Games += 1;
+
     var to = -this.game.width * 3;
     var angle = -90;
 
@@ -78,6 +80,7 @@ Game.prototype = {
 
     if (swipeDirection == SwipeManager.SWIPE_DIRECTIONS.RIGHT) {
       this.good.play();
+      window.PlayedGames += 1;
       to = to * -1;
       angle = angle * -1;
     } else {
@@ -86,7 +89,7 @@ Game.prototype = {
       this.hearts[this.hearts.length - 1].destroy();
       this.hearts.splice(this.hearts.length - 1, 1);
 
-      if (window.Lives === 0) {
+      if (window.Lives === 0 || window.Games === window.TOTAL_GAMES) {
         this.game.state.start('gameover');
       }
 
