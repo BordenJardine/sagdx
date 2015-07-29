@@ -6,15 +6,21 @@ module.exports = GameOver;
 GameOver.prototype = {
   create: function () {
     this.game.stage.backgroundColor = '#ffffff';
+    this.emitter = null;
 
     var endText = "GAME OVER!";
     var textProps = { font: '24pt Arial',
                       fill: '#C24300',
                       strokeThickness: 0 };
+    var textPropsScore = {
+      font: '24pt Arial',
+      fill: '#000000',
+      strokeThickness: 0
+    };
 
     var text = this.game.add.text(0, 0, endText, textProps);
-    var scoreTitle = this.game.add.text(0, 0, "Final Score:", textProps);
-    this.scoreText = this.game.add.text(0, 0, '1000', textProps);
+    var scoreTitle = this.game.add.text(0, 0, "Final Score:", textPropsScore);
+    this.scoreText = this.game.add.text(0, 0, '1000', textPropsScore);
     this.updateCnt = 0;
     this.counter = 0;
     this.scoreDone = false;
@@ -22,9 +28,9 @@ GameOver.prototype = {
     text.x = (this.game.width / 2) - (text.width / 2);
     text.y = (this.game.height / 2) - (text.height / 2);
     scoreTitle.x = (this.game.width / 2) - (scoreTitle.width / 2);
-    scoreTitle.y = text.y - 130;
+    scoreTitle.y = text.y + 50;
     this.scoreText.x = (this.game.width / 2) - (this.scoreText.width / 2);
-    this.scoreText.y = text.y - 100;
+    this.scoreText.y = text.y + 80;
 
     this.input.onDown.add(this.onDown, this);
   },
@@ -39,6 +45,12 @@ GameOver.prototype = {
       if (this.updateCnt % 20 === 0) this.counter++;
       if (this.counter >= 20) {
         this.scoreText.setText(0);
+        this.scoreText.x = (this.game.width / 2) - (this.scoreText.width / 2);
+        this.emitter = this.game.add.emitter(this.scoreText.x + (this.scoreText.width / 2),
+                                             this.scoreText.y + (this.scoreText.height / 2),
+                                             100);
+        this.emitter.makeParticles('spark');
+        this.emitter.start(false, 1500, 75);
         this.scoreDone = true;
       }
 
