@@ -24,6 +24,7 @@ Boot.prototype = {
       this.game.scale.minHeight = 480;
       this.game.scale.maxWidth = 414;
       this.game.scale.maxHeight = 736;
+      this.game.scale.refresh();
     }
 
     this.game.scale.refresh();
