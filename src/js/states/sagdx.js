@@ -7,7 +7,7 @@ SAGDX.prototype = {
   create: function () {
     if(!window.bgMusic) {
       window.bgMusic = this.game.add.audio('bgMusic');
-      window.bgMusic.play('', 0, 0.5, true);
+      window.bgMusic.play('', 0, 1, true);
     }
     this.blue = true;
     this.game.stage.backgroundColor = '#9CD4E6';
