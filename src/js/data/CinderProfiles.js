@@ -14,9 +14,9 @@ CinderProfiles.PROFILES = [
   },
   {
     name: 'Cinderella',
-    image: 'cind.png',
+    image: 'cinderella_profile.jpg',
     correctDirection: 1,
-    revealImage: 'reveal.png',
+    revealImage: 'cinderella_reveal.jpg',
     revealText: 'TeH B1g R3V34l!!!1',
     minigame: 'CinderellaGame',
     minigameDirection: 1
