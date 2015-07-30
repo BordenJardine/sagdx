@@ -115,11 +115,13 @@ FlatTaxGame.prototype = {
           var slopeDir = this.findSlopeDirection(seg);
           var nextSlope = 0;
           var prevSlope = 0;
+          var prevI = (slopeDir === 1) ? -1 : 1;
+          var nextI = (slopeDir === 1) ? 1 : -1;
 
-          var prev = this.segments[i - 1];
+          var prev = this.segments[i + prevI];
           if (prev)
             prevSlope = this.findSlopeDirection(prev);
-          var next = this.segments[i + 1];
+          var next = this.segments[i + nextI];
           if (next)
             nextSlope = this.findSlopeDirection(next);
 
