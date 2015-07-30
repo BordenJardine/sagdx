@@ -1,7 +1,7 @@
 var CinderProfiles = function() {
 };
 
-CinderProfiles.PROFILES = [/*
+CinderProfiles.PROFILES = [
   {
     name: 'Girl Next Door',
     image: 'frog_profile.png',
@@ -56,7 +56,7 @@ CinderProfiles.PROFILES = [/*
     revealText: "Zip Zop Zoobity Bop!",
     minigame: 'CupGame',
     minigameDirection: 1
-  },*/
+  },
   {
     name: 'Liberty Abs',
     image: 'lib_profile.jpg',
