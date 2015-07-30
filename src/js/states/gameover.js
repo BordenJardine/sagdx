@@ -17,6 +17,13 @@ GameOver.prototype = {
       fill: '#000000',
       strokeThickness: 0
     };
+    var flavorProps = {
+      font: '20px Arial',
+      fill: '#000000',
+      align: 'center',
+      wordWrap: true,
+      wordWrapWidth: this.game.width - 30
+    };
 
     var text = this.game.add.text(0, 0, endText, textProps);
     var scoreTitle = this.game.add.text(0, 0, "Final Score:", textPropsScore);
@@ -32,9 +39,21 @@ GameOver.prototype = {
     this.scoreText.x = (this.game.width / 2) - (this.scoreText.width / 2);
     this.scoreText.y = text.y + 80;
 
+    var flavorText = null;
     if (window.PlayedGames >= window.TOTAL_GAMES) {
+      flavorText = "Wow, you played all of the games. You think that's something that" +
+        " should be rewarded?";
     } else if (window.Games >= window.TOTAL_GAMES) {
+      flavorText = "Wow, you couldn't even play through all of the games, and you expect" +
+        " a reward or something?";
     }
+    else {
+      flavorText = "You're a loser.";
+    }
+
+    var flavor = this.game.add.text(0, 0, flavorText, flavorProps);
+    flavor.x = (this.game.width / 2) - (flavor.width / 2);
+    flavor.y = text.y - 200;
 
     this.input.onDown.add(this.onDown, this);
   },
