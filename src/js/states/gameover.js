@@ -5,6 +5,8 @@ module.exports = GameOver;
 
 GameOver.prototype = {
   create: function () {
+
+    this.tada = this.game.add.audio('tada');
     this.game.stage.backgroundColor = '#ffffff';
     this.emitter = null;
 
@@ -75,6 +77,7 @@ GameOver.prototype = {
         this.emitter.makeParticles('spark');
         this.emitter.start(false, 1500, 75);
         this.scoreDone = true;
+        this.tada.play();
       }
 
       this.scoreText.x = (this.game.width / 2) - (this.scoreText.width / 2);
