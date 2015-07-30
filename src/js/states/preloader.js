@@ -12,11 +12,21 @@ Preloader.prototype = {
   preload: function () {
     var assetRoot = 'assets/';
 
-    this.asset = this.add.sprite(320, 240, 'preloader');
-    this.asset.anchor.setTo(0.5, 0.5);
+
+    var textProps = { font: '24pt Arial',
+                      fill: '#C24300',
+                      strokeThickness: 0 };
+    var text = this.game.add.text(0, 0, 'Loading...', textProps);
+    text.x = (this.game.width / 2) - (text.width / 2);
+    text.y = (this.game.height / 2) - (text.height / 2) - 25;
+
+    this.asset = this.add.sprite(0, 0, 'preloader');
+    this.asset.x = (this.game.width / 2) - (this.asset.width / 2);
+    this.asset.y = (this.game.height / 2) - (this.asset.height / 2);
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);
+
     this.load.image('SAGDX', 'assets/sagdx_logo.png');
     this.load.image('cinderLogo', 'assets/cinder-logo.png');
     this.load.image('cinderFrame', 'assets/cinder-frame.png');
@@ -77,9 +87,6 @@ Preloader.prototype = {
     this.game.load.audio('bgMusic', 'assets/sounds/sagdx.mp3');
     this.game.load.audio('tada', 'assets/sounds/tada.mp3');
 
-    this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
-    this.load.setPreloadSprite(this.asset);
-
     window.CurrentProfileIdx = -1;
     window.CinderProfiles = this.shuffleProfiles();
 
@@ -115,7 +122,7 @@ Preloader.prototype = {
 
   update: function () {
     if (!!this.ready) {
-      this.game.state.start('ClickMe');
+    //  this.game.state.start('ClickMe');
     }
   },
 
