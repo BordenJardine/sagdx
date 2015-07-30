@@ -4,9 +4,10 @@ var TextManager = function(game) {
   this.floatingTexts = [];
 };
 
-TextManager.prototype.addFloatingText = function(text, dir, reason, x, y) {
+TextManager.prototype.addFloatingText = function(text, dir, reason, x, y, size) {
   var startX = x || this.game.width / 2;
   var startY = y || this.game.height / 2;
+  var txtSize = size || 40;
   var direct = dir || "up";
   var target = 64;
   var textReason = null;
@@ -14,7 +15,8 @@ TextManager.prototype.addFloatingText = function(text, dir, reason, x, y) {
   if (direct === "down")
     target = this.game.height - 64;
 
-  var textObj = this.game.add.text(startX, startY, text, { font: '40px Arial' });
+  var textObj = this.game.add.text(startX, startY, text, { font: txtSize + 'px Arial' });
+  console.log(textObj);
   textObj.x -= (textObj.width / 2) + 16;
 
   if (typeof reason !== "undefined") {

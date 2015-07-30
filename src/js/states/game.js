@@ -11,7 +11,7 @@ var Game = function () {
 
 Game.prototype = {
   create: function () {
-    if (window.Lives === 0 || window.Games === window.TOTAL_GAMES)
+    if (window.Lives <= 0)
       this.game.state.start('gameover');
 
     this.game.stage.backgroundColor = '#ffffff';
@@ -59,6 +59,14 @@ Game.prototype = {
     this.updateTime = 0;
 
     this.swipeEnabled = true;
+
+    if (window.Games === window.TOTAL_GAMES)
+      this.TextManager.addFloatingText('critical omission.',
+                                       'down',
+                                       'something, something,',
+                                       null,
+                                       null,
+                                       20);
   },
 
   goFullscreen: function() {
@@ -89,9 +97,8 @@ Game.prototype = {
       this.hearts[this.hearts.length - 1].destroy();
       this.hearts.splice(this.hearts.length - 1, 1);
 
-      if (window.Lives === 0 || window.Games === window.TOTAL_GAMES) {
+      if (window.Lives <= 0)
         this.game.state.start('gameover');
-      }
 
       this.swipePenalty();
     }
@@ -141,6 +148,14 @@ Game.prototype = {
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
     this.swipeScore = this.baseSwipeScore;
     this.swipeEnabled = true;
+
+    if (window.Games === window.TOTAL_GAMES)
+      this.TextManager.addFloatingText('critical omission.',
+                                       'down',
+                                       'something, something,',
+                                       null,
+                                       null,
+                                       20);
   },
 
   update: function () {

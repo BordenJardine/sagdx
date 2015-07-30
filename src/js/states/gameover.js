@@ -32,6 +32,10 @@ GameOver.prototype = {
     this.scoreText.x = (this.game.width / 2) - (this.scoreText.width / 2);
     this.scoreText.y = text.y + 80;
 
+    if (window.PlayedGames >= window.TOTAL_GAMES) {
+    } else if (window.Games >= window.TOTAL_GAMES) {
+    }
+
     this.input.onDown.add(this.onDown, this);
   },
 
