@@ -85,7 +85,7 @@ ThisCatIsHorseShit.prototype = {
     var randXSign = (Math.random() > .5) ? 1 : -1;
     var randYSign = (Math.random() > .5) ? 1 : -1;
 
-    var speedModifier = ((window.SpeedMultiplier - 1) / 2) + 1
+    var speedModifier = ((window.SpeedMultiplier - 1) / 2) + 1;
 
     var velX = (BASE_CAT_X_VEL + randX * speedModifier) * randXSign;
     var velY = (BASE_CAT_Y_VEL + randY * speedModifier) * randYSign;

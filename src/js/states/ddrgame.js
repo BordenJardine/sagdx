@@ -10,7 +10,6 @@ var REQUIRED_HIT_PERCENTAGE = .75;
 
 DDRGame.prototype = {
   create: function () {
-
     this.bad = this.game.add.audio('bad');
     this.good = this.game.add.audio('good');
 
