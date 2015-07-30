@@ -20,7 +20,10 @@ Game.prototype = {
     this.TextManager = new TextManager(this.game);
     currentCinderProfile = new CinderProfile(this.game, lastSwipeDirection);
 
-    if (!this.game.device.desktop) this.input.onDown.add(this.goFullscreen, this);
+    /*
+    if (!this.game.device.desktop &&
+       !this.game.device.iOS) this.input.onDown.add(this.goFullscreen, this);
+     */
 
     this.header = this.add.sprite(0, 0, 'header');
     this.bad = this.game.add.audio('bad');
@@ -170,6 +173,7 @@ Game.prototype = {
   },
 
   nopeButtonCallback: function() {
+    console.log('here');
     this.swipe(SwipeManager.SWIPE_DIRECTIONS.LEFT);
   },
 

@@ -5,6 +5,6 @@
     ""
   ],
   "dependencies": {
-    "phaser-official": "latest"
+    "phaser-official": "2.3.0"
   }
 }
