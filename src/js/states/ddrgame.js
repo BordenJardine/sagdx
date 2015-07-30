@@ -160,13 +160,14 @@ DDRGame.prototype = {
         if (arrow.dir === dir) {
           hit = true;
           this.hits += 1;
+          this.yay.play();
         } else {
           hit = false;
           this.hits -= 1;
+          this.boo.play();
         }
 
         if (hit) {
-          this.yay.play();
           switch (dir) {
           case 0:
             this.emitter.x = this.left.x + this.left.width / 2;
@@ -186,8 +187,6 @@ DDRGame.prototype = {
             break;
           }
           this.emitter.start(true, 1000, null, 10);
-        } else {
-          this.boo.play();
         }
       }
     }

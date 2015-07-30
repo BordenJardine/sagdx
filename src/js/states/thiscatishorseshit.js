@@ -21,7 +21,7 @@ ThisCatIsHorseShit.prototype = {
     var self = this;
 
     this.crash = this.game.add.audio('crash');
-    this.ding = this.game.add.audio('goodDing');
+    this.ding = this.game.add.audio('yay');
 
     this.bad = this.game.add.audio('bad');
     this.good = this.game.add.audio('good');
@@ -48,7 +48,7 @@ ThisCatIsHorseShit.prototype = {
 
     this.ready = false;
 
-    this.inter = new Interstitial(this.game, "THIS CAT IS HORSESHIT", 1000, function() {
+    this.inter = new Interstitial(this.game, "THIS CAT IS HORSESHIT", 2000, function() {
       this.inter.destroy();
       this.ready = true;
       this.initGame();

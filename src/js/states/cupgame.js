@@ -19,6 +19,9 @@ var CupGame = function () {
 
 CupGame.prototype = {
   create: function () {
+
+    this.boo = this.game.add.audio('boo');
+
     var state = this;
     if (!this.game.device.desktop) this.input.onDown.add(this.goFullscreen, this);
 
@@ -176,6 +179,7 @@ CupGame.prototype = {
     var pillTween = this.game.add.tween(pill).to({y: cup.y + 25 }, 500).start();
     pillTween.onComplete.add(function() {
       cup.drugged = true;
+      this.boo.play();
       this.splashAnimation(pill, callback);
     }, this);
   },

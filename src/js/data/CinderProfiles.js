@@ -13,7 +13,7 @@ CinderProfiles.PROFILES = [
     minigameDirection: 1
   },
   {
-    name: 'Cinderella',
+    name: 'Ella',
     image: 'cinderella_profile.jpg',
     correctDirection: 1,
     revealImage: 'cinderella_reveal.jpg',
@@ -22,7 +22,7 @@ CinderProfiles.PROFILES = [
     minigameDirection: 1
   },
   {
-    name: 'Mermaid',
+    name: 'beachgrl',
     image: 'mermaid_profile.jpg',
     correctDirection: 1,
     revealImage: 'mermaid1.png',
