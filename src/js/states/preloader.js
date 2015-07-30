@@ -68,9 +68,10 @@ Preloader.prototype = {
     this.load.spritesheet('down-arrow', 'assets/down-arrow.png', 50, 90, 4);
     this.load.spritesheet('right-arrow', 'assets/right-arrow.png', 90, 50, 4);
     this.load.spritesheet('left-arrow', 'assets/left-arrow.png', 90, 50, 4);
+    this.game.load.audio('yay', 'assets/sounds/yay-ding.mp3');
+    this.game.load.audio('boo', 'assets/sounds/boo-ding.mp3');
 
     this.game.load.audio('good', 'assets/sounds/good.wav');
-    this.game.load.audio('goodDing', 'assets/sounds/ding.mp3');
     this.game.load.audio('bad', 'assets/sounds/bad.wav');
     this.game.load.audio('wabang', 'assets/sounds/wa-bang.wav');
     this.game.load.audio('bgMusic', 'assets/sounds/sagdx.mp3');

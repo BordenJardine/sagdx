@@ -24,7 +24,7 @@ Game.prototype = {
 
     this.header = this.add.sprite(0, 0, 'header');
     this.bad = this.game.add.audio('bad');
-    this.good = this.game.add.audio('goodDing');
+    this.good = this.game.add.audio('yay');
     this.wabang = this.game.add.audio('wabang');
 
     this.xButton = this.add.button(115, 485, 'xButton', this.nopeButtonCallback.bind(this));

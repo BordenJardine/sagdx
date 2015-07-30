@@ -13,6 +13,9 @@ DDRGame.prototype = {
     this.bad = this.game.add.audio('bad');
     this.good = this.game.add.audio('good');
 
+    this.yay = this.game.add.audio('yay');
+    this.boo = this.game.add.audio('boo');
+
     this.ready = false;
     this.Timer = null;
     this.TextManager = new TextManager(this.game);
@@ -163,6 +166,7 @@ DDRGame.prototype = {
         }
 
         if (hit) {
+          this.yay.play();
           switch (dir) {
           case 0:
             this.emitter.x = this.left.x + this.left.width / 2;
@@ -182,6 +186,8 @@ DDRGame.prototype = {
             break;
           }
           this.emitter.start(true, 1000, null, 10);
+        } else {
+          this.boo.play();
         }
       }
     }
