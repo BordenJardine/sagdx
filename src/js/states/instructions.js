@@ -35,7 +35,7 @@ Instructions.prototype = {
     t4.x = (this.game.width / 2) - (t4.width / 2);
 
     this.input.onDown.add(this.onDown, this);
-    this.timeout = this.game.time.events.add(3000, this.startGame, this);
+    this.timeout = this.game.time.events.add(8000, this.startGame, this);
   },
 
   update: function () {
