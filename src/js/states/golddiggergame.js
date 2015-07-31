@@ -18,7 +18,9 @@ GoldDigger.prototype = {
     this.TextManager = new TextManager(this.game);
     this.Timer = null;
 
-    this.player = this.game.add.sprite(0, 0, 'golddigger');
+    this.game.add.sprite(0, 0, 'goldbg');
+
+    this.player = this.game.add.sprite(20, 20, 'prospector');
     this.game.physics.enable(this.player, Phaser.Physics.Arcade);
 
     this.coinsNeeded = this.game.rnd.integerInRange(5, 20);
@@ -28,18 +30,18 @@ GoldDigger.prototype = {
     this.coins.physicsBodyType = Phaser.Physics.Arcade;
 
     for (var i = 0; i < this.coinsNeeded; i++) {
-      var c = this.coins.create(0, 0, 'coin');
-      c.name = 'coin' + i;
-      c.body.immovable = true;
+      //var c = this.coins.create(0, 0, 'coin');
+      //c.name = 'coin' + i;
+      //c.body.immovable = true;
     }
 
     this.movement = 2.3 * window.SpeedMultiplier;
     this.ready = false;
 
-    this.inter = new Interstitial(this.game, "GET THE FOOT", 1500, function() {
+    this.inter = new Interstitial(this.game, "OH HE'S A GOLD DIGGER", 1500, function() {
       this.inter.destroy();
       this.ready = true;
-      this.Timer = new Timer(this.game, 2500, this.onTimerComplete, this);
+      this.Timer = new Timer(this.game, 7500, this.onTimerComplete, this);
       this.Timer.start();
     }, this);
   },
@@ -54,7 +56,7 @@ GoldDigger.prototype = {
     if (!this.ready)
       return;
 
-    this.game.physics.arcade.collide(this.player, this.group, handleCollide, null, this);
+    this.game.physics.arcade.collide(this.player, this.group, this.handleCollide, null, this);
   },
 
   onTimerComplete: function () {
