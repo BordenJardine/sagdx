@@ -117,7 +117,7 @@ GoldDigger.prototype = {
     this.inter = new Interstitial(this.game, "OH HE'S A GOLD DIGGER", 1500, function() {
       this.inter.destroy();
       this.ready = true;
-      this.Timer = new Timer(this.game, 10500, this.onTimerComplete, this);
+      this.Timer = new Timer(this.game, 15000, this.onTimerComplete, this);
       this.player.body.velocity.x = this.SPEED;
       this.Timer.start();
     }, this);
@@ -142,6 +142,20 @@ GoldDigger.prototype = {
   handleCollide: function (a, b) {
     b.kill();
     this.coinsNeeded -= 1;
+    switch(this.player.direction){
+    case GoldDigger.DIRECTIONS.UP:
+      this.player.body.velocity.y = -this.SPEED;
+      break;
+    case GoldDigger.DIRECTIONS.DOWN:
+      this.player.body.velocity.y = this.SPEED;
+      break;
+    case GoldDigger.DIRECTIONS.RIGHT:
+      this.player.body.velocity.x = this.SPEED;
+      break;
+    case GoldDigger.DIRECTIONS.LEFT:
+      this.player.body.velocity.x = -this.SPEED;
+      break;
+    }
   },
 
   update: function () {
@@ -164,15 +178,19 @@ GoldDigger.prototype = {
     switch(dir){
     case GoldDigger.DIRECTIONS.UP:
       this.player.body.velocity.y = -this.SPEED;
+      this.player.direction = GoldDigger.DIRECTIONS.UP;
       break;
     case GoldDigger.DIRECTIONS.DOWN:
       this.player.body.velocity.y = this.SPEED;
+      this.player.direction = GoldDigger.DIRECTIONS.DOWN;
       break;
     case GoldDigger.DIRECTIONS.RIGHT:
       this.player.body.velocity.x = this.SPEED;
+      this.player.direction = GoldDigger.DIRECTIONS.RIGHT;
       break;
     case GoldDigger.DIRECTIONS.LEFT:
       this.player.body.velocity.x = -this.SPEED;
+      this.player.direction = GoldDigger.DIRECTIONS.LEFT;
       break;
     }
   },
