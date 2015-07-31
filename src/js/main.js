@@ -18,6 +18,7 @@ game.state.add('ClickMe', require('./states/clickme'));
 game.state.add('warning', require('./states/warning'));
 game.state.add('SAGDX', require('./states/sagdx'));
 game.state.add('Menu', require('./states/menu'));
+game.state.add('Instructions', require('./states/instructions'));
 game.state.add('Game', require('./states/game'));
 game.state.add('gameover', require('./states/gameover'));
 

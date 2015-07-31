@@ -86,7 +86,7 @@ GameOver.prototype = {
 
   reset: function() {
     window.Lives = 8;
-    window.SpeedMultipler = 1;
+    window.SpeedMultiplier = 1;
     window.Games = 0;
     window.PlayedGames = 0;
     window.Score = 0;

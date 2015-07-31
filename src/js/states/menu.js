@@ -33,6 +33,6 @@ Menu.prototype = {
       this.game.scale.startFullScreen(true);
     }
 
-    this.game.state.start('Game');
+    this.game.state.start('Instructions');
   }
 };

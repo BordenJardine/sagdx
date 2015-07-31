@@ -42,6 +42,7 @@ Preloader.prototype = {
     this.load.image('slipper', 'assets/slipper.png');
     this.load.image('spark', 'assets/particle.png');
     this.load.image('taxbg', 'assets/taxbg.png');
+    this.load.image('instructions', 'assets/instructions.png');
 
     this.load.image('heart', 'assets/heart.png');
     this.load.image('smallheart', 'assets/heartsmall.png');
@@ -122,7 +123,7 @@ Preloader.prototype = {
 
   update: function () {
     if (!!this.ready) {
-    //  this.game.state.start('ClickMe');
+      this.game.state.start('ClickMe');
     }
   },
 
