@@ -80,7 +80,7 @@ CinderProfiles.PROFILES = [
     image: 'golddiggerprofile',
     correctDirection: 1,
     revealImage: 'golddiggerreveal',
-    revealTest: 'OH HE\'S A GOLD DIGGER',
+    revealText: 'OH HE\'S A GOLD DIGGER',
     minigame: 'GoldDiggerGame',
     minigameDirection: 1
   }
