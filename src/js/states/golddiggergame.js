@@ -21,7 +21,7 @@ GoldDigger.prototype = {
 
     this.yay = this.game.add.audio('yay');
 
-    this.mngr = new SwipeManager(this.game, this.swipe, this, true);
+    this.mngr = new SwipeManager(this.game, this.swipeMove, this, true);
     this.game.plugins.add(this.mngr);
 
     this.bad = this.game.add.audio('bad');
@@ -177,7 +177,7 @@ GoldDigger.prototype = {
     else this.lose();
   },
 
-  swipe: function(dir) {
+  swipeMove: function(dir) {
     this.player.body.velocity.x = 0;
     this.player.body.velocity.y = 0;
     switch(dir){
