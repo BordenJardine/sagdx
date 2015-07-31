@@ -16,7 +16,6 @@ TextManager.prototype.addFloatingText = function(text, dir, reason, x, y, size) 
     target = this.game.height - 64;
 
   var textObj = this.game.add.text(startX, startY, text, { font: txtSize + 'px Arial' });
-  console.log(textObj);
   textObj.x -= (textObj.width / 2) + 16;
 
   if (typeof reason !== "undefined") {

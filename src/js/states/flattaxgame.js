@@ -15,7 +15,7 @@ FlatTaxGame.prototype = {
     this.bad = this.game.add.audio('bad');
     this.good = this.game.add.audio('good');
 
-    this.Timer = new Timer(this.game, 5000 - (100 * window.SpeedModifier),
+    this.Timer = new Timer(this.game, 5000 - (100 * window.SpeedMultiplier),
                            this.onTimerComplete, this, true);
     this.TextManager = new TextManager(this.game);
     this.game.plugins.add(new SwipeManager(this.game, this.swipe, this, true));

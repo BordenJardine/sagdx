@@ -173,7 +173,6 @@ Game.prototype = {
   },
 
   nopeButtonCallback: function() {
-    console.log('here');
     this.swipe(SwipeManager.SWIPE_DIRECTIONS.LEFT);
   },
 
