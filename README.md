@@ -27,4 +27,4 @@ bower install
 npm start
 ```
 
-then point your browser to `localhost:9000`
+then point your phone's browser to `YOUR.COMPUTERS.IP:9000` while your phone and computer are on the same wifi network.
