@@ -73,7 +73,7 @@ GameOver.prototype = {
         this.emitter = this.game.add.emitter(this.scoreText.x + (this.scoreText.width / 2),
                                              this.scoreText.y + (this.scoreText.height / 2),
                                              100);
-        this.emitter.makeParticles('spark');
+        this.emitter.makeParticles('sparkBlue');
         this.emitter.start(false, 1500, 75);
         this.scoreDone = true;
         this.tada.play();

@@ -41,6 +41,7 @@ Preloader.prototype = {
     this.load.image('foot', 'assets/foot.png');
     this.load.image('slipper', 'assets/slipper.png');
     this.load.image('spark', 'assets/particle.png');
+    this.load.image('sparkBlue', 'assets/blue_particle.png');
     this.load.image('taxbg', 'assets/taxbg.png');
     this.load.image('instructions', 'assets/instructions.png');
     this.load.image('golddiggerreveal', 'assets/golddiggerreveal.jpg');
