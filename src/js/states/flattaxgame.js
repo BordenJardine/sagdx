@@ -18,7 +18,10 @@ FlatTaxGame.prototype = {
     this.Timer = new Timer(this.game, 5000 - (100 * window.SpeedMultiplier),
                            this.onTimerComplete, this, true);
     this.TextManager = new TextManager(this.game);
-    this.game.plugins.add(new SwipeManager(this.game, this.swipe, this, true));
+
+    this.mngr = new SwipeManager(this.game, this.swipe, this, true);
+    this.game.plugins.add(this.mngr);
+
     this.segments = [];
     this.graphics = this.game.add.graphics(0, 0);
     this.graphics.lineStyle(3, 0x000000);
@@ -218,6 +221,7 @@ FlatTaxGame.prototype = {
   },
 
   end: function() {
+    this.mngr.destroy();
     this.game.stage.backgroundColor = "#ffffff";
     this.game.state.start('Game');
   }

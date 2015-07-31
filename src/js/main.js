@@ -2,7 +2,7 @@
 
 var game = new Phaser.Game(414, 606, Phaser.AUTO, 'body');
 
-window.TOTAL_GAMES = 8;
+window.TOTAL_GAMES = 9;
 
 window.Utils = require('./utils');
 window.Score = 0;

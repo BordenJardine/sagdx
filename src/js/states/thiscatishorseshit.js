@@ -33,8 +33,6 @@ ThisCatIsHorseShit.prototype = {
     this.TextManager = new TextManager(this.game);
     this.Timer = null;
 
-    this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
     this.cat = this.game.add.sprite(192, 330, 'cat');
 
     this.coatRack = this.game.add.existing(new Collidable(this.game, 53, 205, 'coatRack', false));

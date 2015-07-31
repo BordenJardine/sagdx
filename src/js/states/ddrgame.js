@@ -26,7 +26,8 @@ DDRGame.prototype = {
     this.skelly.animations.add('dance');
     this.skelly.animations.play('dance', 1.2 * window.SpeedMultiplier, true);
 
-    this.game.plugins.add(new SwipeManager(this.game, this.swipe, this, true));
+    this.mngr = new SwipeManager(this.game, this.swipe, this, true);
+    this.game.plugins.add(this.mngr);
 
     var width = this.game.cache.getImage('up-arrow').width / 4;
     var height = this.game.cache.getImage('up-arrow').height;
@@ -212,6 +213,7 @@ DDRGame.prototype = {
   },
 
   end: function() {
+    this.mngr.destroy();
     this.game.stage.backgroundColor = "#ffffff";
     this.game.state.start('Game');
   }

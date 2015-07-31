@@ -17,12 +17,12 @@ GoldDigger.REQUIRED_RATIO = 0.75;
 
 GoldDigger.prototype = {
   create: function () {
-    this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.SPEED = 105;
 
     this.yay = this.game.add.audio('yay');
 
-    this.game.plugins.add(new SwipeManager(this.game, this.swipe, this, true));
+    this.mngr = new SwipeManager(this.game, this.swipe, this, true);
+    this.game.plugins.add(this.mngr);
 
     this.bad = this.game.add.audio('bad');
     this.good = this.game.add.audio('good');
@@ -219,7 +219,7 @@ GoldDigger.prototype = {
   },
 
   end: function() {
-    this.game.physics.destroy();
+    this.mngr.destroy();
     this.game.state.start('Game');
   }
 };
