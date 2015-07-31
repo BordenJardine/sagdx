@@ -101,6 +101,9 @@ ThisCatIsHorseShit.prototype = {
     if (this.ready) {
       collidable.broken = false;
       collidable.frame = 0;
+        if(collidable.name == 'coatRack') {
+          collidable.body.setSize(53, 176);
+        }
       this.ding.play();
     }
   },
@@ -120,6 +123,9 @@ ThisCatIsHorseShit.prototype = {
         this.crash.play('', 0, 0.2, false);
         collidable.broken = true;
         collidable.frame = 1;
+        if(collidable.name == 'coatRack') {
+          collidable.body.setSize(53, 44);
+        }
       }, null, this);
     }
   },
