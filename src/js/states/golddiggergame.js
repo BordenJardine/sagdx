@@ -12,11 +12,15 @@ GoldDigger.DIRECTIONS = {
   UP: 2,
   DOWN: 3
 };
+GoldDigger.REQUIRED_RATIO = 0.75;
+
 
 GoldDigger.prototype = {
   create: function () {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.SPEED = 105;
+
+    this.yay = this.game.add.audio('yay');
 
     this.game.plugins.add(new SwipeManager(this.game, this.swipe, this, true));
 
@@ -85,7 +89,7 @@ GoldDigger.prototype = {
     this.rects.add(botr);
     this.rects.add(trrect);
 
-    this.coinsNeeded = this.game.rnd.integerInRange(5, 15);
+    this.coinsNeeded = this.totalCoins = this.game.rnd.integerInRange(5, 15);
 
     this.coins = this.game.add.group();
     this.coins.enableBody = true;
@@ -141,7 +145,8 @@ GoldDigger.prototype = {
 
   handleCollide: function (a, b) {
     b.kill();
-    this.coinsNeeded -= 1;
+    this.yay.play();
+    this.coinsNeeded += 1;
     switch(this.player.direction){
     case GoldDigger.DIRECTIONS.UP:
       this.player.body.velocity.y = -this.SPEED;
@@ -168,7 +173,7 @@ GoldDigger.prototype = {
   },
 
   onTimerComplete: function () {
-    if (this.coinsNeeded <= 0) this.win();
+    if (this.coinsNeeded >= GoldDigger.REQUIRED_RATIO * this.totalCoins) this.win();
     else this.lose();
   },
 
