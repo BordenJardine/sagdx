@@ -43,8 +43,7 @@ GameOver.prototype = {
 
     var flavorText = null;
     if (window.PlayedGames >= window.TOTAL_GAMES) {
-      flavorText = "Wow, you played all of the games. You think that's something that" +
-        " should be rewarded?";
+      flavorText = "Wow, you played all of the games. That's it I guess.";
     } else if (window.Games >= window.TOTAL_GAMES) {
       flavorText = "Wow, you couldn't even play through all of the games, and you expect" +
         " a reward or something?";
