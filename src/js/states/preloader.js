@@ -51,6 +51,7 @@ Preloader.prototype = {
 
     this.load.image('goldbg', 'assets/golddiggerbg.jpg');
     this.load.spritesheet('prospector', 'assets/prospector.png', 16, 16);
+    this.load.spritesheet('gold', 'assets/nugget.png', 8, 8);
 
     this.load.image('frogHaus', 'assets/froghaus_color.jpg');
     this.load.spritesheet('frogPlayer', 'assets/naked_runner.png', 160, 190, 3);
