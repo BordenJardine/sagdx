@@ -64,9 +64,9 @@ Game.prototype = {
     this.swipeEnabled = true;
 
     if (window.Games === window.TOTAL_GAMES)
-      this.TextManager.addFloatingText('critical omission.',
+      this.TextManager.addFloatingText("that's all of em",
                                        'down',
-                                       'something, something,',
+                                       '',
                                        null,
                                        null,
                                        20);
